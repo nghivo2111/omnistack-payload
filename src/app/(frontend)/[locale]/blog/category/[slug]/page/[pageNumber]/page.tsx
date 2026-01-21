@@ -11,7 +11,7 @@ import { notFound } from 'next/navigation'
 import { generateMeta } from '@/utilities/generateMeta'
 import { RenderHero } from '@/heros/RenderHero'
 import { RenderBlocks } from '@/blocks/RenderBlocks'
-import { queryPageBySlug } from '@/app/(frontend)/[locale]/[slug]/page'
+import { queryCategoryByType, queryPageBySlug, queryPostsByCategorySlug } from '@/_data'
 
 export const revalidate = 600
 
@@ -31,38 +31,14 @@ export default async function Page({ params: paramsPromise }: Args) {
 
   if (!Number.isInteger(sanitizedPageNumber)) notFound()
 
-  const posts = await payload.find({
-    collection: 'posts',
-    depth: 1,
-    limit: 8,
-    locale,
-    page: sanitizedPageNumber,
-    overrideAccess: false,
-    where: {
-      'categories.slug': {
-        equals: slug
-      }
-    },
-    sort: '-updatedAt'
-  })
+  const posts = await queryPostsByCategorySlug({ slug, locale })
 
   const page = await queryPageBySlug({
     slug: 'blog',
     locale: locale,
   })
 
-  const categories = await payload.find({
-    collection: 'categories',
-    depth: 1,
-    limit: 9,
-    locale,
-    overrideAccess: false,
-    where: {
-      type: {
-        equals: 'blog'
-      }
-    }
-  })
+  const categories = await queryCategoryByType({ locale, type: 'blog' })
 
   return (
     <div className="pt-16">

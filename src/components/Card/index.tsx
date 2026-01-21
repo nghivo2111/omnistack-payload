@@ -9,6 +9,7 @@ import { Media } from '@/components/Media'
 import { Link } from '@/i18n/routing'
 import { formatDateTime } from '@/utilities/formatDateTime'
 import { useTranslations } from 'next-intl'
+import Image, { StaticImageData } from 'next/image'
 
 export type CardPostData = Pick<Post, 'slug' | 'categories' | 'meta' | 'title' | 'populatedAuthors' | 'publishedAt' | 'updatedAt'>
 
@@ -33,6 +34,8 @@ export const Card: React.FC<{
   const sanitizedDescription = description?.replace(/\s/g, ' ') // replace non-breaking space with white space
   const href = `/${relationTo}/${slug}`
 
+  console.log(metaImage);
+
   return (
     <article
       className={cn(
@@ -42,11 +45,11 @@ export const Card: React.FC<{
     >
       <div className="relative w-full border border-[#00000014] rounded-[0.375rem] overflow-hidden">
         {!metaImage && <div className="">No image</div>}
-        {metaImage && typeof metaImage !== 'string' && <Link href={href}><Media resource={metaImage} imgClassName='aspect-[1200/630]' /></Link>}
+        {metaImage && typeof metaImage !== 'number' && <Link href={href}><Image className='aspect-[1200/630]' src={metaImage.sizes?.medium?.url as string} alt={metaImage.alt || ''} width={488} height={256} /></Link>}
       </div>
       <div className="py-4">
         {showCategories && hasCategories && (
-          <div className="text-sm mb-2 text-[#4b5563]">
+          <div className="text-sm mb-2 text-primary uppercase font-semibold">
             {showCategories && hasCategories && (
               <div>
                 {categories?.map((category, index) => {
