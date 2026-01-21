@@ -1,17 +1,16 @@
 import type { Metadata } from 'next/types'
 
 import { PostsArchive } from '@/components/PostsArchive'
-import { PageRange } from '@/components/PageRange'
 import { Pagination } from '@/components/Pagination'
 import configPromise from '@payload-config'
 import { getPayload, TypedLocale } from 'payload'
 import React from 'react'
 import PageClient from './page.client'
 import { notFound } from 'next/navigation'
-import { queryPageBySlug } from '../../../[slug]/page'
 import { generateMeta } from '@/utilities/generateMeta'
 import { RenderHero } from '@/heros/RenderHero'
 import { RenderBlocks } from '@/blocks/RenderBlocks'
+import { queryCategoryByType, queryPageBySlug } from '@/_data'
 
 export const revalidate = 600
 
@@ -45,18 +44,7 @@ export default async function Page({ params: paramsPromise }: Args) {
     locale: locale,
   })
 
-  const categories = await payload.find({
-    collection: 'categories',
-    depth: 1,
-    limit: 9,
-    locale,
-    overrideAccess: false,
-    where: {
-      type: {
-        equals: 'blog'
-      }
-    }
-  })
+  const categories = await queryCategoryByType({ locale, type: 'blog' })
 
   return (
     <div className="pt-16">

@@ -1,16 +1,13 @@
 import type { Metadata } from 'next/types'
-
 import { PostsArchive } from '@/components/PostsArchive'
-import { PageRange } from '@/components/PageRange'
 import { Pagination } from '@/components/Pagination'
-import configPromise from '@payload-config'
-import { getPayload, TypedLocale } from 'payload'
+import { TypedLocale } from 'payload'
 import React from 'react'
 import PageClient from './page.client'
 import { RenderHero } from '@/heros/RenderHero'
 import { RenderBlocks } from '@/blocks/RenderBlocks'
 import { generateMeta } from '@/utilities/generateMeta'
-import { queryPageBySlug } from '../../../[slug]/page'
+import { queryCategoryByType, queryPageBySlug, queryPostsByCategorySlug } from '@/_data'
 
 export const revalidate = 600
 
@@ -23,48 +20,12 @@ type Args = {
 
 export default async function Page({ params: paramsPromise }: Args) {
     const { locale = 'en', slug } = await paramsPromise;
-    const payload = await getPayload({ config: configPromise })
 
-    const posts = await payload.find({
-        collection: 'posts',
-        depth: 1,
-        limit: 8,
-        locale,
-        overrideAccess: false,
-        select: {
-            title: true,
-            slug: true,
-            categories: true,
-            meta: true,
-            authors: true,
-            publishedAt: true,
-            updatedAt: true
-        },
-        where: {
-            'categories.slug': {
-                equals: slug
-            }
-        },
-        sort: '--updatedAt'
-    })
+    const posts = await queryPostsByCategorySlug({ slug, locale })
 
-    const page = await queryPageBySlug({
-        slug: 'blog',
-        locale: locale,
-    })
+    const page = await queryPageBySlug({ slug: 'blog', locale })
 
-    const categories = await payload.find({
-        collection: 'categories',
-        depth: 1,
-        limit: 9,
-        locale,
-        overrideAccess: false,
-        where: {
-            type: {
-                equals: 'blog'
-            }
-        }
-    })
+    const categories = await queryCategoryByType({ locale, type: 'blog' })
 
     return (
         <div className="pt-16">
