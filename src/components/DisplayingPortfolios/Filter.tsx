@@ -1,5 +1,3 @@
-'use client'
-
 import { useRouter } from '@/i18n/routing'
 import { Category } from '@/payload-types'
 import { ChevronDownIcon, ChevronUpIcon, FunnelIcon } from '@heroicons/react/24/outline'
@@ -46,12 +44,12 @@ export default function Filter({ categories }: { categories: Category[] }) {
     return (
       <div
         className={`${mobile &&
-          'mt-1 absolute px-3 z-10 w-full bg-white dark:bg-[#001e3c] transition-all overflow-hidden border border-gray-200 dark:border-[#183b61] shadow-lg md:border-0'
+          'absolute px-3 z-10 w-full bg-white dark:bg-[#001e3c] transition-all overflow-hidden border border-gray-200 dark:border-[#183b61] shadow-lg md:border-0'
           } ${mobile
             ? open
-              ? 'h-max py-3 rounded-xl'
+              ? 'h-max rounded-xl'
               : 'h-0 border-transparent dark:border-transparent'
-            : 'block pt-2'
+            : 'block'
           }`}
       >
         {categories?.map((category) => (
@@ -76,7 +74,7 @@ export default function Filter({ categories }: { categories: Category[] }) {
     )
   }
   return (
-    <div className="pt-16 md:py-16 px-6 sm:px-8 md:pr-0 md:sticky top-4">
+    <div className="px-6 sm:px-8 md:pr-0 md:sticky top-24">
       <div className="hidden md:block">
         <div className="flex gap-2 items-center border-b border-gray-200 dark:border-[#183b61]">
           <FunnelIcon className="h-5 w-5 text-blue-500" />
