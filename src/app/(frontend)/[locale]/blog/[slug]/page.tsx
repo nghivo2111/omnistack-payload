@@ -71,7 +71,7 @@ export default async function Post({ params: paramsPromise }: Args) {
 
       <div className="container pt-6">
         <PostHero post={post} />
-        <RichText className="max-w-[56rem] mx-auto pt-8" data={post.content} enableGutter={false} />
+        <RichText className="max-w-[56rem] mx-auto pt-8 [&_p]:my-0" data={post.content} enableGutter={false} />
         {post.relatedPosts && post.relatedPosts.length > 0 && (
           <RelatedPosts
             className="mt-12 max-w-[56rem] lg:grid lg:grid-cols-subgrid col-start-1 col-span-3 grid-rows-[2fr]"
@@ -111,5 +111,5 @@ export async function generateMetadata({ params: paramsPromise }: Args): Promise
   const decodedSlug = decodeURIComponent(slug)
   const post = await queryPostBySlug({ slug: decodedSlug, locale })
 
-  return generateMeta({ doc: post })
+  return generateMeta({ doc: post, basePath: 'blog'})
 }

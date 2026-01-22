@@ -76,13 +76,13 @@ export default async function Page({ params: paramsPromise }: Args) {
 }
 
 export async function generateMetadata({ params: paramsPromise }: Args): Promise<Metadata> {
-  const { locale = 'en' } = await paramsPromise
+  const { locale = 'en', pageNumber } = await paramsPromise
   const page = await queryPageBySlug({
     slug: 'blog',
     locale: locale,
   })
 
-  return generateMeta({ doc: page, locale })
+  return generateMeta({ doc: page, locale, subPath: `page/${pageNumber}` })
 }
 
 export async function generateStaticParams() {

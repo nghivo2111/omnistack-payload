@@ -19,8 +19,8 @@ export const PostHero: React.FC<{
 
   return (
     <div className="relative flex-col items-end">
-      <div className="container pb-2 relative">
-        <div className='absolute top-6 left-0 text-[#4b5563] font-medium hover:font-bold'><Link href={'/blog'}>{'<<  Blog'}</Link></div>
+      <div className="pb-2 relative">
+        <div className='absolute -top-2 md:top-6 left-0 text-[#4b5563] font-medium hover:font-bold'><Link href={'/blog'}>{'<<  Blog'}</Link></div>
         <div className="max-w-[56rem] mx-auto pt-6">
           <div className="uppercase text-sm md:text-base mb-2 font-semibold text-primary">
             {categories?.map((category, index) => {
@@ -43,9 +43,9 @@ export const PostHero: React.FC<{
           </div>
 
           <div className="mb-10">
-            <h1 className="text-3xl lg:text-[3.375rem] font-bold">{title}</h1>
+            <h1 className="text-3xl lg:text-[3.375rem] lg:leading-[3.5rem] font-bold">{title}</h1>
           </div>
-          <div className="flex flex-col md:flex-row gap-4 md:gap-16 justify-between">
+          <div className="flex flex-col md:flex-row gap-1 justify-between">
             {hasAuthors && (
               <p className="text-sm font-semibold">{t('posts.author')}: <span className='font-normal text-base'>{formatAuthors(populatedAuthors)}</span></p>
             )}
