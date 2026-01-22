@@ -3,7 +3,7 @@
 import React from 'react'
 import Filter from './Filter'
 import { Category } from '@/payload-types'
-import { portfolioHooks } from './portfolio.hook'
+import { PortfolioHooks } from './portfolio.hook'
 import { TypedLocale } from 'payload'
 import Loading from './Loading'
 import Portfolio from '../PortfoliosArchive/Portfolio'
@@ -16,7 +16,7 @@ export type Props = {
 const DisplayingPortfolios: React.FC<Props> = (props) => {
   const { categories, locale } = props
 
-  const { lastPortfolioElementRef, portfolioData, loading } = portfolioHooks({ locale })
+  const { lastPortfolioElementRef, portfolioData, loading } = PortfolioHooks({ locale })
 
   return (
     <div className="md:grid md:grid-cols-12 container">

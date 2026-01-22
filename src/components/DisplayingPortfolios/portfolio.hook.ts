@@ -7,7 +7,7 @@ type Props = {
   locale: TypedLocale, 
 }
 
-export const portfolioHooks = ({ locale }: Props) => {
+export const PortfolioHooks = ({ locale }: Props) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [page, setPage] = useState<number>(1);
   const [hasMore, setHasMore] = useState<boolean>(true);
