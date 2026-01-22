@@ -5,14 +5,14 @@ import { useTranslations } from 'next-intl'
 import { usePathname, useSearchParams } from 'next/navigation'
 import { useState } from 'react'
 
-export default function Combobox({ category }: { category: Category[] }) {
+export default function Filter({ categories }: { categories: Category[] }) {
   const t = useTranslations()
   const [open, setOpen] = useState(false)
 
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
-  const cateQuery = searchParams.get('cate')
+  const cateQuery = searchParams.get('category')
 
   const handleChange = (cateName: string) => {
     const params = new URLSearchParams(searchParams.toString())
@@ -24,16 +24,16 @@ export default function Combobox({ category }: { category: Category[] }) {
         // remove
         const next = list.filter((c) => c !== cateName)
         if (next.length === 0) {
-          params.delete('cate')
+          params.delete('category')
         } else {
-          params.set('cate', next.join(','))
+          params.set('category', next.join(','))
         }
       } else {
         // add
-        params.set('cate', [...list, cateName].join(','))
+        params.set('category', [...list, cateName].join(','))
       }
     } else {
-      params.set('cate', cateName)
+      params.set('category', cateName)
     }
     const query = Object.fromEntries(params.entries())
 
@@ -44,29 +44,29 @@ export default function Combobox({ category }: { category: Category[] }) {
     return (
       <div
         className={`${mobile &&
-          'mt-1 absolute px-3 z-10 w-full bg-white dark:bg-[#001e3c] transition-all overflow-hidden border border-gray-200 dark:border-[#183b61] shadow-lg md:border-0'
+          'absolute px-3 z-10 w-full bg-white dark:bg-[#001e3c] transition-all overflow-hidden border border-gray-200 dark:border-[#183b61] shadow-lg md:border-0'
           } ${mobile
             ? open
-              ? 'h-max py-3 rounded-xl'
+              ? 'h-max rounded-xl'
               : 'h-0 border-transparent dark:border-transparent'
-            : 'block pt-2'
+            : 'block'
           }`}
       >
-        {category?.map((cate) => (
-          <div className="flex gap-2 pt-2" key={cate.id}>
+        {categories?.map((category) => (
+          <div className="flex gap-2 pt-2" key={category.id}>
             <input
-              id={cate.slug + '-' + mobile ? 'mobile' : 'desktop'}
-              name={cate.slug}
+              id={category.slug + '-' + mobile ? 'mobile' : 'desktop'}
+              name={category.slug}
               type="checkbox"
               className="h-4 w-4 hover:cursor-pointer rounded-md focus:[--tw-ring-offset-width:0px] focus:ring-0 border border-gray-300 outline-none bg-transparent dark:border-[#183b61] mt-[5px]"
-              onChange={() => handleChange(cate.slug)}
-              checked={cateQuery?.includes(cate.slug) || false}
+              onChange={() => handleChange(category.slug)}
+              checked={cateQuery?.includes(category.slug) || false}
             />
             <label
-              htmlFor={cate.slug}
+              htmlFor={category.slug + '-' + mobile ? 'mobile' : 'desktop'}
               className="font-medium text-black dark:text-white hover:cursor-pointer"
             >
-              {cate.title}
+              {category.title}
             </label>
           </div>
         ))}
@@ -74,7 +74,7 @@ export default function Combobox({ category }: { category: Category[] }) {
     )
   }
   return (
-    <div className="pt-16 md:py-16 px-6 sm:px-8 md:pr-0 md:sticky top-4">
+    <div className="px-6 sm:px-8 md:pr-0 md:sticky top-24">
       <div className="hidden md:block">
         <div className="flex gap-2 items-center border-b border-gray-200 dark:border-[#183b61]">
           <FunnelIcon className="h-5 w-5 text-blue-500" />
