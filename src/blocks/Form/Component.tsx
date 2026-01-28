@@ -13,6 +13,7 @@ import { getClientSideURL } from '@/utilities/getURL'
 import { cn } from '@/utilities/ui'
 import { blockSettingStyle } from '@/utilities/blockSettingStyle'
 import { FormBlock as FormBlockProps } from '@/payload-types'
+import { useTranslations, useLocale } from 'next-intl'
 
 export type FormBlockType = FormBlockProps & {
   blockName?: string
@@ -40,6 +41,9 @@ const FormBlock: React.FC<
     handleSubmit,
     register,
   } = formMethods
+
+  const t = useTranslations();
+  const locale = useLocale();
 
   const [isLoading, setIsLoading] = useState(false)
   const [hasSubmitted, setHasSubmitted] = useState<boolean>()
@@ -77,6 +81,7 @@ const FormBlock: React.FC<
             }),
             headers: {
               'Content-Type': 'application/json',
+              'Accept-Language': locale,
             },
             method: 'POST',
           })
@@ -106,6 +111,12 @@ const FormBlock: React.FC<
 
             if (redirectUrl) router.push(redirectUrl)
           }
+          
+          setTimeout(()=>{
+            setHasSubmitted(false);
+            formMethods.reset();
+          }, 3000)
+
         } catch (err) {
           console.warn(err)
           setIsLoading(false)
@@ -131,9 +142,9 @@ const FormBlock: React.FC<
             {!isLoading && hasSubmitted && confirmationType === 'message' && (
               <RichText data={confirmationMessage} />
             )}
-            {isLoading && !hasSubmitted && <p>Loading, please wait...</p>}
+            {isLoading && !hasSubmitted && <p>{t('form.sending')}</p>}
             {error && <div>{`${error.status || '500'}: ${error.message || ''}`}</div>}
-            {!hasSubmitted && (
+            {!isLoading && !hasSubmitted && (
               <form id={formID} onSubmit={handleSubmit(onSubmit)}>
                 <div className="mb-4 last:mb-0">
                   {formData &&

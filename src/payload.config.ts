@@ -125,8 +125,8 @@ export default buildConfig({
   },
   folders: false,
   email: nodemailerAdapter({
-    defaultFromAddress: process.env.FROM_ADDRESS || 'hi@omnistack.co',
-    defaultFromName: process.env.FROM_NAME || 'Omnistack',
+    defaultFromAddress: process.env.DEFAULT_FROM_ADDRESS || 'hi@omnistack.co',
+    defaultFromName: process.env.DEFAULT_FROM_NAME || 'Omnistack',
     transportOptions: {
       host: process.env.SMTP_HOST!,
       port: Number(process.env.SMTP_PORT!) || 587,
