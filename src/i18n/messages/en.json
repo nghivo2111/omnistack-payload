@@ -22,8 +22,10 @@
   "go_home": "Go home",
   "no_data": "Search produced no results.",
   "form": {
-    "title": "📩 News from",
     "footer": "Sent from Omnistack System",
-    "sending": "Sending...., please wait!"
+    "sending": "Sending...., please wait!",
+    "email": {
+      "title": "📩 News from"
+    }
   }
 }

@@ -22,8 +22,10 @@
   "go_home": "Về trang chủ",
   "no_data": "Tìm kiếm không có kết quả",
   "form": {
-    "title": "📩 Tin mới từ",
     "footer": "Gửi từ hệ thống Omnistack",
-    "sending": "Đang gửi, vui lòng chờ!"
+    "sending": "Đang gửi, vui lòng chờ!",
+    "email": {
+      "title": "📩 Tin mới từ"
+    }
   }
 }
