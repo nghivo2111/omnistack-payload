@@ -126,8 +126,9 @@ export const plugins: Plugin[] = [
               
               const form = await req.payload.findByID({
                 collection: 'forms',
-                locale: locale ||'en',
-                id: doc.form.id,
+                locale,
+                fallbackLocale: 'en',
+                id: doc?.form?.id,
                 depth: 2,
                 overrideAccess: true,
               })
@@ -136,23 +137,37 @@ export const plugins: Plugin[] = [
 
               if (emails && emails.length > 0) {   
                 await Promise.all(
-                  emails.map((email) =>
-                    req.payload.sendEmail({
+                  emails.map(async(email) =>{
+                    const html = await formSubmissionTemplate(
+                      fieldMap,
+                      title,
+                      email.message,
+                      locale
+                    )
+        
+                    return req.payload.sendEmail({
                       from: email.emailFrom,
                       to: email.emailTo,
                       cc: email.cc,
                       bcc: email.bcc,
                       replyTo: email.replyTo,
                       subject: email.subject,
-                      html: formSubmissionTemplate(fieldMap, title, email.message, locale),
+                      html,
                     })
-                  )
+                  })
                 )
               } else {
+                const html = await formSubmissionTemplate(
+                  fieldMap,
+                  title,
+                  null,
+                  locale
+                )
+        
                 await req.payload.sendEmail({
                   to: process.env.DEFAULT_TO_ADDRESS || 'support@omnistack.co',
-                  subject: `News from Omnistack`,
-                  html: formSubmissionTemplate(fieldMap, title, null,locale),
+                  subject: 'News from Omnistack',
+                  html,
                 })
               }
 

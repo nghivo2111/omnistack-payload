@@ -55,7 +55,7 @@ export async function formSubmissionTemplate(
                       <h2 style="margin:0;font-size:20px;text-align:center"> ${t('email.title')} ${title} Form</h2>
                     </div>
 
-                    ${messageHTML}
+                    ${messageHTML&&null}
 
                     <div style="padding:24px;">
                       ${rows}
