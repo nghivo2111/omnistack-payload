@@ -113,24 +113,26 @@ export const plugins: Plugin[] = [
         afterChange: [
           async ({ doc, req }) => {
             try {
-              const fields = doc.submissionData || []
+              const fields = doc?.submissionData || []
 
               const fieldMap = fields.reduce((acc: any, item: any) => {
                 acc[item.field] = item.value
                 return acc
               }, {})
 
-              const locale: TypedLocale = req.i18n.language as TypedLocale;
+              const title = doc?.form?.title
+
+              const locale: TypedLocale = req?.i18n?.language as TypedLocale;
               
               const form = await req.payload.findByID({
                 collection: 'forms',
-                locale,
+                locale: locale ||'en',
                 id: doc.form.id,
                 depth: 2,
                 overrideAccess: true,
               })
           
-              const emails: Form['emails'] = form.emails || []
+              const emails: Form['emails'] = form?.emails || []
 
               if (emails && emails.length > 0) {   
                 await Promise.all(
@@ -142,7 +144,7 @@ export const plugins: Plugin[] = [
                       bcc: email.bcc,
                       replyTo: email.replyTo,
                       subject: email.subject,
-                      html: formSubmissionTemplate(fieldMap, doc.form.title, email.message, locale),
+                      html: formSubmissionTemplate(fieldMap, title, email.message, locale),
                     })
                   )
                 )
@@ -150,7 +152,7 @@ export const plugins: Plugin[] = [
                 await req.payload.sendEmail({
                   to: process.env.DEFAULT_TO_ADDRESS || 'support@omnistack.co',
                   subject: `News from Omnistack`,
-                  html: formSubmissionTemplate(fieldMap, doc.form.title, null,locale),
+                  html: formSubmissionTemplate(fieldMap, title, null,locale),
                 })
               }
 
