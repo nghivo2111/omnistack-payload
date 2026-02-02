@@ -1,16 +1,12 @@
-'use client'
-
 import React from 'react'
 
 import type { Header as HeaderType } from '@/payload-types'
 
 import { CMSLink } from '@/components/Link'
 import { cn } from '@/utilities/ui'
-import { motion } from 'motion/react'
 
-export const HeaderNav: React.FC<{ data: HeaderType; currentPath: string }> = ({
+export const HeaderNav: React.FC<{ data: HeaderType }> = ({
   data,
-  currentPath,
 }) => {
   const navItems = data?.navItems || []
 
@@ -18,17 +14,14 @@ export const HeaderNav: React.FC<{ data: HeaderType; currentPath: string }> = ({
     <nav className="md:flex gap-3 items-center">
       {navItems.map(({ link }, i) => {
         return (
-          <motion.div  whileHover={{scale: 1.05, y:-4}} key={i}>
+          <div key={i} className=' h-full'>
             <CMSLink
             {...link}
             className={cn(
-              'px-2.5 py-[22px] inline-flex items-center text-base font-medium text-gray-900 dark:text-gray-50 hover:border-blue-500 hover:border-b-2',
-              {
-                'border-blue-500 border-b-2': link.url === currentPath,
-              },
+              'ml-2 p-4 inline-flex h-full items-center font-bold text-primary hover:text-secondary hover:border-b-secondary-foreground border-white border-y-[6px]',
             )}
           />
-          </motion.div>
+          </div>
           
         )
       })}

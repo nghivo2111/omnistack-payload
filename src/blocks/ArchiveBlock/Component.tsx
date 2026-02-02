@@ -17,6 +17,7 @@ import ReviewsArchive from '@/components/ReviewArchive'
 import { cookies } from 'next/headers'
 import { blockSettingStyle } from '@/utilities/blockSettingStyle'
 import PortfolioArchive from '@/components/PortfoliosArchive'
+import { CMSLink } from '@/components/Link'
 
 const ArchiveBlock: React.FC<
   ArchiveBlockProps & {
@@ -32,6 +33,7 @@ const ArchiveBlock: React.FC<
     selectedDocs,
     relationTo,
     settings,
+    link
   } = props
 
   const cookieStore = await cookies()
@@ -151,11 +153,15 @@ const ArchiveBlock: React.FC<
 
   return (
     <div className="py-8 block-setting" id={`block-${id}`} style={blockSettingStyle(settings)}>
-      {introContent && (
-        <div className="container">
-          <RichText data={introContent} enableGutter={false} />
+      <div className='container flex flex-col md:flex-row gap-6 md:items-end justify-between pb-6'>
+        <div className="md:w-[70%]">
+          {introContent && <RichText data={introContent} enableGutter={false} />} 
         </div>
-      )}
+        <div className=''>
+         {link && <CMSLink {...link} appearance={'link'} className='w-max py-2.5 pr-8 hover:pl-4 hover:pr-4 transition-[unset] transform duration-200 border-b-2 border-primary'/>} 
+        </div>
+      </div>
+      
       {renderArchive()}
     </div>
   )

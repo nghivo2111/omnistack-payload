@@ -13,10 +13,10 @@ const Card = ({
   description: DefaultTypedEditorState
 }) => {
   return (
-    <div className="w-full h-full shadow-lg dark:shadow-[inset_0px_-1px_1px_#132f4c] dark:border-[#1e4976] dark:border rounded-xl overflow-hidden">
-      <Media resource={image} imgClassName="object-cover h-[150px]" />
-      <div className="bg-gray-100 dark:bg-[#132f4c] p-4 h-[55%]">
-        <h3 className="text-xl font-medium mb-4 dark:text-white text-center">{title}</h3>
+    <div className="w-full h-full overflow-hidden">
+      <Media resource={image} imgClassName="w-10 h-10" />
+      <div className="pt-2">
+        <h3 className="text-2xl md:text-3xl font-medium mb-4">{title}</h3>
         <RichText data={description} />
       </div>
     </div>

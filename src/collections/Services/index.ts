@@ -15,7 +15,7 @@ export const Services: CollectionConfig = {
   },
   fields: [
     { name: 'title', type: 'text', required: true, localized: true },
-    { name: 'image', type: 'upload', required: true, relationTo: 'media', localized: true },
+    { name: 'icon', type: 'upload', required: true, relationTo: 'media', localized: true },
     { name: 'description', type: 'richText', localized: true },
   ],
 }

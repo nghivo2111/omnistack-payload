@@ -10,7 +10,14 @@ export const Header: GlobalConfig = {
   },
   fields: [
     { name: 'logo', type: 'upload', relationTo: 'media', localized: true },
-    { name: 'phone', type: 'text', label: 'Contact Phone' },
+    { name: 'icon', type: 'upload', relationTo: 'media', localized: true },
+    link({
+      overrides:{
+        label: 'Contact',
+        localized: true,
+        required: false,
+      },
+    }),
     {
       name: 'navItems',
       type: 'array',

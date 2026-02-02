@@ -10,6 +10,7 @@ type CMSLinkType = {
   appearance?: 'inline' | ButtonProps['variant']
   children?: React.ReactNode
   className?: string
+  wrapClassName?: string;
   label?: string | null
   newTab?: boolean | null
   reference?: {
@@ -28,6 +29,7 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
     appearance = 'inline',
     children,
     className,
+    wrapClassName,
     label,
     newTab,
     reference,
@@ -63,9 +65,10 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
         'w-full text-left',
         { 'text-center': position === 'center' },
         { 'text-right': position === 'right' },
+        wrapClassName
       )}
     >
-      <Button asChild className={cn(className, 'hover:scale-105 transition duration-300 ease-in-out')} size={size} variant={appearance}>
+      <Button asChild className={cn(className, {'transition duration-300 ease-in-out rounded-[0.5rem]': ['default','secondary', 'outline'].includes(appearance as string)}, 'rounded-none')} size={size} variant={appearance}>
         <Link className={cn(className)} href={href || url || ''} {...newTabProps}>
           {label && label}
           {children && children}

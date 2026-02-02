@@ -39,7 +39,7 @@ export const RenderBlocks: React.FC<{
 
             if (Block) {
               return (
-                <div key={block.id} className={cn({ 'overflow-hidden': blockType !== 'archive' })}>
+                <div key={block.id} className={cn({ 'overflow-hidden': blockType !== 'archive' }, 'relative')}>
                   <Block {...block} />
                 </div>
               )

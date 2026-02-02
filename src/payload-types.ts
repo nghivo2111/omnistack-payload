@@ -237,7 +237,7 @@ export interface Page {
       /**
        * Choose how the link should be rendered.
        */
-      appearance?: ('default' | 'outline') | null;
+      appearance?: ('default' | 'outline' | 'link' | 'secondary') | null;
       /**
        * Choose how the link position should be.
        */
@@ -652,7 +652,7 @@ export interface ContentBlock {
           /**
            * Choose how the link should be rendered.
            */
-          appearance?: ('default' | 'outline') | null;
+          appearance?: ('default' | 'outline' | 'link' | 'secondary') | null;
           /**
            * Choose how the link position should be.
            */
@@ -787,6 +787,21 @@ export interface ArchiveBlock {
     };
     [k: string]: unknown;
   } | null;
+  link: {
+    type?: ('reference' | 'custom') | null;
+    newTab?: boolean | null;
+    reference?:
+      | ({
+          relationTo: 'pages';
+          value: number | Page;
+        } | null)
+      | ({
+          relationTo: 'posts';
+          value: number | Post;
+        } | null);
+    url?: string | null;
+    label: string;
+  };
   populateBy?: ('collection' | 'selection') | null;
   relationTo?: ('posts' | 'services' | 'reviews' | 'portfolios') | null;
   categories?: (number | Category)[] | null;
@@ -1308,7 +1323,7 @@ export interface MapsBlock {
 export interface Service {
   id: number;
   title: string;
-  image: number | Media;
+  icon: number | Media;
   description?: {
     root: {
       type: string;
@@ -1838,6 +1853,15 @@ export interface ArchiveBlockSelect<T extends boolean = true> {
         padding?: T;
       };
   introContent?: T;
+  link?:
+    | T
+    | {
+        type?: T;
+        newTab?: T;
+        reference?: T;
+        url?: T;
+        label?: T;
+      };
   populateBy?: T;
   relationTo?: T;
   categories?: T;
@@ -2123,7 +2147,7 @@ export interface UsersSelect<T extends boolean = true> {
  */
 export interface ServicesSelect<T extends boolean = true> {
   title?: T;
-  image?: T;
+  icon?: T;
   description?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -2447,7 +2471,30 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
 export interface Header {
   id: number;
   logo?: (number | null) | Media;
-  phone?: string | null;
+  icon?: (number | null) | Media;
+  link?: {
+    type?: ('reference' | 'custom') | null;
+    newTab?: boolean | null;
+    reference?:
+      | ({
+          relationTo: 'pages';
+          value: number | Page;
+        } | null)
+      | ({
+          relationTo: 'posts';
+          value: number | Post;
+        } | null);
+    url?: string | null;
+    label?: string | null;
+    /**
+     * Choose how the link should be rendered.
+     */
+    appearance?: ('default' | 'outline' | 'link' | 'secondary') | null;
+    /**
+     * Choose how the link position should be.
+     */
+    position?: ('center' | 'right') | null;
+  };
   navItems?:
     | {
         link: {
@@ -2555,7 +2602,18 @@ export interface Footer {
  */
 export interface HeaderSelect<T extends boolean = true> {
   logo?: T;
-  phone?: T;
+  icon?: T;
+  link?:
+    | T
+    | {
+        type?: T;
+        newTab?: T;
+        reference?: T;
+        url?: T;
+        label?: T;
+        appearance?: T;
+        position?: T;
+      };
   navItems?:
     | T
     | {
