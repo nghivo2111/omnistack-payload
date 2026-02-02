@@ -5,7 +5,6 @@ import RichText from '@/components/RichText'
 import { blockSettingStyle } from '@/utilities/blockSettingStyle'
 import { cn } from '@/utilities/ui'
 import { DefaultTypedEditorState } from '@payloadcms/richtext-lexical'
-import { motion } from 'motion/react'
 import { FeatureProps } from './Component'
 
 const FeatureClient = ({ props }: { props: FeatureProps }) => {
@@ -22,15 +21,11 @@ const FeatureClient = ({ props }: { props: FeatureProps }) => {
         )}
       >
         {items?.map((item) => (
-          <motion.div
-            key={item.id}
-            initial={{ x: -100, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            whileHover={{ scale: 1.1 }}
-            transition={{ duration: 0.3, ease: 'easeInOut' }}>
+          <div
+            key={item.id}>
             {item.media && <Media resource={item.media} imgClassName="mx-auto" />}
             {item.content && <RichText data={item.content as DefaultTypedEditorState} />}
-          </motion.div>
+          </div>
         ))}
       </div>
     </div>

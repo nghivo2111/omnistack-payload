@@ -27,16 +27,7 @@ export const ContentClient = ({ props }: { props: ContentBlockProps }) => {
                         const { enableLink, link, richText, size } = col
 
                         return (
-                            <motion.div
-                                whileInView={{
-                                    opacity: [0,1],
-                                    scale: [0.6, 1]
-                                }}
-                                transition={{
-                                    duration: 0.5,
-                                    ease: "easeInOut",
-                                }
-                                }
+                            <div
                                 className={cn(`col-span-4 lg:col-span-${colsSpanClasses[size!]}`, {
                                     'md:col-span-2': size !== 'full',
                                 })}
@@ -45,7 +36,7 @@ export const ContentClient = ({ props }: { props: ContentBlockProps }) => {
                                 {richText && <RichText data={richText} enableGutter={false} />}
 
                                 {enableLink && <CMSLink {...link} />}
-                            </motion.div>
+                            </div>
                         )
                     })}
             </div>

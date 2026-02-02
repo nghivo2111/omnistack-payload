@@ -59,6 +59,15 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
     )
   }
 
+  // if(appearance === 'link') {
+  //   return(
+  //     <Link href={href || url || ''} className='w-max py-2.5 pr-8 hover:pl-4 hover:pr-4 transition-[unset] transform duration-200 border-b-2 border-primary' {...newTabProps}>
+  //       {label && label}
+  //       {children && children}
+  //     </Link>
+  //   )
+  // }
+
   return (
     <div
       className={cn(
@@ -68,7 +77,7 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
         wrapClassName
       )}
     >
-      <Button asChild className={cn(className, {'transition duration-300 ease-in-out rounded-[0.5rem]': ['default','secondary', 'outline'].includes(appearance as string)}, 'rounded-none')} size={size} variant={appearance}>
+      <Button asChild className={cn(className, {'transition duration-300 ease-in-out !rounded-[0.5rem]': ['default','secondary', 'outline'].includes(appearance as string)}, 'rounded-none')} size={size} variant={appearance}>
         <Link className={cn(className)} href={href || url || ''} {...newTabProps}>
           {label && label}
           {children && children}

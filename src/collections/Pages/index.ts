@@ -23,6 +23,7 @@ import {
 import { FeatureBlock } from '@/blocks/FeatureBlock/config'
 import { MediaContentBlock } from '@/blocks/MediaContentBlock/config'
 import { MapsBlock } from '@/blocks/MapsBlock/config'
+import { Carousel } from '@/blocks/Carousel/config'
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
@@ -86,6 +87,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 FeatureBlock,
                 MediaContentBlock,
                 MapsBlock,
+                Carousel
               ],
               admin: {
                 initCollapsed: true,

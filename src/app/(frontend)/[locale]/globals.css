@@ -27,7 +27,7 @@
     --primary-foreground: 0 0% 7%;
 
     --secondary: 14 91% 59%;
-    --secondary-foreground: 13.55 92.08% 80.02%;
+    --secondary-foreground: 14 67% 51%;
 
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
@@ -199,4 +199,30 @@ a {
 
 .prose :where(h2){
   font-size: 2rem !important;
+  margin: 16px 0 !important;
+}
+
+.md\:prose-md :where(h4){
+  font-size: 1.5rem !important;
+  font-weight: 600 !important;
+}
+
+.prose :where(h4){
+  font-size: 1.25rem !important;
+}
+
+.swiper-wrapper {
+  -webkit-transition-timing-function: linear !important;
+  -o-transition-timing-function: linear !important;
+  transition-timing-function: linear !important; 
+}
+
+.swiper-wrapper:hover {
+  animation-play-state: paused;
+}
+
+@media screen and (max-width: 500px) {
+  .media-class {
+    width: 100% !important;
+  }
 }

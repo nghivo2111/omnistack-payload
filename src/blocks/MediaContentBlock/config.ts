@@ -11,6 +11,13 @@ export const MediaContentBlock: Block = {
     settingField({
       overrides: [
         {
+          name: 'gap',
+          type: "text",
+          admin: {
+            description: "Space between media and content elements (CSS units, e.g., 24px, 2rem). Default: 24px."
+          }
+        },
+        {
           type: 'row',
           fields: [
             {
@@ -49,6 +56,31 @@ export const MediaContentBlock: Block = {
             },
           ],
         },
+        {
+          type: 'row',
+          fields: [
+            {
+              label: 'Media Setting',
+              type: 'collapsible',
+              fields: [
+                {
+                  name: 'margin',
+                  type: 'text',
+                  admin: {
+                    description: 'Margin format: "top right bottom left" (e.g., "16px 24px 16px 24px"). Applies to media. Each value sets margin for one side, in order: top, right, bottom, left.'
+                  }
+                },
+                {
+                  name: 'width',
+                  type: 'text',
+                  admin: {
+                    description: 'Width of the media (e.g., "100%", "400px", "40vw"). Accepts any valid CSS width value.',
+                  }
+                }
+              ]
+            },
+          ]
+        }
       ],
     }),
     {
@@ -73,7 +105,6 @@ export const MediaContentBlock: Block = {
       fields: [
         { name: 'enableButtonDirect', type: 'checkbox' },
         link({
-          appearances: false,
           overrides: {
             admin: {
               condition: (_, sibling) => sibling.enableButtonDirect === true,

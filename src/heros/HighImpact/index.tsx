@@ -14,20 +14,20 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ link, media, richText }
   return (
     <div className="relative overflow-hidden mx-auto sm:px-8 min-h-[70vh] xl:min-h-screen -mb-24 pb-24 md:-mb-52 md:pb-48 lg:pb-60 z-0 bg-neutral-100">
       <div
-        className="container py-16 z-30 absolute inset-0 pointer-events-none"
+        className="container py-16 pointer-events-none"
       >
         <div className="relative pointer-events-auto w-full xl:w-[45%]">
-          {richText && <RichText className="mb-6 text-center xl:text-left" enableProse data={richText} enableGutter={false} />}
-          <CMSLink {...link} wrapClassName='text-center xl:text-left'/>
+          {richText && <RichText className="mb-6 text-center xl:text-left [&_h1]:text-[32px] [&_h1]:md:text-[72px]" enableProse data={richText} enableGutter={false} />}
+          <CMSLink {...link} wrapClassName='text-center xl:text-left text-xl'/>
         </div>
       </div>
-      <div className="absolute inset-0 z-10 hidden xl:block">
+      <div className="absolute inset-0 -z-10 hidden xl:block">
         <Media
           resource={media}
           imgClassName="object-cover w-full h-full"
         />
       </div>
-      <div className="absolute inset-0 z-20 bg-gradient-to-r from-45% via-70% to-90% from-neutral-100 via-white/80 to-transparent hidden xl:block">       
+      <div className="absolute inset-0 -z-[5] bg-gradient-to-r from-45% via-70% to-90% from-neutral-100 via-white/80 to-transparent hidden xl:block">       
       </div>
       <div
         className="absolute -bottom-36 -left-[10%] h-72 w-[120%] bg-white md:h-96 lg:-bottom-[500px] lg:h-[800px] z-30"

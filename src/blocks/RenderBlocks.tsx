@@ -9,6 +9,7 @@ import { cn } from '@/utilities/ui'
 import ArchiveBlock from '@/blocks/ArchiveBlock/Component'
 import FormBlock from '@/blocks/Form/Component'
 import MapsBlock from './MapsBlock/Component'
+import Carousel from './Carousel/Component'
 
 const blockComponents: Record<string, React.FC<any>> = {
   archive: ArchiveBlock,
@@ -19,6 +20,7 @@ const blockComponents: Record<string, React.FC<any>> = {
   featureBlock: FeatureBlock,
   mediaContent: MediaContent,
   mapsBlock: MapsBlock,
+  carousel: Carousel,
 }
 
 export const RenderBlocks: React.FC<{
@@ -39,7 +41,7 @@ export const RenderBlocks: React.FC<{
 
             if (Block) {
               return (
-                <div key={block.id} className={cn({ 'overflow-hidden': blockType !== 'archive' }, 'relative')}>
+                <div key={block.id} className={cn('relative')}>
                   <Block {...block} />
                 </div>
               )

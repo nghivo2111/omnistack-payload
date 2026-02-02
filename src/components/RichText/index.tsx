@@ -37,6 +37,7 @@ import type {
   TextStateFeatureProps,
 } from 'node_modules/@payloadcms/richtext-lexical/dist/features/textState/feature.server'
 import { CSSProperties } from 'react'
+import { styleStringToObject } from '@/utilities/styleStringToObject'
 
 export const textShadowState: TextStateFeatureProps['state'] = {
   textShadow: {
@@ -122,6 +123,17 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) 
   link: ({ node }) => {
     const { doc, url, newTab } = node.fields
 
+    const styles = node.children
+      .filter(
+        (child): child is { style: string; type: string; version: number } =>
+          typeof child === 'object' &&
+          child !== null &&
+          'style' in child &&
+          typeof (child as any).style === 'string'
+      )
+    .map(child => styleStringToObject(child.style))
+    .reduce((acc, style) => ({ ...acc, ...style }), {})
+    
     // Extract text from children
     const textContent =
       node.children[0] && 'text' in node.children[0]
@@ -139,7 +151,7 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) 
           }}
           newTab={newTab}
         >
-          {textContent}
+          <span style={styles}>{textContent}</span>
         </CMSLink>
       )
     }
@@ -147,7 +159,7 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) 
     // Handle custom URL
     return (
       <CMSLink type="custom" url={url} newTab={newTab}>
-        {textContent}
+        <span style={styles}>{textContent}</span> 
       </CMSLink>
     )
   },

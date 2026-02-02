@@ -6,7 +6,6 @@ import { Logo } from '@/components/Logo/Logo'
 import { Link } from '@/i18n/routing'
 import RichText from '@/components/RichText'
 import { DefaultTypedEditorState } from '@payloadcms/richtext-lexical'
-import { motion } from 'motion/react'
 
 export function FooterClient({ data }: { data: Footer }) {
     return (
@@ -19,36 +18,22 @@ export function FooterClient({ data }: { data: Footer }) {
             </h2>
             <div className="container pb-10 pt-10 overflow-hidden">
                 <div className="lg:grid lg:grid-cols-2 lg:gap-32">
-                    <motion.div
-                        initial={{ y: 100, opacity: 0 }}
-                        whileInView={{ y: 0, opacity: 1 }}
-                        transition={{ duration: 0.5, ease: 'easeInOut' }}>
+                    <div>
                         <div
                             className="flex flex-shrink-0 items-center"><Link href={'/'}>
                                 <Logo />
                             </Link>
                         </div>
-                        <motion.div className="pt-5"
-                            initial={{ x: -100 }}
-                            whileInView={{ x: 0 }}
-                            transition={{ duration: 0.5, ease: 'easeInOut' }}>
+                        <div className="pt-5">
                             <RichText
                                 data={data.additionalInformation as DefaultTypedEditorState}
                                 className="[&_p]:my-0"
                             />
-                        </motion.div>
-                    </motion.div>
-                    <motion.div
-                        initial={{ x: 200, opacity: 0 }}
-                        whileInView={{ x: 0, opacity: 1 }}
-                        transition={{ duration: 0.5, ease: 'easeInOut' }}
-                        className="mt-12 grid lg:grid-cols-2 grid-cols-2 lg:col-span-1 lg:mt-0 gap-6">
+                        </div>
+                    </div>
+                    <div className="mt-12 grid lg:grid-cols-2 grid-cols-2 lg:col-span-1 lg:mt-0 gap-6">
                         {data.columns?.map((column) => (
-                            <motion.div key={column.id}
-                                initial={{ y: -100, scale: 0.1 }}
-                                whileInView={{ y: 0, scale: 1 }}
-                                transition={{ duration: 0.5, ease: 'easeInOut' }}
-                            >
+                            <div key={column.id}>
                                 <div className="text-sm font-semibold leading-6 text-gray-900 dark:text-gray-50">
                                     {column.label}
                                 </div>
@@ -62,9 +47,9 @@ export function FooterClient({ data }: { data: Footer }) {
                                         </div>
                                     ))}
                                 </div>
-                            </motion.div>
+                            </div>
                         ))}
-                    </motion.div>
+                    </div>
                 </div>
                 <div className="mt-20 border-t border-gray-200 dark:border-[#183b61] pt-10 md:flex md:items-center md:justify-between">
                     <p className="mt-5 text-xs leading-5 text-gray-400 md:order-1 md:mt-0">

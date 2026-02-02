@@ -158,7 +158,7 @@ const ArchiveBlock: React.FC<
           {introContent && <RichText data={introContent} enableGutter={false} />} 
         </div>
         <div className=''>
-         {link && <CMSLink {...link} appearance={'link'} className='w-max py-2.5 pr-8 hover:pl-4 hover:pr-4 transition-[unset] transform duration-200 border-b-2 border-primary'/>} 
+         {link && <CMSLink {...link} appearance={'link'}/>} 
         </div>
       </div>
       

@@ -1,12 +1,9 @@
-'use client'
-
 import { Media } from '@/components/Media'
 import RichText from '@/components/RichText'
 import type {} from '@/payload-types'
 import { cn } from '@/utilities/ui'
 import { CMSLink } from '@/components/Link'
 import { blockSettingStyle } from '@/utilities/blockSettingStyle'
-import { motion } from 'motion/react'
 import { MediaContentProps } from './Component'
 
 const reverseLayout = (fraction: string) => {
@@ -34,13 +31,7 @@ const MediaContentClient = ({ props }: { props: MediaContentProps }) => {
   const renderMedia = () => {
     if (media || staticImage)
       return (
-        <motion.div
-          initial={{
-            y: -100,
-            opacity: 0,
-          }}
-          whileInView={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8, ease: 'easeInOut' }}
+        <div
           className={cn(
             'md:w-1/2',
             'md:w-1/3',
@@ -52,14 +43,17 @@ const MediaContentClient = ({ props }: { props: MediaContentProps }) => {
             'w-full',
             [`md:w-${settings?.layout}`],
           )}
+          style={{margin: `${settings?.margin}` }}
         >
-          <Media
-            imgClassName={cn(imgClassName)}
-            resource={media}
-            src={staticImage}
-            className="object-contain"
+          <div className='w-full media-class' style={{width: `${settings?.width}`}}>
+            <Media
+              imgClassName={cn(imgClassName)}
+              resource={media}
+              src={staticImage}
+              className="object-contain"
           />
-        </motion.div>
+          </div>
+        </div>
       )
     return null
   }
@@ -67,13 +61,7 @@ const MediaContentClient = ({ props }: { props: MediaContentProps }) => {
   const renderContent = () => {
     if (content)
       return (
-        <motion.div
-          initial={{
-            y: 100,
-            opacity: 0,
-          }}
-          whileInView={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8, ease: 'easeInOut' }}
+        <div
           className={cn(
             {
               container: !disableInnerContainer,
@@ -84,8 +72,8 @@ const MediaContentClient = ({ props }: { props: MediaContentProps }) => {
           )}
         >
           <RichText data={content} enableGutter={false} />
-          {enableButtonDirect && link && <CMSLink {...link} appearance={'default'} />}
-        </motion.div>
+          {enableButtonDirect && link && <CMSLink {...link} />}
+        </div>
       )
     return null
   }
@@ -108,7 +96,7 @@ const MediaContentClient = ({ props }: { props: MediaContentProps }) => {
   }
   return (
     <div className={cn(className, 'py-8 block-setting')} style={blockSettingStyle(settings)}>
-      <div className={cn('flex flex-col md:flex-row gap-6 w-full', { container: enableGutter })}>
+      <div className={cn('flex flex-col md:flex-row w-full gap-6 justify-between', { container: enableGutter })} style={{gap: `${settings?.gap}`}}>
         {renderLayout()}
       </div>
     </div>

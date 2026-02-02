@@ -255,6 +255,7 @@ export interface Page {
         | FeatureBlock
         | MediaContentBlock
         | MapsBlock
+        | CarouselBlock
       )[]
     | null;
   meta?: {
@@ -787,7 +788,7 @@ export interface ArchiveBlock {
     };
     [k: string]: unknown;
   } | null;
-  link: {
+  link?: {
     type?: ('reference' | 'custom') | null;
     newTab?: boolean | null;
     reference?:
@@ -800,7 +801,7 @@ export interface ArchiveBlock {
           value: number | Post;
         } | null);
     url?: string | null;
-    label: string;
+    label?: string | null;
   };
   populateBy?: ('collection' | 'selection') | null;
   relationTo?: ('posts' | 'services' | 'reviews' | 'portfolios') | null;
@@ -1195,6 +1196,10 @@ export interface MediaContentBlock {
      */
     padding?: string | null;
     /**
+     * Space between media and content elements (CSS units, e.g., 24px, 2rem). Default: 24px.
+     */
+    gap?: string | null;
+    /**
      * Choose the order of content and media within this block. "Media + Content" displays the media first, followed by the content; "Content + Media" reverses the order.
      */
     alignment?: ('contentMedia' | 'mediaContent') | null;
@@ -1202,6 +1207,14 @@ export interface MediaContentBlock {
      * Select the proportional layout of Content and Media within this block.
      */
     layout?: ('1/2' | '1/4' | '2/5' | '1/3' | '3/5' | '2/3' | '3/4' | 'full') | null;
+    /**
+     * Margin format: "top right bottom left" (e.g., "16px 24px 16px 24px"). Applies to media. Each value sets margin for one side, in order: top, right, bottom, left.
+     */
+    margin?: string | null;
+    /**
+     * Width of the media (e.g., "100%", "400px", "40vw"). Accepts any valid CSS width value.
+     */
+    width?: string | null;
   };
   media?: (number | null) | Media;
   content?: {
@@ -1234,6 +1247,10 @@ export interface MediaContentBlock {
         } | null);
     url?: string | null;
     label: string;
+    /**
+     * Choose how the link should be rendered.
+     */
+    appearance?: ('default' | 'outline' | 'link' | 'secondary') | null;
     /**
      * Choose how the link position should be.
      */
@@ -1315,6 +1332,134 @@ export interface MapsBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'mapsBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CarouselBlock".
+ */
+export interface CarouselBlock {
+  settings?: {
+    /**
+     * Select "Image" to use a background image, or "Color" to choose a solid background color. If neither is chosen, the section background will default to transparent.
+     */
+    bgType?: ('image' | 'color' | 'gradient' | 'transparent') | null;
+    /**
+     * Enter a CSS gradient value. Supports: "linear-gradient", "radial-gradient", "conic-gradient" (e.g., "linear-gradient(90deg, #fff, #000)". If left empty, section background defaults to transparent.
+     */
+    bgGradient?: string | null;
+    /**
+     * Custom CSS Light color value (e.g., #ffffff, rgb(255,255,255), or color name). Defaults to transparent if left empty.
+     */
+    bgLightColor?: string | null;
+    /**
+     * Custom CSS Dark color value (e.g., #ffffff, rgb(255,255,255), or color name). Defaults to transparent if left empty.
+     */
+    bgDarkColor?: string | null;
+    /**
+     * Upload an image to use as the section background. This image will only be displayed if "Type" is set to "Image".
+     */
+    bgImage?: (number | null) | Media;
+    /**
+     * Enable to repeat the background image. When checked, the image will tile to fill the area. Leave unchecked for a single image.
+     */
+    bgRepeat?: boolean | null;
+    /**
+     * How the image should scale. "Contain" fits within the area, "Cover" fills it, or set a custom value. Default is auto.
+     */
+    bgSize?: ('contain' | 'cover' | 'custom') | null;
+    /**
+     * Enter a value in pixels or percent (e.g., 70px, 50%)
+     */
+    bgSizeCustom?: string | null;
+    /**
+     * Choose one or more background positions. Default is center. Example: select "Right" and "Top" to position background at the top right.
+     */
+    bgPosition?: ('center' | 'right' | 'left' | 'top' | 'bottom')[] | null;
+    /**
+     * Specifies how the background image scrolls with the page. "Scroll" moves with the content (default), "Fixed" remains stationary.
+     */
+    bgAttachment?: ('scroll' | 'fixed') | null;
+    /**
+     * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px". Leave blank to use the default.
+     */
+    padding?: string | null;
+    type?: 'content' | null;
+    /**
+     * If checked, the carousel will extend to the full width of the viewport, overflowing the container.
+     */
+    fullWidth?: boolean | null;
+  };
+  title?: string | null;
+  subtitle?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  link?: {
+    type?: ('reference' | 'custom') | null;
+    newTab?: boolean | null;
+    reference?:
+      | ({
+          relationTo: 'pages';
+          value: number | Page;
+        } | null)
+      | ({
+          relationTo: 'posts';
+          value: number | Post;
+        } | null);
+    url?: string | null;
+    label?: string | null;
+    /**
+     * Choose how the link should be rendered.
+     */
+    appearance?: ('default' | 'outline' | 'link' | 'secondary') | null;
+    /**
+     * Choose how the link position should be.
+     */
+    position?: ('center' | 'right') | null;
+  };
+  slides?:
+    | {
+        direction?: ('slide-to-right' | 'slide-to-left') | null;
+        slidesPerView?: number | null;
+        autoPlay?: boolean | null;
+        enableArrow?: boolean | null;
+        items?:
+          | {
+              content?: {
+                root: {
+                  type: string;
+                  children: {
+                    type: any;
+                    version: number;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
+                };
+                [k: string]: unknown;
+              } | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'carousel';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1711,6 +1856,7 @@ export interface PagesSelect<T extends boolean = true> {
         featureBlock?: T | FeatureBlockSelect<T>;
         mediaContent?: T | MediaContentBlockSelect<T>;
         mapsBlock?: T | MapsBlockSelect<T>;
+        carousel?: T | CarouselBlockSelect<T>;
       };
   meta?:
     | T
@@ -1946,8 +2092,11 @@ export interface MediaContentBlockSelect<T extends boolean = true> {
         bgPosition?: T;
         bgAttachment?: T;
         padding?: T;
+        gap?: T;
         alignment?: T;
         layout?: T;
+        margin?: T;
+        width?: T;
       };
   media?: T;
   content?: T;
@@ -1960,6 +2109,7 @@ export interface MediaContentBlockSelect<T extends boolean = true> {
         reference?: T;
         url?: T;
         label?: T;
+        appearance?: T;
         position?: T;
       };
   id?: T;
@@ -1991,6 +2141,59 @@ export interface MapsBlockSelect<T extends boolean = true> {
   specificAddress?: T;
   latitude?: T;
   longitude?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CarouselBlock_select".
+ */
+export interface CarouselBlockSelect<T extends boolean = true> {
+  settings?:
+    | T
+    | {
+        bgType?: T;
+        bgGradient?: T;
+        bgLightColor?: T;
+        bgDarkColor?: T;
+        bgImage?: T;
+        bgRepeat?: T;
+        bgSize?: T;
+        bgSizeCustom?: T;
+        bgPosition?: T;
+        bgAttachment?: T;
+        padding?: T;
+        type?: T;
+        fullWidth?: T;
+      };
+  title?: T;
+  subtitle?: T;
+  link?:
+    | T
+    | {
+        type?: T;
+        newTab?: T;
+        reference?: T;
+        url?: T;
+        label?: T;
+        appearance?: T;
+        position?: T;
+      };
+  slides?:
+    | T
+    | {
+        direction?: T;
+        slidesPerView?: T;
+        autoPlay?: T;
+        enableArrow?: T;
+        items?:
+          | T
+          | {
+              content?: T;
+              id?: T;
+            };
+        id?: T;
+      };
   id?: T;
   blockName?: T;
 }
