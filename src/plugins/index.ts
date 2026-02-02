@@ -3,14 +3,14 @@ import { nestedDocsPlugin } from '@payloadcms/plugin-nested-docs'
 import { redirectsPlugin } from '@payloadcms/plugin-redirects'
 import { seoPlugin } from '@payloadcms/plugin-seo'
 import { searchPlugin } from '@payloadcms/plugin-search'
-import { Plugin } from 'payload'
+import { Plugin, TypedLocale } from 'payload'
 import { revalidateRedirects } from '@/hooks/revalidateRedirects'
 import { GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types'
 import { FixedToolbarFeature, HeadingFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
 import { searchFields } from '@/search/fieldOverrides'
 import { beforeSyncWithSearch } from '@/search/beforeSync'
 
-import { Page, Post } from '@/payload-types'
+import { Form, Page, Post } from '@/payload-types'
 import { getServerSideURL } from '@/utilities/getURL'
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 import { formSubmissionTemplate } from '@/emails-template/submitEmail'
@@ -113,20 +113,63 @@ export const plugins: Plugin[] = [
         afterChange: [
           async ({ doc, req }) => {
             try {
-              const fields = doc.submissionData || []
+              const fields = doc?.submissionData || []
 
               const fieldMap = fields.reduce((acc: any, item: any) => {
                 acc[item.field] = item.value
                 return acc
               }, {})
 
-              const html = formSubmissionTemplate(fieldMap, doc.form.title)
+              const title = doc?.form?.title
 
-              await req.payload.sendEmail({
-                to: process.env.TO_ADDRESS,
-                subject: `News from Omnistack`,
-                html,
+              const locale: TypedLocale = req?.i18n?.language as TypedLocale;
+              
+              const form = await req.payload.findByID({
+                collection: 'forms',
+                locale,
+                fallbackLocale: 'en',
+                id: doc?.form?.id,
+                depth: 2,
+                overrideAccess: true,
               })
+          
+              const emails: Form['emails'] = form?.emails || []
+
+              if (emails && emails.length > 0) {   
+                await Promise.all(
+                  emails.map(async(email) =>{
+                    const html = await formSubmissionTemplate(
+                      fieldMap,
+                      title,
+                      email.message,
+                      locale
+                    )
+        
+                    return req.payload.sendEmail({
+                      from: email.emailFrom,
+                      to: email.emailTo,
+                      cc: email.cc,
+                      bcc: email.bcc,
+                      replyTo: email.replyTo,
+                      subject: email.subject,
+                      html,
+                    })
+                  })
+                )
+              } else {
+                const html = await formSubmissionTemplate(
+                  fieldMap,
+                  title,
+                  null,
+                  locale
+                )
+        
+                await req.payload.sendEmail({
+                  to: process.env.DEFAULT_TO_ADDRESS || 'support@omnistack.co',
+                  subject: 'News from Omnistack',
+                  html,
+                })
+              }
 
               console.log('✅ Email sent via Postmark')
             } catch (err) {

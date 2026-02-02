@@ -20,5 +20,12 @@
   "next": "Next",
   "page-not-found": "This page could not be found.",
   "go_home": "Go home",
-  "no_data": "Search produced no results."
+  "no_data": "Search produced no results.",
+  "form": {
+    "footer": "Sent from Omnistack System",
+    "sending": "Sending...., please wait!",
+    "email": {
+      "title": "📩 News from"
+    }
+  }
 }
