@@ -211,18 +211,9 @@ a {
   font-size: 1.25rem !important;
 }
 
-.swiper-wrapper {
-  -webkit-transition-timing-function: linear !important;
-  -o-transition-timing-function: linear !important;
-  transition-timing-function: linear !important; 
-}
-
-.swiper-wrapper:hover {
-  animation-play-state: paused;
-}
-
 @media screen and (max-width: 500px) {
   .media-class {
     width: 100% !important;
   }
 }
+

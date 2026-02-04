@@ -50,8 +50,8 @@ const config = {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
         'shimmer': 'shimmer 2s infinite',
-        'slide-to-left': 'slide-to-left 50s linear infinite',
-        'slide-to-right': 'slide-to-right 50s linear infinite',
+        'slide-to-left': 'slide-to-left 40s linear infinite',
+        'slide-to-right': 'slide-to-right 40s linear infinite',
       },
       borderRadius: {
         lg: 'var(--radius)',

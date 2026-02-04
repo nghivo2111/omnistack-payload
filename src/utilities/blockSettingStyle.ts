@@ -2,7 +2,7 @@ import { Media } from '@/payload-types'
 import { CSSProperties } from 'react'
 
 type Setting = {
-  bgType?: ('image' | 'color' | 'transparent'| 'gradient') | null
+  bgType?: ('image' | 'color' | 'transparent' | 'gradient') | null
   bgLightColor?: string | null
   bgDarkColor?: string | null
   bgImage?: (number | null) | Media
@@ -12,7 +12,8 @@ type Setting = {
   bgPosition?: ('center' | 'right' | 'left' | 'top' | 'bottom')[] | null
   bgAttachment?: ('scroll' | 'fixed') | null
   padding?: string | null,
-  bgGradient?: string | null
+  bgGradient?: string | null,
+  maxWidth?: string | null,
 }
 
 export const blockSettingStyle = (settings?: Setting) => {
@@ -21,6 +22,11 @@ export const blockSettingStyle = (settings?: Setting) => {
   if (!settings) return style
 
   if (settings.padding) style.padding = `${settings.padding} 0 ${settings.padding}`
+
+  if (settings.maxWidth) {
+    style.maxWidth = `${settings.maxWidth}`
+    style.margin = 'auto'
+  }
 
   if (settings.bgType === 'transparent') {
     style.background = `transparent`
@@ -37,7 +43,7 @@ export const blockSettingStyle = (settings?: Setting) => {
     return style
   }
 
-  if(settings.bgType==='gradient'){
+  if (settings.bgType === 'gradient') {
     style.background = `${settings.bgGradient}`
   }
 

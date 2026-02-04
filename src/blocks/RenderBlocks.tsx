@@ -10,6 +10,7 @@ import ArchiveBlock from '@/blocks/ArchiveBlock/Component'
 import FormBlock from '@/blocks/Form/Component'
 import MapsBlock from './MapsBlock/Component'
 import Carousel from './Carousel/Component'
+import ListBlock from './ListBlock/Component'
 
 const blockComponents: Record<string, React.FC<any>> = {
   archive: ArchiveBlock,
@@ -21,6 +22,7 @@ const blockComponents: Record<string, React.FC<any>> = {
   mediaContent: MediaContent,
   mapsBlock: MapsBlock,
   carousel: Carousel,
+  listBlock: ListBlock,
 }
 
 export const RenderBlocks: React.FC<{

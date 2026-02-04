@@ -28,7 +28,7 @@ const FormBlock: React.FC<
     id?: string
     className?: string
   } & FormBlockType &
-    FormBlockProps
+  FormBlockProps
 > = (props) => {
   const { enableIntro, form: formFromProps, introContent, className, settings } = props
 
@@ -111,8 +111,8 @@ const FormBlock: React.FC<
 
             if (redirectUrl) router.push(redirectUrl)
           }
-          
-          setTimeout(()=>{
+
+          setTimeout(() => {
             setHasSubmitted(false);
             formMethods.reset();
           }, 3000)

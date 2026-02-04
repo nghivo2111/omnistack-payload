@@ -71,9 +71,18 @@ export const Carousel: Block = {
                         },
                         {
                             type: 'number',
-                            name: 'slidesPerView',
+                            name: 'slidesPerViewD',
+                            label: 'Slides per desktop view',
                             admin: {
-                                width: "50%",
+                                width: "25%",
+                            }
+                        },
+                        {
+                            type: 'number',
+                            name: 'slidesPerViewM',
+                            label: 'Slides per mobile view',
+                            admin: {
+                                width: "25%",
                             }
                         },
                     ]
@@ -85,16 +94,18 @@ export const Carousel: Block = {
                             type: 'checkbox',
                             name: 'autoPlay',
                             admin: {
-                                width: '50%'
+                                width: '25%',
+                                condition: (_, __, {blockData}) => blockData.settings.type !== 'content'
                             }
                         },
                         {
                             name: 'enableArrow',
                             type: 'checkbox',
                             admin: {
-                                width: '50%'
+                                width: '25%',
+                                condition: (_, __, {blockData}) => blockData.settings.type !== 'content'
                             }
-                        }
+                        },                       
                     ]
                 },
                 {

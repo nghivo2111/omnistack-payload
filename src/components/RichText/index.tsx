@@ -120,27 +120,13 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) 
       <MapsBlock {...node.fields} className="!p-0 [&_p]:my-0 [&>div]:px-0" />
     ),
   },
-  link: ({ node }) => {
+  link: ({ node, nodesToJSX }) => {
     const { doc, url, newTab } = node.fields
-
-    const styles = node.children
-      .filter(
-        (child): child is { style: string; type: string; version: number } =>
-          typeof child === 'object' &&
-          child !== null &&
-          'style' in child &&
-          typeof (child as any).style === 'string'
-      )
-    .map(child => styleStringToObject(child.style))
-    .reduce((acc, style) => ({ ...acc, ...style }), {})
-    
-    // Extract text from children
-    const textContent =
-      node.children[0] && 'text' in node.children[0]
-        ? (node.children[0] as { text?: string }).text
-        : undefined
-
-    // Handle internal document reference
+  
+    const content = nodesToJSX({
+      nodes: node.children,
+    })
+  
     if (doc && typeof doc.value === 'object' && doc.value !== null) {
       return (
         <CMSLink
@@ -151,18 +137,19 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) 
           }}
           newTab={newTab}
         >
-          <span style={styles}>{textContent}</span>
+          {content}
         </CMSLink>
       )
     }
-
-    // Handle custom URL
+  
     return (
       <CMSLink type="custom" url={url} newTab={newTab}>
-        <span style={styles}>{textContent}</span> 
+        {content}
       </CMSLink>
     )
-  },
+  }
+  ,
+    
   text: (args) => {
     const { node } = args
     const defaultText =

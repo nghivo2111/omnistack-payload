@@ -61,12 +61,12 @@ const ArchiveBlock: React.FC<
         limit,
         ...(flattenedCategories && flattenedCategories.length > 0
           ? {
-              where: {
-                categories: {
-                  in: flattenedCategories,
-                },
+            where: {
+              categories: {
+                in: flattenedCategories,
               },
-            }
+            },
+          }
           : {}),
       })
       posts = fetchedPosts.docs
@@ -79,12 +79,12 @@ const ArchiveBlock: React.FC<
         limit,
         ...(flattenedCategories && flattenedCategories.length > 0
           ? {
-              where: {
-                categories: {
-                  in: flattenedCategories,
-                },
+            where: {
+              categories: {
+                in: flattenedCategories,
               },
-            }
+            },
+          }
           : {}),
       })
       services = fetchedServices.docs
@@ -97,12 +97,12 @@ const ArchiveBlock: React.FC<
         limit,
         ...(flattenedCategories && flattenedCategories.length > 0
           ? {
-              where: {
-                categories: {
-                  in: flattenedCategories,
-                },
+            where: {
+              categories: {
+                in: flattenedCategories,
               },
-            }
+            },
+          }
           : {}),
       })
       reviews = fetchedReviews.docs
@@ -116,12 +116,12 @@ const ArchiveBlock: React.FC<
         sort: ['name', '-updatedAt'],
         ...(flattenedCategories && flattenedCategories.length > 0
           ? {
-              where: {
-                categories: {
-                  in: flattenedCategories,
-                },
+            where: {
+              categories: {
+                in: flattenedCategories,
               },
-            }
+            },
+          }
           : {}),
       })
       portfolios = fetchedPortfolio.docs
@@ -143,7 +143,7 @@ const ArchiveBlock: React.FC<
       case 'services':
         return <ServicesArchive services={services} />
       case 'reviews':
-        return <ReviewsArchive reviews={reviews} isBgCustom={settings?.bgType !== 'transparent'}/>
+        return <ReviewsArchive reviews={reviews} isBgCustom={settings?.bgType !== 'transparent'} />
       case 'portfolios':
         return <PortfolioArchive portfolios={portfolios} />
       default:
@@ -155,13 +155,13 @@ const ArchiveBlock: React.FC<
     <div className="py-8 block-setting" id={`block-${id}`} style={blockSettingStyle(settings)}>
       <div className='container flex flex-col md:flex-row gap-6 md:items-end justify-between pb-6'>
         <div className="md:w-[70%]">
-          {introContent && <RichText data={introContent} enableGutter={false} />} 
+          {introContent && <RichText data={introContent} enableGutter={false} />}
         </div>
         <div className=''>
-         {link && <CMSLink {...link} appearance={'link'}/>} 
+          {link && <CMSLink {...link} appearance={'link'} />}
         </div>
       </div>
-      
+
       {renderArchive()}
     </div>
   )

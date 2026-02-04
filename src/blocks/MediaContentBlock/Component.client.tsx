@@ -1,6 +1,6 @@
 import { Media } from '@/components/Media'
 import RichText from '@/components/RichText'
-import type {} from '@/payload-types'
+import type { } from '@/payload-types'
 import { cn } from '@/utilities/ui'
 import { CMSLink } from '@/components/Link'
 import { blockSettingStyle } from '@/utilities/blockSettingStyle'
@@ -43,15 +43,15 @@ const MediaContentClient = ({ props }: { props: MediaContentProps }) => {
             'w-full',
             [`md:w-${settings?.layout}`],
           )}
-          style={{margin: `${settings?.margin}` }}
+          style={{ margin: `${settings?.margin}` }}
         >
-          <div className='w-full media-class' style={{width: `${settings?.width}`}}>
+          <div className='w-full media-class' style={{ width: `${settings?.width}` }}>
             <Media
               imgClassName={cn(imgClassName)}
               resource={media}
               src={staticImage}
               className="object-contain"
-          />
+            />
           </div>
         </div>
       )
@@ -96,7 +96,7 @@ const MediaContentClient = ({ props }: { props: MediaContentProps }) => {
   }
   return (
     <div className={cn(className, 'py-8 block-setting')} style={blockSettingStyle(settings)}>
-      <div className={cn('flex flex-col md:flex-row w-full gap-6 justify-between', { container: enableGutter })} style={{gap: `${settings?.gap}`}}>
+      <div className={cn('flex flex-col md:flex-row w-full gap-6 justify-between', { container: enableGutter })} style={{ gap: `${settings?.gap}` }}>
         {renderLayout()}
       </div>
     </div>

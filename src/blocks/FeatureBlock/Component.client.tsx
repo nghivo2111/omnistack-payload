@@ -4,7 +4,6 @@ import { Media } from '@/components/Media'
 import RichText from '@/components/RichText'
 import { blockSettingStyle } from '@/utilities/blockSettingStyle'
 import { cn } from '@/utilities/ui'
-import { DefaultTypedEditorState } from '@payloadcms/richtext-lexical'
 import { FeatureProps } from './Component'
 
 const FeatureClient = ({ props }: { props: FeatureProps }) => {
@@ -24,7 +23,7 @@ const FeatureClient = ({ props }: { props: FeatureProps }) => {
           <div
             key={item.id}>
             {item.media && <Media resource={item.media} imgClassName="mx-auto" />}
-            {item.content && <RichText data={item.content as DefaultTypedEditorState} />}
+            {item.content && <RichText data={item.content} />}
           </div>
         ))}
       </div>

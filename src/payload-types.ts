@@ -203,6 +203,10 @@ export interface Page {
        * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px". Leave blank to use the default.
        */
       padding?: string | null;
+      /**
+       * Set the maximum width for this block. Accepts CSS values such as "40px", "2rem", or "80%". Defaults to "1376px" if left blank.
+       */
+      maxWidth?: string | null;
       type: 'none' | 'highImpact' | 'mediumImpact' | 'lowImpact';
     };
     richText?: {
@@ -256,6 +260,7 @@ export interface Page {
         | MediaContentBlock
         | MapsBlock
         | CarouselBlock
+        | IListBlock
       )[]
     | null;
   meta?: {
@@ -518,6 +523,10 @@ export interface CallToActionBlock {
      * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px". Leave blank to use the default.
      */
     padding?: string | null;
+    /**
+     * Set the maximum width for this block. Accepts CSS values such as "40px", "2rem", or "80%". Defaults to "1376px" if left blank.
+     */
+    maxWidth?: string | null;
   };
   richText?: {
     root: {
@@ -616,6 +625,10 @@ export interface ContentBlock {
      * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px". Leave blank to use the default.
      */
     padding?: string | null;
+    /**
+     * Set the maximum width for this block. Accepts CSS values such as "40px", "2rem", or "80%". Defaults to "1376px" if left blank.
+     */
+    maxWidth?: string | null;
   };
   columns?:
     | {
@@ -716,6 +729,10 @@ export interface MediaBlock {
      * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px". Leave blank to use the default.
      */
     padding?: string | null;
+    /**
+     * Set the maximum width for this block. Accepts CSS values such as "40px", "2rem", or "80%". Defaults to "1376px" if left blank.
+     */
+    maxWidth?: string | null;
   };
   media: number | Media;
   id?: string | null;
@@ -772,6 +789,10 @@ export interface ArchiveBlock {
      * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px". Leave blank to use the default.
      */
     padding?: string | null;
+    /**
+     * Set the maximum width for this block. Accepts CSS values such as "40px", "2rem", or "80%". Defaults to "1376px" if left blank.
+     */
+    maxWidth?: string | null;
   };
   introContent?: {
     root: {
@@ -867,6 +888,10 @@ export interface FormBlock {
      * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px". Leave blank to use the default.
      */
     padding?: string | null;
+    /**
+     * Set the maximum width for this block. Accepts CSS values such as "40px", "2rem", or "80%". Defaults to "1376px" if left blank.
+     */
+    maxWidth?: string | null;
   };
   form: number | Form;
   enableIntro?: boolean | null;
@@ -1118,6 +1143,10 @@ export interface FeatureBlock {
      * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px". Leave blank to use the default.
      */
     padding?: string | null;
+    /**
+     * Set the maximum width for this block. Accepts CSS values such as "40px", "2rem", or "80%". Defaults to "1376px" if left blank.
+     */
+    maxWidth?: string | null;
     layout?: ('3-columns' | '4-columns' | '5-columns') | null;
   };
   items?:
@@ -1195,6 +1224,10 @@ export interface MediaContentBlock {
      * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px". Leave blank to use the default.
      */
     padding?: string | null;
+    /**
+     * Set the maximum width for this block. Accepts CSS values such as "40px", "2rem", or "80%". Defaults to "1376px" if left blank.
+     */
+    maxWidth?: string | null;
     /**
      * Space between media and content elements (CSS units, e.g., 24px, 2rem). Default: 24px.
      */
@@ -1311,6 +1344,10 @@ export interface MapsBlock {
      */
     padding?: string | null;
     /**
+     * Set the maximum width for this block. Accepts CSS values such as "40px", "2rem", or "80%". Defaults to "1376px" if left blank.
+     */
+    maxWidth?: string | null;
+    /**
      * Map width in pixels (px)
      */
     width?: number | null;
@@ -1383,6 +1420,10 @@ export interface CarouselBlock {
      * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px". Leave blank to use the default.
      */
     padding?: string | null;
+    /**
+     * Set the maximum width for this block. Accepts CSS values such as "40px", "2rem", or "80%". Defaults to "1376px" if left blank.
+     */
+    maxWidth?: string | null;
     type?: 'content' | null;
     /**
      * If checked, the carousel will extend to the full width of the viewport, overflowing the container.
@@ -1431,7 +1472,8 @@ export interface CarouselBlock {
   slides?:
     | {
         direction?: ('slide-to-right' | 'slide-to-left') | null;
-        slidesPerView?: number | null;
+        slidesPerViewD?: number | null;
+        slidesPerViewM?: number | null;
         autoPlay?: boolean | null;
         enableArrow?: boolean | null;
         items?:
@@ -1460,6 +1502,110 @@ export interface CarouselBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'carousel';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "IListBlock".
+ */
+export interface IListBlock {
+  settings?: {
+    /**
+     * Select "Image" to use a background image, or "Color" to choose a solid background color. If neither is chosen, the section background will default to transparent.
+     */
+    bgType?: ('image' | 'color' | 'gradient' | 'transparent') | null;
+    /**
+     * Enter a CSS gradient value. Supports: "linear-gradient", "radial-gradient", "conic-gradient" (e.g., "linear-gradient(90deg, #fff, #000)". If left empty, section background defaults to transparent.
+     */
+    bgGradient?: string | null;
+    /**
+     * Custom CSS Light color value (e.g., #ffffff, rgb(255,255,255), or color name). Defaults to transparent if left empty.
+     */
+    bgLightColor?: string | null;
+    /**
+     * Custom CSS Dark color value (e.g., #ffffff, rgb(255,255,255), or color name). Defaults to transparent if left empty.
+     */
+    bgDarkColor?: string | null;
+    /**
+     * Upload an image to use as the section background. This image will only be displayed if "Type" is set to "Image".
+     */
+    bgImage?: (number | null) | Media;
+    /**
+     * Enable to repeat the background image. When checked, the image will tile to fill the area. Leave unchecked for a single image.
+     */
+    bgRepeat?: boolean | null;
+    /**
+     * How the image should scale. "Contain" fits within the area, "Cover" fills it, or set a custom value. Default is auto.
+     */
+    bgSize?: ('contain' | 'cover' | 'custom') | null;
+    /**
+     * Enter a value in pixels or percent (e.g., 70px, 50%)
+     */
+    bgSizeCustom?: string | null;
+    /**
+     * Choose one or more background positions. Default is center. Example: select "Right" and "Top" to position background at the top right.
+     */
+    bgPosition?: ('center' | 'right' | 'left' | 'top' | 'bottom')[] | null;
+    /**
+     * Specifies how the background image scrolls with the page. "Scroll" moves with the content (default), "Fixed" remains stationary.
+     */
+    bgAttachment?: ('scroll' | 'fixed') | null;
+    /**
+     * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px". Leave blank to use the default.
+     */
+    padding?: string | null;
+    /**
+     * Set the maximum width for this block. Accepts CSS values such as "40px", "2rem", or "80%". Defaults to "1376px" if left blank.
+     */
+    maxWidth?: string | null;
+    /**
+     * Width of the icon in pixels (e.g. 24px, 2rem, ...). Leave blank for 24px.
+     */
+    iconSize?: string | null;
+    /**
+     * Choose how many columns to show your list: 2 columns, 3 columns, or 4 columns. Pick what fits your content best.
+     */
+    layout?: ('2-cols' | '3-cols' | '4-cols') | null;
+  };
+  title?: string | null;
+  subTitle?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  items?:
+    | {
+        icon?: (number | null) | Media;
+        content?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'listBlock';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1829,6 +1975,7 @@ export interface PagesSelect<T extends boolean = true> {
               bgPosition?: T;
               bgAttachment?: T;
               padding?: T;
+              maxWidth?: T;
               type?: T;
             };
         richText?: T;
@@ -1857,6 +2004,7 @@ export interface PagesSelect<T extends boolean = true> {
         mediaContent?: T | MediaContentBlockSelect<T>;
         mapsBlock?: T | MapsBlockSelect<T>;
         carousel?: T | CarouselBlockSelect<T>;
+        listBlock?: T | IListBlockSelect<T>;
       };
   meta?:
     | T
@@ -1891,6 +2039,7 @@ export interface CallToActionBlockSelect<T extends boolean = true> {
         bgPosition?: T;
         bgAttachment?: T;
         padding?: T;
+        maxWidth?: T;
       };
   richText?: T;
   links?:
@@ -1931,6 +2080,7 @@ export interface ContentBlockSelect<T extends boolean = true> {
         bgPosition?: T;
         bgAttachment?: T;
         padding?: T;
+        maxWidth?: T;
       };
   columns?:
     | T
@@ -1973,6 +2123,7 @@ export interface MediaBlockSelect<T extends boolean = true> {
         bgPosition?: T;
         bgAttachment?: T;
         padding?: T;
+        maxWidth?: T;
       };
   media?: T;
   id?: T;
@@ -1997,6 +2148,7 @@ export interface ArchiveBlockSelect<T extends boolean = true> {
         bgPosition?: T;
         bgAttachment?: T;
         padding?: T;
+        maxWidth?: T;
       };
   introContent?: T;
   link?:
@@ -2035,6 +2187,7 @@ export interface FormBlockSelect<T extends boolean = true> {
         bgPosition?: T;
         bgAttachment?: T;
         padding?: T;
+        maxWidth?: T;
       };
   form?: T;
   enableIntro?: T;
@@ -2061,6 +2214,7 @@ export interface FeatureBlockSelect<T extends boolean = true> {
         bgPosition?: T;
         bgAttachment?: T;
         padding?: T;
+        maxWidth?: T;
         layout?: T;
       };
   items?:
@@ -2092,6 +2246,7 @@ export interface MediaContentBlockSelect<T extends boolean = true> {
         bgPosition?: T;
         bgAttachment?: T;
         padding?: T;
+        maxWidth?: T;
         gap?: T;
         alignment?: T;
         layout?: T;
@@ -2134,6 +2289,7 @@ export interface MapsBlockSelect<T extends boolean = true> {
         bgPosition?: T;
         bgAttachment?: T;
         padding?: T;
+        maxWidth?: T;
         width?: T;
         height?: T;
       };
@@ -2163,6 +2319,7 @@ export interface CarouselBlockSelect<T extends boolean = true> {
         bgPosition?: T;
         bgAttachment?: T;
         padding?: T;
+        maxWidth?: T;
         type?: T;
         fullWidth?: T;
       };
@@ -2183,7 +2340,8 @@ export interface CarouselBlockSelect<T extends boolean = true> {
     | T
     | {
         direction?: T;
-        slidesPerView?: T;
+        slidesPerViewD?: T;
+        slidesPerViewM?: T;
         autoPlay?: T;
         enableArrow?: T;
         items?:
@@ -2192,6 +2350,41 @@ export interface CarouselBlockSelect<T extends boolean = true> {
               content?: T;
               id?: T;
             };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "IListBlock_select".
+ */
+export interface IListBlockSelect<T extends boolean = true> {
+  settings?:
+    | T
+    | {
+        bgType?: T;
+        bgGradient?: T;
+        bgLightColor?: T;
+        bgDarkColor?: T;
+        bgImage?: T;
+        bgRepeat?: T;
+        bgSize?: T;
+        bgSizeCustom?: T;
+        bgPosition?: T;
+        bgAttachment?: T;
+        padding?: T;
+        maxWidth?: T;
+        iconSize?: T;
+        layout?: T;
+      };
+  title?: T;
+  subTitle?: T;
+  items?:
+    | T
+    | {
+        icon?: T;
+        content?: T;
         id?: T;
       };
   id?: T;
@@ -2950,6 +3143,10 @@ export interface BannerBlock {
      * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px". Leave blank to use the default.
      */
     padding?: string | null;
+    /**
+     * Set the maximum width for this block. Accepts CSS values such as "40px", "2rem", or "80%". Defaults to "1376px" if left blank.
+     */
+    maxWidth?: string | null;
     style: 'info' | 'warning' | 'error' | 'success';
   };
   content: {
@@ -3021,6 +3218,10 @@ export interface CodeBlock {
      * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px". Leave blank to use the default.
      */
     padding?: string | null;
+    /**
+     * Set the maximum width for this block. Accepts CSS values such as "40px", "2rem", or "80%". Defaults to "1376px" if left blank.
+     */
+    maxWidth?: string | null;
   };
   language?: ('typescript' | 'javascript' | 'css') | null;
   code: string;

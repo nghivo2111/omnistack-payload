@@ -199,13 +199,27 @@ export const settingField = ({ overrides }: { overrides?: Field[] }): Field => {
             ],
           },
           {
-            name: 'padding',
-            type: 'text',
-            admin: {
-              width: '50%',
-              description:
-                'Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px". Leave blank to use the default.',
-            },
+            type: 'row',
+            fields: [
+              {
+                name: 'padding',
+                type: 'text',
+                admin: {
+                  width: '50%',
+                  description:
+                    'Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px". Leave blank to use the default.',
+                },
+              },
+              {
+                name: 'maxWidth',
+                type: 'text',
+                admin: {
+                  width: '50%',
+                  description:
+                    'Set the maximum width for this block. Accepts CSS values such as "40px", "2rem", or "80%". Defaults to "1376px" if left blank.',
+                }
+              },
+            ]
           },
           ...itemOverrides,
         ],
