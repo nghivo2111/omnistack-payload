@@ -61,8 +61,8 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
     <header
       className={cn(
         "fixed w-full z-[9999] transition-opacity duration-300 shadow-none opacity-0",
-        {"opacity-100" : show},
-        {"shadow-lg" : lastScrollY >= 50 && show}
+        { "opacity-100": show },
+        { "shadow-lg": lastScrollY >= 50 && show }
       )}
     >
       <Disclosure
@@ -90,13 +90,13 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
                     <Link href="/">
                       {data.logo && data.icon ? (
                         <>
-                          <Media resource={data.logo} className='max-w-[200px] w-full h-full xl:block hidden'/>
-                          <Media resource={data.icon} className='!max-w-12 w-full h-full block xl:hidden'/>
+                          <Media resource={data.logo} className='max-w-[200px] w-full h-full xl:block hidden' />
+                          <Media resource={data.icon} className='!max-w-12 w-full h-full block xl:hidden' />
                         </>
-                      ) : 
+                      ) :
                         <>
-                          <Logo loading="eager" priority="high" src={"/logo-web.png"} className='xl:block hidden'/>
-                          <Logo loading="eager" priority="high" src={"/icons/logo_only.webp"} className='!max-w-12 block xl:hidden'/>
+                          <Logo loading="eager" priority="high" src={"/logo-web.png"} className='xl:block hidden' />
+                          <Logo loading="eager" priority="high" src={"/icons/logo_only.webp"} className='!max-w-12 block xl:hidden' />
                         </>
                       }
                     </Link>
@@ -110,10 +110,10 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
                     <div className="flex">
                       <HeaderNav data={data} />
                       <LocaleSwitcher />
-                      <div className="md:flex hidden gap-6 items-center pl-6">                   
+                      <div className="md:flex hidden gap-6 items-center pl-6">
                         <CMSLink {...data.link} />
                         {/* <ThemeSwitcher /> */}
-                      </div>     
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -126,17 +126,17 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
                 { 'left-[100%]': !open },
               )}
             >
-                <div className="h-full w-full">
-                  {data.navItems?.map((item, index) => (
-                    <Disclosure.Button
-                      key={index}
-                      className={"w-full block p-4 pl-8 text-base font-bold text-primary text-left"}
-                      onClick={() => router.push(item.link.url || '')}
-                    >
-                      {item.link.label}
-                    </Disclosure.Button>
-                  ))}
-                </div>
+              <div className="h-full w-full">
+                {data.navItems?.map((item, index) => (
+                  <Disclosure.Button
+                    key={index}
+                    className={"w-full block p-4 pl-8 text-base font-bold text-primary text-left"}
+                    onClick={() => router.push(item.link.url || '')}
+                  >
+                    {item.link.label}
+                  </Disclosure.Button>
+                ))}
+              </div>
             </div>
           </>
         )}

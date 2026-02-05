@@ -143,7 +143,7 @@ const ArchiveBlock: React.FC<
       case 'services':
         return <ServicesArchive services={services} />
       case 'reviews':
-        return <ReviewsArchive reviews={reviews} isBgCustom={settings?.bgType !== 'transparent'} />
+        return <ReviewsArchive reviews={reviews} />
       case 'portfolios':
         return <PortfolioArchive portfolios={portfolios} />
       default:
@@ -154,9 +154,9 @@ const ArchiveBlock: React.FC<
   return (
     <div className="py-8 block-setting" id={`block-${id}`} style={blockSettingStyle(settings)}>
       <div className='container flex flex-col md:flex-row gap-6 md:items-end justify-between pb-6'>
-        <div className="md:w-[70%]">
-          {introContent && <RichText data={introContent} enableGutter={false} />}
-        </div>
+
+        {introContent && <div className="md:w-[70%]"> <RichText data={introContent} enableGutter={false} /></div>}
+
         <div className=''>
           {link && <CMSLink {...link} appearance={'link'} />}
         </div>
