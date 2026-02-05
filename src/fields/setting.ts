@@ -59,25 +59,14 @@ export const settingField = ({ overrides }: { overrides?: Field[] }): Field => {
                 type: 'row',
                 fields: [
                   {
-                    name: 'bgLightColor',
-                    label: 'Light Color custom',
+                    name: 'bgColor',
+                    label: 'Color custom',
                     type: 'text',
                     admin: {
                       condition: (_, siblingData) => siblingData.bgType === 'color',
                       width: '50%',
                       description:
-                        'Custom CSS Light color value (e.g., #ffffff, rgb(255,255,255), or color name). Defaults to transparent if left empty.',
-                    },
-                  },
-                  {
-                    name: 'bgDarkColor',
-                    label: 'Dark Color custom',
-                    type: 'text',
-                    admin: {
-                      condition: (_, siblingData) => siblingData.bgType === 'color',
-                      width: '50%',
-                      description:
-                        'Custom CSS Dark color value (e.g., #ffffff, rgb(255,255,255), or color name). Defaults to transparent if left empty.',
+                        'Custom CSS color value (e.g., #ffffff, rgb(255,255,255), or color name). Defaults to transparent if left empty.',
                     },
                   },
                 ],
@@ -219,6 +208,18 @@ export const settingField = ({ overrides }: { overrides?: Field[] }): Field => {
                     'Set the maximum width for this block. Accepts CSS values such as "40px", "2rem", or "80%". Defaults to "1376px" if left blank.',
                 }
               },
+            ]
+          },
+          {
+            type: 'row',
+            fields: [
+              {
+                type: 'text',
+                name: 'borderRadius',
+                admin: {
+                  description: 'CSS border radius for the block (e.g., "16px", "2rem", "50%"). Rounds the corners of the container. Leave blank for no rounding.',
+                }
+              }
             ]
           },
           ...itemOverrides,

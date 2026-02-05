@@ -1,5 +1,35 @@
 import { settingField } from '@/fields/setting';
-import { Block } from 'payload';
+import { Block, Field } from 'payload';
+
+const statsHighlight: Field[] = [
+	{
+		name: 'value',
+		type: 'text',
+		required: true,
+	},
+	{
+		name: 'label',
+		type: 'text',
+		required: true,
+	},
+	{
+		name: 'subLabel',
+		type: 'text',
+		required: false,
+	},
+]
+
+const iconContent: Field[] = [
+	{
+		type: 'upload',
+		name: 'icon',
+		relationTo: 'media',
+	},
+	{
+		type: 'richText',
+		name: 'content',
+	}
+]
 
 export const ListBlock: Block = {
 	slug: 'listBlock',
@@ -10,14 +40,6 @@ export const ListBlock: Block = {
 				{
 					type: 'row',
 					fields: [
-						{
-							type: 'text',
-							name: 'iconSize',
-							admin: {
-								description: 'Width of the icon in pixels (e.g. 24px, 2rem, ...). Leave blank for 24px.',
-								width: '50%',
-							}
-						},
 						{
 							type: 'select',
 							name: 'layout',
@@ -41,35 +63,67 @@ export const ListBlock: Block = {
 								width: '50%'
 							}
 						},
+						{
+							type: 'select',
+							name: 'type',
+							defaultValue: 'icon-content',
+							options: [
+								{
+									value: 'icon-content',
+									label: 'Icon Content'
+								},
+								{
+									value: 'stats-highlight',
+									label: 'Stats Highlight'
+								}
+							],
+							admin: {
+								width: '50%',
+								description: 'Choose the style for your list: "Icon Content" displays items with icons and text, while "Stats Highlight" shows statistical highlights with numbers or key data.',
+							}
+						},
+						{
+							type: 'text',
+							name: 'iconSize',
+							admin: {
+								description: 'Width of the icon in pixels (e.g. 24px, 2rem, ...). Leave blank for 24px.',
+								width: '50%',
+								condition: (_, siblingData) => siblingData.type === 'icon-content'
+							}
+						},
 					]
-				}
+				},
 			]
 		}),
 		{
 			name: 'title',
 			type: 'text',
-			localized: true
 		},
 		{
-			name: 'subTitle',
+			name: 'subtitle',
 			type: 'richText',
-			localized: true,
 		},
 		{
 			type: 'array',
 			name: 'items',
 			fields: [
 				{
-					type: 'upload',
-					name: 'icon',
-					relationTo: 'media',
+					type: 'group',
+					name: 'iconContent',
+					fields: iconContent,
+					admin: {
+						condition: (_, __, { blockData }) => blockData.settings.type === 'icon-content'
+					}
 				},
 				{
-					type: 'richText',
-					name: 'content',
+					type: 'group',
+					name: 'statsHighlight',
+					fields: statsHighlight,
+					admin: {
+						condition: (_, __, { blockData }) => blockData.settings.type === 'stats-highlight'
+					}
 				}
 			],
-			localized: true,
 		}
 	]
 }

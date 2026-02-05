@@ -52,6 +52,7 @@ const config = {
         'shimmer': 'shimmer 2s infinite',
         'slide-to-left': 'slide-to-left 40s linear infinite',
         'slide-to-right': 'slide-to-right 40s linear infinite',
+        'spin-slow': 'spin 18s linear infinite',
       },
       borderRadius: {
         lg: 'var(--radius)',

@@ -89,7 +89,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 MediaContentBlock,
                 MapsBlock,
                 Carousel,
-                ListBlock
+                ListBlock,
               ],
               admin: {
                 initCollapsed: true,

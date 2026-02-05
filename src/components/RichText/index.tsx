@@ -19,6 +19,7 @@ import type {
   CallToActionBlock as CTABlockProps,
   FeatureBlock as FeatureBlockProps,
   FormBlock as FormBlockProps,
+  IListBlock,
   MapsBlock as MapsBlockType,
   MediaBlock as MediaBlockProps,
   Page,
@@ -37,7 +38,7 @@ import type {
   TextStateFeatureProps,
 } from 'node_modules/@payloadcms/richtext-lexical/dist/features/textState/feature.server'
 import { CSSProperties } from 'react'
-import { styleStringToObject } from '@/utilities/styleStringToObject'
+import ListBlock from '@/blocks/ListBlock/Component'
 
 export const textShadowState: TextStateFeatureProps['state'] = {
   textShadow: {
@@ -76,6 +77,7 @@ type NodeTypes =
     | FormBlockProps
     | FeatureBlockProps
     | MapsBlockType
+    | IListBlock
   >
 
 const internalDocToHref = ({ linkNode }: { linkNode: SerializedLinkNode }) => {
@@ -119,14 +121,15 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) 
     mapsBlock: ({ node }) => (
       <MapsBlock {...node.fields} className="!p-0 [&_p]:my-0 [&>div]:px-0" />
     ),
+    listBlock: ({ node }) => (<ListBlock {...node.fields} className="!p-0 [&_p]:my-0 [&>div]:px-0" />)
   },
   link: ({ node, nodesToJSX }) => {
     const { doc, url, newTab } = node.fields
-  
+
     const content = nodesToJSX({
       nodes: node.children,
     })
-  
+
     if (doc && typeof doc.value === 'object' && doc.value !== null) {
       return (
         <CMSLink
@@ -141,7 +144,7 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) 
         </CMSLink>
       )
     }
-  
+
     return (
       <CMSLink type="custom" url={url} newTab={newTab}>
         {content}
@@ -149,7 +152,7 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) 
     )
   }
   ,
-    
+
   text: (args) => {
     const { node } = args
     const defaultText =

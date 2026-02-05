@@ -3,8 +3,7 @@ import { CSSProperties } from 'react'
 
 type Setting = {
   bgType?: ('image' | 'color' | 'transparent' | 'gradient') | null
-  bgLightColor?: string | null
-  bgDarkColor?: string | null
+  bgColor?: string | null
   bgImage?: (number | null) | Media
   bgRepeat?: boolean | null
   bgSize?: ('contain' | 'cover' | 'custom') | null
@@ -14,6 +13,7 @@ type Setting = {
   padding?: string | null,
   bgGradient?: string | null,
   maxWidth?: string | null,
+  borderRadius?: string | null,
 }
 
 export const blockSettingStyle = (settings?: Setting) => {
@@ -28,17 +28,17 @@ export const blockSettingStyle = (settings?: Setting) => {
     style.margin = 'auto'
   }
 
+  if (settings.borderRadius) {
+    style.borderRadius = `${settings.borderRadius}`
+  }
+
   if (settings.bgType === 'transparent') {
     style.background = `transparent`
     return style
   }
 
   if (settings.bgType === 'color') {
-    style = {
-      ...style,
-      '--bg-light': settings.bgLightColor,
-      '--bg-dark': settings.bgDarkColor,
-    } as CSSProperties
+    style.backgroundColor = `${settings.bgColor}`
 
     return style
   }
