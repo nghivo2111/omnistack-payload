@@ -17,7 +17,7 @@ type Setting = {
 }
 
 export const blockSettingStyle = (settings?: Setting) => {
-  let style: CSSProperties = {}
+  const style: CSSProperties = {}
 
   if (!settings) return style
 
