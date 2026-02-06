@@ -1,5 +1,3 @@
-'use client'
-
 import { Media } from '@/components/Media'
 import RichText from '@/components/RichText'
 import { blockSettingStyle } from '@/utilities/blockSettingStyle'

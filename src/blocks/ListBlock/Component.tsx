@@ -18,7 +18,7 @@ const renderIconContent = (iconSize: string, item: NonNullable<IListBlock['items
 
 	return (<>
 		{icon && typeof icon === 'object' && 'url' in icon && (
-			<div className='pt-2s'>
+			<div className='pt-2'>
 				<Image
 					alt={typeof icon === 'object' && 'alt' in icon && icon.alt ? icon.alt : ''}
 					src={icon.url ?? ''}
@@ -27,7 +27,9 @@ const renderIconContent = (iconSize: string, item: NonNullable<IListBlock['items
 				/>
 			</div>
 		)}
-		{content && <RichText data={content} enableGutter={false} />}
+		{content && <div className='flex-1'>
+			<RichText data={content} enableGutter={false} />
+		</div>}
 	</>)
 }
 
@@ -93,11 +95,11 @@ const ListBlock = (props: ListBlockProp) => {
 						"grid-cols-2": settings?.type === 'stats-highlight',
 					})}>
 						{
-							items.map((item, index) => {
+							items.map((item) => {
 								const { iconContent, statsHighlight, id } = item
 								if (settings?.type === 'icon-content')
 									return (
-										<div className='flex gap-4 items-center justify-center' key={id}>
+										<div className='flex gap-4 justify-center' key={id}>
 											{renderIconContent(
 												settings?.iconSize ?? 'md',
 												iconContent
