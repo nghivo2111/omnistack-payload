@@ -78,7 +78,7 @@ const ListBlock = (props: ListBlockProp) => {
 	return (
 		<div className={cn('py-8 block-setting overflow-hidden', className)} style={blockSettingStyle(settings)}>
 			<div className='container'>
-				{title || subtitle && (
+				{(title || subtitle && subtitle.root.children.length > 0) && (
 					<div className=' prose md:prose-md w-full max-w-full mb-16'>
 						{title && <h1 className='text-center'>
 							{title}
