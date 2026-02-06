@@ -46,6 +46,10 @@ export const ListBlock: Block = {
 							defaultValue: '2-cols',
 							options: [
 								{
+									label: '1 Columns',
+									value: '1-cols'
+								},
+								{
 									label: '2 Columns',
 									value: '2-cols'
 								},
