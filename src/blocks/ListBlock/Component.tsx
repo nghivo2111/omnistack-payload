@@ -88,6 +88,7 @@ const ListBlock = (props: ListBlockProp) => {
 				)}
 				{items && (
 					<div className={cn('grid md:grid-cols-2 gap-6 p-3', {
+						"md:grid-cols-1": settings?.layout === '1-cols',
 						"md:grid-cols-2": settings?.layout === '2-cols',
 						"md:grid-cols-3": settings?.layout === '3-cols',
 						"md:grid-cols-4": settings?.layout === '4-cols',

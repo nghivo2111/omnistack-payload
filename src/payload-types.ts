@@ -1560,7 +1560,7 @@ export interface IListBlock {
     /**
      * Choose how many columns to show your list: 2 columns, 3 columns, or 4 columns. Pick what fits your content best.
      */
-    layout?: ('2-cols' | '3-cols' | '4-cols') | null;
+    layout?: ('1-cols' | '2-cols' | '3-cols' | '4-cols') | null;
     /**
      * Choose the style for your list: "Icon Content" displays items with icons and text, while "Stats Highlight" shows statistical highlights with numbers or key data.
      */
