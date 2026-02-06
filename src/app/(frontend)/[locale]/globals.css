@@ -189,7 +189,7 @@ a {
 
 .prose :where(h2){
   font-size: 2rem !important;
-  margin: 16px 0 !important;
+  margin: 0 0 16px 0 !important;
 }
 
 .md\:prose-md :where(h4){
@@ -207,3 +207,6 @@ a {
   }
 }
 
+.prose  :where(img, h3, h4, h5, h6){
+  margin: 0 !important;
+}
