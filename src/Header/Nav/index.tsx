@@ -16,13 +16,13 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({
         return (
           <div key={i} className=' h-full'>
             <CMSLink
-            {...link}
-            className={cn(
-              'ml-2 p-4 inline-flex h-full items-center font-bold text-primary hover:text-secondary hover:border-b-secondary-foreground border-white border-y-[6px]',
-            )}
-          />
+              {...link}
+              className={cn(
+                'ml-2 p-4 inline-flex h-full items-center font-bold text-primary hover:text-secondary hover:border-b-secondary/50 border-white border-y-[6px]',
+              )}
+            />
           </div>
-          
+
         )
       })}
     </nav>
