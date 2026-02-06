@@ -14,7 +14,7 @@ const SlideAutoPlayInfinite = ({
       <div className="w-full overflow-hidden">
          <div
             className={cn(
-               "flex hover:paused justify-around",
+               "flex hover:paused justify-around gap-2",
                direction === 'slide-to-right'
                   ? 'animate-slide-to-right'
                   : 'animate-slide-to-left'
@@ -26,12 +26,13 @@ const SlideAutoPlayInfinite = ({
                      className="block md:hidden flex-shrink-0"
                      style={{
                         width: `${100 / (slidesPerViewMobile)}%`,
+                        minWidth: 'max-content'
                      }}
                   >
                      {item.content && (
                         <RichText
                            data={item.content}
-                           className='[&_a_span]:hover:!text-secondary w-max'
+                           className='[&_a_span]:hover:!text-secondary w-max [&_h1]:!leading-[4.6rem]'
                            enableGutter={false}
                         />
                      )}
@@ -41,12 +42,13 @@ const SlideAutoPlayInfinite = ({
                      className="hidden md:block flex-shrink-0"
                      style={{
                         width: `${100 / (slidesPerViewDesktop)}%`,
+                        minWidth: 'max-content'
                      }}
                   >
                      {item.content && (
                         <RichText
                            data={item.content}
-                           className='[&_a_span]:hover:!text-secondary w-max'
+                           className='[&_a_span]:hover:!text-secondary w-max [&_h1]:!leading-[4.6rem]'
                            enableGutter={false}
                         />
                      )}
