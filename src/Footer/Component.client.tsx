@@ -1,77 +1,71 @@
-'use client'
-
-import type { Footer } from '@/payload-types'
+import type { Footer, Media as MediaType } from '@/payload-types'
 import { CMSLink } from '@/components/Link'
 import { Logo } from '@/components/Logo/Logo'
 import { Link } from '@/i18n/routing'
 import RichText from '@/components/RichText'
 import { DefaultTypedEditorState } from '@payloadcms/richtext-lexical'
-import { motion } from 'motion/react'
+import { Media } from '@/components/Media'
 
-export function FooterClient({ data }: { data: Footer }) {
-    return (
-        <footer
-            className="bg-white dark:bg-[#001e3c] relative bottom-0 border-t border-gray-200 dark:border-[#183b61]"
-            aria-labelledby="footer-heading"
-        >
-            <h2 id="footer-heading" className="sr-only">
-                Footer
-            </h2>
-            <div className="container pb-10 pt-10 overflow-hidden">
-                <div className="lg:grid lg:grid-cols-2 lg:gap-32">
-                    <motion.div
-                        initial={{ y: 100, opacity: 0 }}
-                        whileInView={{ y: 0, opacity: 1 }}
-                        transition={{ duration: 0.5, ease: 'easeInOut' }}>
-                        <div
-                            className="flex flex-shrink-0 items-center"><Link href={'/'}>
-                                <Logo />
-                            </Link>
-                        </div>
-                        <motion.div className="pt-5"
-                            initial={{ x: -100 }}
-                            whileInView={{ x: 0 }}
-                            transition={{ duration: 0.5, ease: 'easeInOut' }}>
-                            <RichText
-                                data={data.additionalInformation as DefaultTypedEditorState}
-                                className="[&_p]:my-0"
-                            />
-                        </motion.div>
-                    </motion.div>
-                    <motion.div
-                        initial={{ x: 200, opacity: 0 }}
-                        whileInView={{ x: 0, opacity: 1 }}
-                        transition={{ duration: 0.5, ease: 'easeInOut' }}
-                        className="mt-12 grid lg:grid-cols-2 grid-cols-2 lg:col-span-1 lg:mt-0 gap-6">
+export function FooterClient({ data, icon }: { data: Footer, icon?: MediaType }) {
+   return (
+      <footer
+         className="bg-white relative"
+         aria-labelledby="footer-heading"
+      >
+         <h2 id="footer-heading" className="sr-only">
+            Footer
+         </h2>
+         <div className="lg:container !px-0 overflow-hidden lg:after:absolute lg:after:bg-neutral-200 lg:after:inset-0 lg:after:left-[calc(50%+687px)]">
+            <div className="lg:flex justify-between gap-6">
+               <div className='px-5 lg:px-0 lg:pl-8'>
+                  <div className='md:flex items-start gap-10 py-10'>
+                     <div
+                        className="flex flex-shrink-0 items-center">
+                        <Link href={'/'}>
+                           {icon ? (
+                              <Media resource={icon} className='!max-w-24 w-full h-full' />
+                           ) :
+                              <Logo loading="eager" priority="high" src={"/icons/logo_only.webp"} className='!max-w-24' />
+                           }
+                        </Link>
+                     </div>
+                     <div className="mt-6 grid lg:grid-cols-3 grid-cols-2 lg:col-span-1 lg:mt-0 gap-6">
                         {data.columns?.map((column) => (
-                            <motion.div key={column.id}
-                                initial={{ y: -100, scale: 0.1 }}
-                                whileInView={{ y: 0, scale: 1 }}
-                                transition={{ duration: 0.5, ease: 'easeInOut' }}
-                            >
-                                <div className="text-sm font-semibold leading-6 text-gray-900 dark:text-gray-50">
-                                    {column.label}
-                                </div>
-                                <div className="mt-6 space-y-4">
-                                    {column.navItems?.map((item) => (
-                                        <div key={item.id}>
-                                            <CMSLink
-                                                {...item.link}
-                                                className="text-sm leading-6 text-gray-600 dark:text-gray-400 hover:text-gray-900"
-                                            />
-                                        </div>
-                                    ))}
-                                </div>
-                            </motion.div>
+                           <div key={column.id}>
+                              <div className="text-xl font-bold leading-6 text-gray-900 dark:text-gray-50">
+                                 {column.label}
+                              </div>
+                              <div className="mt-6 space-y-3">
+                                 {column.navItems?.map((item) => (
+                                    <div key={item.id}>
+                                       <CMSLink
+                                          {...item.link}
+                                          className="text-sm leading-6 text-gray-600 dark:text-gray-400 hover:text-gray-900"
+                                       />
+                                    </div>
+                                 ))}
+                              </div>
+                           </div>
                         ))}
-                    </motion.div>
-                </div>
-                <div className="mt-20 border-t border-gray-200 dark:border-[#183b61] pt-10 md:flex md:items-center md:justify-between">
-                    <p className="mt-5 text-xs leading-5 text-gray-400 md:order-1 md:mt-0">
+                     </div>
+                  </div>
+                  <div className="border-t border-gray-200 dark:border-[#183b61] md:flex md:items-center md:justify-between pb-10 pt-10">
+                     <p className="text-xs leading-5 text-gray-400 md:order-1 md:mt-0">
                         {data.copyRight}
-                    </p>
-                </div>
+                     </p>
+                  </div>
+               </div>
+
+               <div className="lg:max-w-[386px] py-10 bg-neutral-200 px-5 lg:px-8">
+                  <RichText
+                     data={data.additionalInformation as DefaultTypedEditorState}
+                     className="[&_p]:my-0"
+                     enableGutter={false}
+                  />
+               </div>
             </div>
-        </footer>
-    )
+
+         </div>
+      </footer>
+   )
 }

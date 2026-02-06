@@ -19,6 +19,7 @@ import type {
   CallToActionBlock as CTABlockProps,
   FeatureBlock as FeatureBlockProps,
   FormBlock as FormBlockProps,
+  IListBlock,
   MapsBlock as MapsBlockType,
   MediaBlock as MediaBlockProps,
   Page,
@@ -37,6 +38,7 @@ import type {
   TextStateFeatureProps,
 } from 'node_modules/@payloadcms/richtext-lexical/dist/features/textState/feature.server'
 import { CSSProperties } from 'react'
+import ListBlock from '@/blocks/ListBlock/Component'
 
 export const textShadowState: TextStateFeatureProps['state'] = {
   textShadow: {
@@ -75,6 +77,7 @@ type NodeTypes =
     | FormBlockProps
     | FeatureBlockProps
     | MapsBlockType
+    | IListBlock
   >
 
 const internalDocToHref = ({ linkNode }: { linkNode: SerializedLinkNode }) => {
@@ -118,17 +121,15 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) 
     mapsBlock: ({ node }) => (
       <MapsBlock {...node.fields} className="!p-0 [&_p]:my-0 [&>div]:px-0" />
     ),
+    listBlock: ({ node }) => (<ListBlock {...node.fields} className="!p-0 [&_p]:my-0 [&>div]:px-0" />)
   },
-  link: ({ node }) => {
+  link: ({ node, nodesToJSX }) => {
     const { doc, url, newTab } = node.fields
 
-    // Extract text from children
-    const textContent =
-      node.children[0] && 'text' in node.children[0]
-        ? (node.children[0] as { text?: string }).text
-        : undefined
+    const content = nodesToJSX({
+      nodes: node.children,
+    })
 
-    // Handle internal document reference
     if (doc && typeof doc.value === 'object' && doc.value !== null) {
       return (
         <CMSLink
@@ -139,18 +140,19 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) 
           }}
           newTab={newTab}
         >
-          {textContent}
+          {content}
         </CMSLink>
       )
     }
 
-    // Handle custom URL
     return (
       <CMSLink type="custom" url={url} newTab={newTab}>
-        {textContent}
+        {content}
       </CMSLink>
     )
-  },
+  }
+  ,
+
   text: (args) => {
     const { node } = args
     const defaultText =
@@ -185,12 +187,11 @@ export default function RichText(props: Props) {
     <ConvertRichText
       converters={jsxConverters}
       className={cn(
-        'payload-richtext',
         'p-0',
         {
           container: enableGutter,
           'max-w-none': !enableGutter,
-          'mx-auto prose md:prose-md dark:prose-invert': enableProse,
+          'mx-auto prose md:prose-md': enableProse,
         },
         className,
       )}

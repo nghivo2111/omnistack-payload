@@ -168,13 +168,9 @@ export interface Page {
        */
       bgGradient?: string | null;
       /**
-       * Custom CSS Light color value (e.g., #ffffff, rgb(255,255,255), or color name). Defaults to transparent if left empty.
+       * Custom CSS color value (e.g., #ffffff, rgb(255,255,255), or color name). Defaults to transparent if left empty.
        */
-      bgLightColor?: string | null;
-      /**
-       * Custom CSS Dark color value (e.g., #ffffff, rgb(255,255,255), or color name). Defaults to transparent if left empty.
-       */
-      bgDarkColor?: string | null;
+      bgColor?: string | null;
       /**
        * Upload an image to use as the section background. This image will only be displayed if "Type" is set to "Image".
        */
@@ -203,6 +199,14 @@ export interface Page {
        * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px". Leave blank to use the default.
        */
       padding?: string | null;
+      /**
+       * Set the maximum width for this block. Accepts CSS values such as "40px", "2rem", or "80%". Defaults to "1376px" if left blank.
+       */
+      maxWidth?: string | null;
+      /**
+       * CSS border radius for the block (e.g., "16px", "2rem", "50%"). Rounds the corners of the container. Leave blank for no rounding.
+       */
+      borderRadius?: string | null;
       type: 'none' | 'highImpact' | 'mediumImpact' | 'lowImpact';
     };
     richText?: {
@@ -237,7 +241,7 @@ export interface Page {
       /**
        * Choose how the link should be rendered.
        */
-      appearance?: ('default' | 'outline') | null;
+      appearance?: ('default' | 'outline' | 'link' | 'secondary') | null;
       /**
        * Choose how the link position should be.
        */
@@ -255,6 +259,8 @@ export interface Page {
         | FeatureBlock
         | MediaContentBlock
         | MapsBlock
+        | CarouselBlock
+        | IListBlock
       )[]
     | null;
   meta?: {
@@ -482,13 +488,9 @@ export interface CallToActionBlock {
      */
     bgGradient?: string | null;
     /**
-     * Custom CSS Light color value (e.g., #ffffff, rgb(255,255,255), or color name). Defaults to transparent if left empty.
+     * Custom CSS color value (e.g., #ffffff, rgb(255,255,255), or color name). Defaults to transparent if left empty.
      */
-    bgLightColor?: string | null;
-    /**
-     * Custom CSS Dark color value (e.g., #ffffff, rgb(255,255,255), or color name). Defaults to transparent if left empty.
-     */
-    bgDarkColor?: string | null;
+    bgColor?: string | null;
     /**
      * Upload an image to use as the section background. This image will only be displayed if "Type" is set to "Image".
      */
@@ -517,6 +519,14 @@ export interface CallToActionBlock {
      * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px". Leave blank to use the default.
      */
     padding?: string | null;
+    /**
+     * Set the maximum width for this block. Accepts CSS values such as "40px", "2rem", or "80%". Defaults to "1376px" if left blank.
+     */
+    maxWidth?: string | null;
+    /**
+     * CSS border radius for the block (e.g., "16px", "2rem", "50%"). Rounds the corners of the container. Leave blank for no rounding.
+     */
+    borderRadius?: string | null;
   };
   richText?: {
     root: {
@@ -580,13 +590,9 @@ export interface ContentBlock {
      */
     bgGradient?: string | null;
     /**
-     * Custom CSS Light color value (e.g., #ffffff, rgb(255,255,255), or color name). Defaults to transparent if left empty.
+     * Custom CSS color value (e.g., #ffffff, rgb(255,255,255), or color name). Defaults to transparent if left empty.
      */
-    bgLightColor?: string | null;
-    /**
-     * Custom CSS Dark color value (e.g., #ffffff, rgb(255,255,255), or color name). Defaults to transparent if left empty.
-     */
-    bgDarkColor?: string | null;
+    bgColor?: string | null;
     /**
      * Upload an image to use as the section background. This image will only be displayed if "Type" is set to "Image".
      */
@@ -615,6 +621,14 @@ export interface ContentBlock {
      * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px". Leave blank to use the default.
      */
     padding?: string | null;
+    /**
+     * Set the maximum width for this block. Accepts CSS values such as "40px", "2rem", or "80%". Defaults to "1376px" if left blank.
+     */
+    maxWidth?: string | null;
+    /**
+     * CSS border radius for the block (e.g., "16px", "2rem", "50%"). Rounds the corners of the container. Leave blank for no rounding.
+     */
+    borderRadius?: string | null;
   };
   columns?:
     | {
@@ -652,7 +666,7 @@ export interface ContentBlock {
           /**
            * Choose how the link should be rendered.
            */
-          appearance?: ('default' | 'outline') | null;
+          appearance?: ('default' | 'outline' | 'link' | 'secondary') | null;
           /**
            * Choose how the link position should be.
            */
@@ -680,13 +694,9 @@ export interface MediaBlock {
      */
     bgGradient?: string | null;
     /**
-     * Custom CSS Light color value (e.g., #ffffff, rgb(255,255,255), or color name). Defaults to transparent if left empty.
+     * Custom CSS color value (e.g., #ffffff, rgb(255,255,255), or color name). Defaults to transparent if left empty.
      */
-    bgLightColor?: string | null;
-    /**
-     * Custom CSS Dark color value (e.g., #ffffff, rgb(255,255,255), or color name). Defaults to transparent if left empty.
-     */
-    bgDarkColor?: string | null;
+    bgColor?: string | null;
     /**
      * Upload an image to use as the section background. This image will only be displayed if "Type" is set to "Image".
      */
@@ -715,6 +725,14 @@ export interface MediaBlock {
      * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px". Leave blank to use the default.
      */
     padding?: string | null;
+    /**
+     * Set the maximum width for this block. Accepts CSS values such as "40px", "2rem", or "80%". Defaults to "1376px" if left blank.
+     */
+    maxWidth?: string | null;
+    /**
+     * CSS border radius for the block (e.g., "16px", "2rem", "50%"). Rounds the corners of the container. Leave blank for no rounding.
+     */
+    borderRadius?: string | null;
   };
   media: number | Media;
   id?: string | null;
@@ -736,13 +754,9 @@ export interface ArchiveBlock {
      */
     bgGradient?: string | null;
     /**
-     * Custom CSS Light color value (e.g., #ffffff, rgb(255,255,255), or color name). Defaults to transparent if left empty.
+     * Custom CSS color value (e.g., #ffffff, rgb(255,255,255), or color name). Defaults to transparent if left empty.
      */
-    bgLightColor?: string | null;
-    /**
-     * Custom CSS Dark color value (e.g., #ffffff, rgb(255,255,255), or color name). Defaults to transparent if left empty.
-     */
-    bgDarkColor?: string | null;
+    bgColor?: string | null;
     /**
      * Upload an image to use as the section background. This image will only be displayed if "Type" is set to "Image".
      */
@@ -771,6 +785,14 @@ export interface ArchiveBlock {
      * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px". Leave blank to use the default.
      */
     padding?: string | null;
+    /**
+     * Set the maximum width for this block. Accepts CSS values such as "40px", "2rem", or "80%". Defaults to "1376px" if left blank.
+     */
+    maxWidth?: string | null;
+    /**
+     * CSS border radius for the block (e.g., "16px", "2rem", "50%"). Rounds the corners of the container. Leave blank for no rounding.
+     */
+    borderRadius?: string | null;
   };
   introContent?: {
     root: {
@@ -787,6 +809,21 @@ export interface ArchiveBlock {
     };
     [k: string]: unknown;
   } | null;
+  link?: {
+    type?: ('reference' | 'custom') | null;
+    newTab?: boolean | null;
+    reference?:
+      | ({
+          relationTo: 'pages';
+          value: number | Page;
+        } | null)
+      | ({
+          relationTo: 'posts';
+          value: number | Post;
+        } | null);
+    url?: string | null;
+    label?: string | null;
+  };
   populateBy?: ('collection' | 'selection') | null;
   relationTo?: ('posts' | 'services' | 'reviews' | 'portfolios') | null;
   categories?: (number | Category)[] | null;
@@ -816,13 +853,9 @@ export interface FormBlock {
      */
     bgGradient?: string | null;
     /**
-     * Custom CSS Light color value (e.g., #ffffff, rgb(255,255,255), or color name). Defaults to transparent if left empty.
+     * Custom CSS color value (e.g., #ffffff, rgb(255,255,255), or color name). Defaults to transparent if left empty.
      */
-    bgLightColor?: string | null;
-    /**
-     * Custom CSS Dark color value (e.g., #ffffff, rgb(255,255,255), or color name). Defaults to transparent if left empty.
-     */
-    bgDarkColor?: string | null;
+    bgColor?: string | null;
     /**
      * Upload an image to use as the section background. This image will only be displayed if "Type" is set to "Image".
      */
@@ -851,6 +884,14 @@ export interface FormBlock {
      * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px". Leave blank to use the default.
      */
     padding?: string | null;
+    /**
+     * Set the maximum width for this block. Accepts CSS values such as "40px", "2rem", or "80%". Defaults to "1376px" if left blank.
+     */
+    maxWidth?: string | null;
+    /**
+     * CSS border radius for the block (e.g., "16px", "2rem", "50%"). Rounds the corners of the container. Leave blank for no rounding.
+     */
+    borderRadius?: string | null;
   };
   form: number | Form;
   enableIntro?: boolean | null;
@@ -1067,13 +1108,9 @@ export interface FeatureBlock {
      */
     bgGradient?: string | null;
     /**
-     * Custom CSS Light color value (e.g., #ffffff, rgb(255,255,255), or color name). Defaults to transparent if left empty.
+     * Custom CSS color value (e.g., #ffffff, rgb(255,255,255), or color name). Defaults to transparent if left empty.
      */
-    bgLightColor?: string | null;
-    /**
-     * Custom CSS Dark color value (e.g., #ffffff, rgb(255,255,255), or color name). Defaults to transparent if left empty.
-     */
-    bgDarkColor?: string | null;
+    bgColor?: string | null;
     /**
      * Upload an image to use as the section background. This image will only be displayed if "Type" is set to "Image".
      */
@@ -1102,6 +1139,14 @@ export interface FeatureBlock {
      * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px". Leave blank to use the default.
      */
     padding?: string | null;
+    /**
+     * Set the maximum width for this block. Accepts CSS values such as "40px", "2rem", or "80%". Defaults to "1376px" if left blank.
+     */
+    maxWidth?: string | null;
+    /**
+     * CSS border radius for the block (e.g., "16px", "2rem", "50%"). Rounds the corners of the container. Leave blank for no rounding.
+     */
+    borderRadius?: string | null;
     layout?: ('3-columns' | '4-columns' | '5-columns') | null;
   };
   items?:
@@ -1144,13 +1189,9 @@ export interface MediaContentBlock {
      */
     bgGradient?: string | null;
     /**
-     * Custom CSS Light color value (e.g., #ffffff, rgb(255,255,255), or color name). Defaults to transparent if left empty.
+     * Custom CSS color value (e.g., #ffffff, rgb(255,255,255), or color name). Defaults to transparent if left empty.
      */
-    bgLightColor?: string | null;
-    /**
-     * Custom CSS Dark color value (e.g., #ffffff, rgb(255,255,255), or color name). Defaults to transparent if left empty.
-     */
-    bgDarkColor?: string | null;
+    bgColor?: string | null;
     /**
      * Upload an image to use as the section background. This image will only be displayed if "Type" is set to "Image".
      */
@@ -1180,6 +1221,18 @@ export interface MediaContentBlock {
      */
     padding?: string | null;
     /**
+     * Set the maximum width for this block. Accepts CSS values such as "40px", "2rem", or "80%". Defaults to "1376px" if left blank.
+     */
+    maxWidth?: string | null;
+    /**
+     * CSS border radius for the block (e.g., "16px", "2rem", "50%"). Rounds the corners of the container. Leave blank for no rounding.
+     */
+    borderRadius?: string | null;
+    /**
+     * Space between media and content elements (CSS units, e.g., 24px, 2rem). Default: 24px.
+     */
+    gap?: string | null;
+    /**
      * Choose the order of content and media within this block. "Media + Content" displays the media first, followed by the content; "Content + Media" reverses the order.
      */
     alignment?: ('contentMedia' | 'mediaContent') | null;
@@ -1187,6 +1240,14 @@ export interface MediaContentBlock {
      * Select the proportional layout of Content and Media within this block.
      */
     layout?: ('1/2' | '1/4' | '2/5' | '1/3' | '3/5' | '2/3' | '3/4' | 'full') | null;
+    /**
+     * Margin format: "top right bottom left" (e.g., "16px 24px 16px 24px"). Applies to media. Each value sets margin for one side, in order: top, right, bottom, left.
+     */
+    margin?: string | null;
+    /**
+     * Width of the media (e.g., "100%", "400px", "40vw"). Accepts any valid CSS width value.
+     */
+    width?: string | null;
   };
   media?: (number | null) | Media;
   content?: {
@@ -1220,6 +1281,10 @@ export interface MediaContentBlock {
     url?: string | null;
     label: string;
     /**
+     * Choose how the link should be rendered.
+     */
+    appearance?: ('default' | 'outline' | 'link' | 'secondary') | null;
+    /**
      * Choose how the link position should be.
      */
     position?: ('center' | 'right') | null;
@@ -1243,13 +1308,9 @@ export interface MapsBlock {
      */
     bgGradient?: string | null;
     /**
-     * Custom CSS Light color value (e.g., #ffffff, rgb(255,255,255), or color name). Defaults to transparent if left empty.
+     * Custom CSS color value (e.g., #ffffff, rgb(255,255,255), or color name). Defaults to transparent if left empty.
      */
-    bgLightColor?: string | null;
-    /**
-     * Custom CSS Dark color value (e.g., #ffffff, rgb(255,255,255), or color name). Defaults to transparent if left empty.
-     */
-    bgDarkColor?: string | null;
+    bgColor?: string | null;
     /**
      * Upload an image to use as the section background. This image will only be displayed if "Type" is set to "Image".
      */
@@ -1279,6 +1340,14 @@ export interface MapsBlock {
      */
     padding?: string | null;
     /**
+     * Set the maximum width for this block. Accepts CSS values such as "40px", "2rem", or "80%". Defaults to "1376px" if left blank.
+     */
+    maxWidth?: string | null;
+    /**
+     * CSS border radius for the block (e.g., "16px", "2rem", "50%"). Rounds the corners of the container. Leave blank for no rounding.
+     */
+    borderRadius?: string | null;
+    /**
      * Map width in pixels (px)
      */
     width?: number | null;
@@ -1303,12 +1372,260 @@ export interface MapsBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CarouselBlock".
+ */
+export interface CarouselBlock {
+  settings?: {
+    /**
+     * Select "Image" to use a background image, or "Color" to choose a solid background color. If neither is chosen, the section background will default to transparent.
+     */
+    bgType?: ('image' | 'color' | 'gradient' | 'transparent') | null;
+    /**
+     * Enter a CSS gradient value. Supports: "linear-gradient", "radial-gradient", "conic-gradient" (e.g., "linear-gradient(90deg, #fff, #000)". If left empty, section background defaults to transparent.
+     */
+    bgGradient?: string | null;
+    /**
+     * Custom CSS color value (e.g., #ffffff, rgb(255,255,255), or color name). Defaults to transparent if left empty.
+     */
+    bgColor?: string | null;
+    /**
+     * Upload an image to use as the section background. This image will only be displayed if "Type" is set to "Image".
+     */
+    bgImage?: (number | null) | Media;
+    /**
+     * Enable to repeat the background image. When checked, the image will tile to fill the area. Leave unchecked for a single image.
+     */
+    bgRepeat?: boolean | null;
+    /**
+     * How the image should scale. "Contain" fits within the area, "Cover" fills it, or set a custom value. Default is auto.
+     */
+    bgSize?: ('contain' | 'cover' | 'custom') | null;
+    /**
+     * Enter a value in pixels or percent (e.g., 70px, 50%)
+     */
+    bgSizeCustom?: string | null;
+    /**
+     * Choose one or more background positions. Default is center. Example: select "Right" and "Top" to position background at the top right.
+     */
+    bgPosition?: ('center' | 'right' | 'left' | 'top' | 'bottom')[] | null;
+    /**
+     * Specifies how the background image scrolls with the page. "Scroll" moves with the content (default), "Fixed" remains stationary.
+     */
+    bgAttachment?: ('scroll' | 'fixed') | null;
+    /**
+     * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px". Leave blank to use the default.
+     */
+    padding?: string | null;
+    /**
+     * Set the maximum width for this block. Accepts CSS values such as "40px", "2rem", or "80%". Defaults to "1376px" if left blank.
+     */
+    maxWidth?: string | null;
+    /**
+     * CSS border radius for the block (e.g., "16px", "2rem", "50%"). Rounds the corners of the container. Leave blank for no rounding.
+     */
+    borderRadius?: string | null;
+    type?: 'content' | null;
+    /**
+     * If checked, the carousel will extend to the full width of the viewport, overflowing the container.
+     */
+    fullWidth?: boolean | null;
+  };
+  title?: string | null;
+  subtitle?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  link?: {
+    type?: ('reference' | 'custom') | null;
+    newTab?: boolean | null;
+    reference?:
+      | ({
+          relationTo: 'pages';
+          value: number | Page;
+        } | null)
+      | ({
+          relationTo: 'posts';
+          value: number | Post;
+        } | null);
+    url?: string | null;
+    label?: string | null;
+    /**
+     * Choose how the link should be rendered.
+     */
+    appearance?: ('default' | 'outline' | 'link' | 'secondary') | null;
+    /**
+     * Choose how the link position should be.
+     */
+    position?: ('center' | 'right') | null;
+  };
+  slides?:
+    | {
+        direction?: ('slide-to-right' | 'slide-to-left') | null;
+        slidesPerViewD?: number | null;
+        slidesPerViewM?: number | null;
+        autoPlay?: boolean | null;
+        enableArrow?: boolean | null;
+        items?:
+          | {
+              content?: {
+                root: {
+                  type: string;
+                  children: {
+                    type: any;
+                    version: number;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
+                };
+                [k: string]: unknown;
+              } | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'carousel';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "IListBlock".
+ */
+export interface IListBlock {
+  settings?: {
+    /**
+     * Select "Image" to use a background image, or "Color" to choose a solid background color. If neither is chosen, the section background will default to transparent.
+     */
+    bgType?: ('image' | 'color' | 'gradient' | 'transparent') | null;
+    /**
+     * Enter a CSS gradient value. Supports: "linear-gradient", "radial-gradient", "conic-gradient" (e.g., "linear-gradient(90deg, #fff, #000)". If left empty, section background defaults to transparent.
+     */
+    bgGradient?: string | null;
+    /**
+     * Custom CSS color value (e.g., #ffffff, rgb(255,255,255), or color name). Defaults to transparent if left empty.
+     */
+    bgColor?: string | null;
+    /**
+     * Upload an image to use as the section background. This image will only be displayed if "Type" is set to "Image".
+     */
+    bgImage?: (number | null) | Media;
+    /**
+     * Enable to repeat the background image. When checked, the image will tile to fill the area. Leave unchecked for a single image.
+     */
+    bgRepeat?: boolean | null;
+    /**
+     * How the image should scale. "Contain" fits within the area, "Cover" fills it, or set a custom value. Default is auto.
+     */
+    bgSize?: ('contain' | 'cover' | 'custom') | null;
+    /**
+     * Enter a value in pixels or percent (e.g., 70px, 50%)
+     */
+    bgSizeCustom?: string | null;
+    /**
+     * Choose one or more background positions. Default is center. Example: select "Right" and "Top" to position background at the top right.
+     */
+    bgPosition?: ('center' | 'right' | 'left' | 'top' | 'bottom')[] | null;
+    /**
+     * Specifies how the background image scrolls with the page. "Scroll" moves with the content (default), "Fixed" remains stationary.
+     */
+    bgAttachment?: ('scroll' | 'fixed') | null;
+    /**
+     * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px". Leave blank to use the default.
+     */
+    padding?: string | null;
+    /**
+     * Set the maximum width for this block. Accepts CSS values such as "40px", "2rem", or "80%". Defaults to "1376px" if left blank.
+     */
+    maxWidth?: string | null;
+    /**
+     * CSS border radius for the block (e.g., "16px", "2rem", "50%"). Rounds the corners of the container. Leave blank for no rounding.
+     */
+    borderRadius?: string | null;
+    /**
+     * Choose how many columns to show your list: 2 columns, 3 columns, or 4 columns. Pick what fits your content best.
+     */
+    layout?: ('2-cols' | '3-cols' | '4-cols') | null;
+    /**
+     * Choose the style for your list: "Icon Content" displays items with icons and text, while "Stats Highlight" shows statistical highlights with numbers or key data.
+     */
+    type?: ('icon-content' | 'stats-highlight') | null;
+    /**
+     * Width of the icon in pixels (e.g. 24px, 2rem, ...). Leave blank for 24px.
+     */
+    iconSize?: string | null;
+  };
+  title?: string | null;
+  subtitle?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  items?:
+    | {
+        iconContent?: {
+          icon?: (number | null) | Media;
+          content?: {
+            root: {
+              type: string;
+              children: {
+                type: any;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+        };
+        statsHighlight?: {
+          value: string;
+          label: string;
+          subLabel?: string | null;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'listBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "services".
  */
 export interface Service {
   id: number;
   title: string;
-  image: number | Media;
+  icon: number | Media;
   description?: {
     root: {
       type: string;
@@ -1660,8 +1977,7 @@ export interface PagesSelect<T extends boolean = true> {
           | {
               bgType?: T;
               bgGradient?: T;
-              bgLightColor?: T;
-              bgDarkColor?: T;
+              bgColor?: T;
               bgImage?: T;
               bgRepeat?: T;
               bgSize?: T;
@@ -1669,6 +1985,8 @@ export interface PagesSelect<T extends boolean = true> {
               bgPosition?: T;
               bgAttachment?: T;
               padding?: T;
+              maxWidth?: T;
+              borderRadius?: T;
               type?: T;
             };
         richText?: T;
@@ -1696,6 +2014,8 @@ export interface PagesSelect<T extends boolean = true> {
         featureBlock?: T | FeatureBlockSelect<T>;
         mediaContent?: T | MediaContentBlockSelect<T>;
         mapsBlock?: T | MapsBlockSelect<T>;
+        carousel?: T | CarouselBlockSelect<T>;
+        listBlock?: T | IListBlockSelect<T>;
       };
   meta?:
     | T
@@ -1721,8 +2041,7 @@ export interface CallToActionBlockSelect<T extends boolean = true> {
     | {
         bgType?: T;
         bgGradient?: T;
-        bgLightColor?: T;
-        bgDarkColor?: T;
+        bgColor?: T;
         bgImage?: T;
         bgRepeat?: T;
         bgSize?: T;
@@ -1730,6 +2049,8 @@ export interface CallToActionBlockSelect<T extends boolean = true> {
         bgPosition?: T;
         bgAttachment?: T;
         padding?: T;
+        maxWidth?: T;
+        borderRadius?: T;
       };
   richText?: T;
   links?:
@@ -1761,8 +2082,7 @@ export interface ContentBlockSelect<T extends boolean = true> {
     | {
         bgType?: T;
         bgGradient?: T;
-        bgLightColor?: T;
-        bgDarkColor?: T;
+        bgColor?: T;
         bgImage?: T;
         bgRepeat?: T;
         bgSize?: T;
@@ -1770,6 +2090,8 @@ export interface ContentBlockSelect<T extends boolean = true> {
         bgPosition?: T;
         bgAttachment?: T;
         padding?: T;
+        maxWidth?: T;
+        borderRadius?: T;
       };
   columns?:
     | T
@@ -1803,8 +2125,7 @@ export interface MediaBlockSelect<T extends boolean = true> {
     | {
         bgType?: T;
         bgGradient?: T;
-        bgLightColor?: T;
-        bgDarkColor?: T;
+        bgColor?: T;
         bgImage?: T;
         bgRepeat?: T;
         bgSize?: T;
@@ -1812,6 +2133,8 @@ export interface MediaBlockSelect<T extends boolean = true> {
         bgPosition?: T;
         bgAttachment?: T;
         padding?: T;
+        maxWidth?: T;
+        borderRadius?: T;
       };
   media?: T;
   id?: T;
@@ -1827,8 +2150,7 @@ export interface ArchiveBlockSelect<T extends boolean = true> {
     | {
         bgType?: T;
         bgGradient?: T;
-        bgLightColor?: T;
-        bgDarkColor?: T;
+        bgColor?: T;
         bgImage?: T;
         bgRepeat?: T;
         bgSize?: T;
@@ -1836,8 +2158,19 @@ export interface ArchiveBlockSelect<T extends boolean = true> {
         bgPosition?: T;
         bgAttachment?: T;
         padding?: T;
+        maxWidth?: T;
+        borderRadius?: T;
       };
   introContent?: T;
+  link?:
+    | T
+    | {
+        type?: T;
+        newTab?: T;
+        reference?: T;
+        url?: T;
+        label?: T;
+      };
   populateBy?: T;
   relationTo?: T;
   categories?: T;
@@ -1856,8 +2189,7 @@ export interface FormBlockSelect<T extends boolean = true> {
     | {
         bgType?: T;
         bgGradient?: T;
-        bgLightColor?: T;
-        bgDarkColor?: T;
+        bgColor?: T;
         bgImage?: T;
         bgRepeat?: T;
         bgSize?: T;
@@ -1865,6 +2197,8 @@ export interface FormBlockSelect<T extends boolean = true> {
         bgPosition?: T;
         bgAttachment?: T;
         padding?: T;
+        maxWidth?: T;
+        borderRadius?: T;
       };
   form?: T;
   enableIntro?: T;
@@ -1882,8 +2216,7 @@ export interface FeatureBlockSelect<T extends boolean = true> {
     | {
         bgType?: T;
         bgGradient?: T;
-        bgLightColor?: T;
-        bgDarkColor?: T;
+        bgColor?: T;
         bgImage?: T;
         bgRepeat?: T;
         bgSize?: T;
@@ -1891,6 +2224,8 @@ export interface FeatureBlockSelect<T extends boolean = true> {
         bgPosition?: T;
         bgAttachment?: T;
         padding?: T;
+        maxWidth?: T;
+        borderRadius?: T;
         layout?: T;
       };
   items?:
@@ -1913,8 +2248,7 @@ export interface MediaContentBlockSelect<T extends boolean = true> {
     | {
         bgType?: T;
         bgGradient?: T;
-        bgLightColor?: T;
-        bgDarkColor?: T;
+        bgColor?: T;
         bgImage?: T;
         bgRepeat?: T;
         bgSize?: T;
@@ -1922,8 +2256,13 @@ export interface MediaContentBlockSelect<T extends boolean = true> {
         bgPosition?: T;
         bgAttachment?: T;
         padding?: T;
+        maxWidth?: T;
+        borderRadius?: T;
+        gap?: T;
         alignment?: T;
         layout?: T;
+        margin?: T;
+        width?: T;
       };
   media?: T;
   content?: T;
@@ -1936,6 +2275,7 @@ export interface MediaContentBlockSelect<T extends boolean = true> {
         reference?: T;
         url?: T;
         label?: T;
+        appearance?: T;
         position?: T;
       };
   id?: T;
@@ -1951,8 +2291,7 @@ export interface MapsBlockSelect<T extends boolean = true> {
     | {
         bgType?: T;
         bgGradient?: T;
-        bgLightColor?: T;
-        bgDarkColor?: T;
+        bgColor?: T;
         bgImage?: T;
         bgRepeat?: T;
         bgSize?: T;
@@ -1960,6 +2299,8 @@ export interface MapsBlockSelect<T extends boolean = true> {
         bgPosition?: T;
         bgAttachment?: T;
         padding?: T;
+        maxWidth?: T;
+        borderRadius?: T;
         width?: T;
         height?: T;
       };
@@ -1967,6 +2308,108 @@ export interface MapsBlockSelect<T extends boolean = true> {
   specificAddress?: T;
   latitude?: T;
   longitude?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CarouselBlock_select".
+ */
+export interface CarouselBlockSelect<T extends boolean = true> {
+  settings?:
+    | T
+    | {
+        bgType?: T;
+        bgGradient?: T;
+        bgColor?: T;
+        bgImage?: T;
+        bgRepeat?: T;
+        bgSize?: T;
+        bgSizeCustom?: T;
+        bgPosition?: T;
+        bgAttachment?: T;
+        padding?: T;
+        maxWidth?: T;
+        borderRadius?: T;
+        type?: T;
+        fullWidth?: T;
+      };
+  title?: T;
+  subtitle?: T;
+  link?:
+    | T
+    | {
+        type?: T;
+        newTab?: T;
+        reference?: T;
+        url?: T;
+        label?: T;
+        appearance?: T;
+        position?: T;
+      };
+  slides?:
+    | T
+    | {
+        direction?: T;
+        slidesPerViewD?: T;
+        slidesPerViewM?: T;
+        autoPlay?: T;
+        enableArrow?: T;
+        items?:
+          | T
+          | {
+              content?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "IListBlock_select".
+ */
+export interface IListBlockSelect<T extends boolean = true> {
+  settings?:
+    | T
+    | {
+        bgType?: T;
+        bgGradient?: T;
+        bgColor?: T;
+        bgImage?: T;
+        bgRepeat?: T;
+        bgSize?: T;
+        bgSizeCustom?: T;
+        bgPosition?: T;
+        bgAttachment?: T;
+        padding?: T;
+        maxWidth?: T;
+        borderRadius?: T;
+        layout?: T;
+        type?: T;
+        iconSize?: T;
+      };
+  title?: T;
+  subtitle?: T;
+  items?:
+    | T
+    | {
+        iconContent?:
+          | T
+          | {
+              icon?: T;
+              content?: T;
+            };
+        statsHighlight?:
+          | T
+          | {
+              value?: T;
+              label?: T;
+              subLabel?: T;
+            };
+        id?: T;
+      };
   id?: T;
   blockName?: T;
 }
@@ -2123,7 +2566,7 @@ export interface UsersSelect<T extends boolean = true> {
  */
 export interface ServicesSelect<T extends boolean = true> {
   title?: T;
-  image?: T;
+  icon?: T;
   description?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -2447,7 +2890,30 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
 export interface Header {
   id: number;
   logo?: (number | null) | Media;
-  phone?: string | null;
+  icon?: (number | null) | Media;
+  link?: {
+    type?: ('reference' | 'custom') | null;
+    newTab?: boolean | null;
+    reference?:
+      | ({
+          relationTo: 'pages';
+          value: number | Page;
+        } | null)
+      | ({
+          relationTo: 'posts';
+          value: number | Post;
+        } | null);
+    url?: string | null;
+    label?: string | null;
+    /**
+     * Choose how the link should be rendered.
+     */
+    appearance?: ('default' | 'outline' | 'link' | 'secondary') | null;
+    /**
+     * Choose how the link position should be.
+     */
+    position?: ('center' | 'right') | null;
+  };
   navItems?:
     | {
         link: {
@@ -2555,7 +3021,18 @@ export interface Footer {
  */
 export interface HeaderSelect<T extends boolean = true> {
   logo?: T;
-  phone?: T;
+  icon?: T;
+  link?:
+    | T
+    | {
+        type?: T;
+        newTab?: T;
+        reference?: T;
+        url?: T;
+        label?: T;
+        appearance?: T;
+        position?: T;
+      };
   navItems?:
     | T
     | {
@@ -2654,13 +3131,9 @@ export interface BannerBlock {
      */
     bgGradient?: string | null;
     /**
-     * Custom CSS Light color value (e.g., #ffffff, rgb(255,255,255), or color name). Defaults to transparent if left empty.
+     * Custom CSS color value (e.g., #ffffff, rgb(255,255,255), or color name). Defaults to transparent if left empty.
      */
-    bgLightColor?: string | null;
-    /**
-     * Custom CSS Dark color value (e.g., #ffffff, rgb(255,255,255), or color name). Defaults to transparent if left empty.
-     */
-    bgDarkColor?: string | null;
+    bgColor?: string | null;
     /**
      * Upload an image to use as the section background. This image will only be displayed if "Type" is set to "Image".
      */
@@ -2689,6 +3162,14 @@ export interface BannerBlock {
      * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px". Leave blank to use the default.
      */
     padding?: string | null;
+    /**
+     * Set the maximum width for this block. Accepts CSS values such as "40px", "2rem", or "80%". Defaults to "1376px" if left blank.
+     */
+    maxWidth?: string | null;
+    /**
+     * CSS border radius for the block (e.g., "16px", "2rem", "50%"). Rounds the corners of the container. Leave blank for no rounding.
+     */
+    borderRadius?: string | null;
     style: 'info' | 'warning' | 'error' | 'success';
   };
   content: {
@@ -2725,13 +3206,9 @@ export interface CodeBlock {
      */
     bgGradient?: string | null;
     /**
-     * Custom CSS Light color value (e.g., #ffffff, rgb(255,255,255), or color name). Defaults to transparent if left empty.
+     * Custom CSS color value (e.g., #ffffff, rgb(255,255,255), or color name). Defaults to transparent if left empty.
      */
-    bgLightColor?: string | null;
-    /**
-     * Custom CSS Dark color value (e.g., #ffffff, rgb(255,255,255), or color name). Defaults to transparent if left empty.
-     */
-    bgDarkColor?: string | null;
+    bgColor?: string | null;
     /**
      * Upload an image to use as the section background. This image will only be displayed if "Type" is set to "Image".
      */
@@ -2760,6 +3237,14 @@ export interface CodeBlock {
      * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px". Leave blank to use the default.
      */
     padding?: string | null;
+    /**
+     * Set the maximum width for this block. Accepts CSS values such as "40px", "2rem", or "80%". Defaults to "1376px" if left blank.
+     */
+    maxWidth?: string | null;
+    /**
+     * CSS border radius for the block (e.g., "16px", "2rem", "50%"). Rounds the corners of the container. Leave blank for no rounding.
+     */
+    borderRadius?: string | null;
   };
   language?: ('typescript' | 'javascript' | 'css') | null;
   code: string;

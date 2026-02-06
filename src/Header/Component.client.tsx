@@ -1,16 +1,15 @@
 'use client'
 import { Disclosure } from '@headlessui/react'
-import { Bars3Icon, PhoneIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import { useHeaderTheme } from '@/providers/HeaderTheme'
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import React, { useEffect, useState } from 'react'
 import type { Header } from '@/payload-types'
 import { Logo } from '@/components/Logo/Logo'
 import { HeaderNav } from './Nav'
-import ThemeSwitcher from './ThemeSwitcher'
 import { LocaleSwitcher } from './LocationSwitcher'
 import { cn } from '@/utilities/ui'
 import { Link, usePathname, useRouter } from '@/i18n/routing'
-import { motion } from 'motion/react'
+import { CMSLink } from '@/components/Link'
+import { Media } from '@/components/Media'
 
 interface HeaderClientProps {
   data: Header
@@ -18,106 +17,130 @@ interface HeaderClientProps {
 
 export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
   /* Storing the value in a useState to avoid hydration errors */
-  const [theme, setTheme] = useState<string | null>(null)
-  const { headerTheme, setHeaderTheme } = useHeaderTheme()
+  // const [theme, setTheme] = useState<string | null>(null)
+  // const { headerTheme, setHeaderTheme } = useHeaderTheme()
   const pathname = usePathname()
-  const router = useRouter()
+  const router = useRouter();
+  const [show, setShow] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
-    setHeaderTheme(null)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pathname])
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
 
-  useEffect(() => {
-    if (headerTheme && headerTheme !== theme) setTheme(headerTheme)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [headerTheme])
+      if (currentScrollY < 50) {
+        // Always show near the top
+        setShow(true);
+      } else if (currentScrollY > lastScrollY) {
+        // scrolling down
+        setShow(false);
+      } else {
+        // scrolling up
+        setShow(true);
+      }
+
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY]);
+
+  // useEffect(() => {
+  //   setHeaderTheme(null)
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [pathname])
+
+  // useEffect(() => {
+  //   if (headerTheme && headerTheme !== theme) setTheme(headerTheme)
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [headerTheme])
 
   return (
-    <motion.header
-      initial={{ y: -40, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{
-        duration: 0.5,
-        ease: 'easeInOut',
-      }}
-      className="fixed w-full z-[9999]"
+    <header
+      className={cn(
+        "fixed w-full z-[9999] transition-opacity duration-300 shadow-none opacity-0",
+        { "opacity-100": show },
+        { "shadow-lg": lastScrollY >= 50 && show }
+      )}
     >
       <Disclosure
         as="nav"
-        className="bg-background/80 backdrop-blur shadow-lg dark:shadow-[inset_0px_-1px_1px_#132f4c] "
+        className="bg-background backdrop-blur"
       >
         {({ open }) => (
           <>
-            <div className="container relative">
-              <div className="relative flex h-16 justify-between">
-                <div className="absolute inset-y-0 right-0 flex items-center md:hidden">
+            <div className="relative px-8">
+              <div className="relative flex h-20 justify-between">
+                <div className="absolute inset-y-0 right-0 flex items-center lg:hidden">
                   {/* Mobile menu button */}
-                  <Disclosure.Button className="inline-flex items-center justify-center rounded-xl p-2 text-blue-500 focus:outline-none focus:ring-0 border border-gray-300 dark:border-[#183b61]">
+                  <Disclosure.Button className="inline-flex items-center justify-center text-primary font-bold focus:outline-none focus:ring-0">
                     <span className="sr-only">Open main menu</span>
                     {open ? (
-                      <XMarkIcon className="block h-4 w-4" aria-hidden="true" />
+                      <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
                     ) : (
-                      <Bars3Icon className="block h-4 w-4" aria-hidden="true" />
+                      <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
                     )}
                   </Disclosure.Button>
                 </div>
                 <div className="flex flex-1 items-center md:items-stretch justify-start gap-5">
-                  <motion.div
-                    whileHover={{ scale: 1.05, y: -3 }}
-                    className="flex flex-shrink-0 items-center">
+                  <div
+                    className="flex flex-shrink-0 items-center gap-5">
                     <Link href="/">
-                      <Logo loading="eager" priority="high" />
+                      {data.logo && data.icon ? (
+                        <>
+                          <Media resource={data.logo} className='max-w-[200px] w-full h-full xl:block hidden' />
+                          <Media resource={data.icon} className='!max-w-12 w-full h-full block xl:hidden' />
+                        </>
+                      ) :
+                        <>
+                          <Logo loading="eager" priority="high" src={"/logo-web.png"} className='xl:block hidden' />
+                          <Logo loading="eager" priority="high" src={"/icons/logo_only.webp"} className='!max-w-12 block xl:hidden' />
+                        </>
+                      }
                     </Link>
-                  </motion.div>
-                  <div className="hidden w-full md:flex justify-between">
+                    {pathname && pathname !== '/' && (
+                      <p className='border-l-2 border-[#d9dcdf] px-5 text-xl md:text-2xl'>
+                        {data.navItems?.find((i) => i.link.url === pathname)?.link.label}
+                      </p>
+                    )}
+                  </div>
+                  <div className="hidden w-full lg:flex justify-end ml-auto">
                     <div className="flex">
-                      <HeaderNav data={data} currentPath={pathname} />
+                      <HeaderNav data={data} />
+                      <LocaleSwitcher />
+                      <div className="md:flex hidden gap-6 items-center pl-6">
+                        <CMSLink {...data.link} />
+                        {/* <ThemeSwitcher /> */}
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="absolute inset-y-0 right-11 md:right-0 flex gap-2 md:gap-5">
-                  <div className="md:flex hidden gap-6">
-                    {data.phone && (
-                      <motion.div
-                        whileHover={{ scale: 1.05, y: -3 }}
-                        className="my-auto gap-1 flex text-sm md:test-base items-center">
-                        <PhoneIcon className="text-black dark:text-white" width={24} height={24} />
-                        <Link href={`tel:${data.phone}`}>{data.phone}</Link>
-                      </motion.div>
-                    )}
-                    <ThemeSwitcher />
-                  </div>
-
-                  <LocaleSwitcher />
                 </div>
               </div>
             </div>
             <div
               className={cn(
-                'transition duration-500 ease-in-out overflow-hidden shadow-lg dark:shadow-[inset_0px_-1px_1px_#132f4c] absolute top-[100%] inset-x-0',
-                { 'opacity-100 translate-y-0': open },
-                { '-translate-y-0 opacity-0': !open },
+                'ease-out duration-300 overflow-hidden shadow-lg dark:shadow-[inset_0px_-1px_1px_#132f4c] fixed h-[100vh] top-20 w-full bg-white block overscroll-contain',
+                { 'left-0': open },
+                { 'left-[100%]': !open },
               )}
             >
-              <Disclosure.Panel>
-                <div className="pt-2 pb-4 bg-white dark:bg-[#0a1929b3]">
-                  {data.navItems?.map((item, index) => (
-                    <Disclosure.Button
-                      key={index}
-                      className={`${item.link.url === pathname && 'border-blue-500 border-l-2 text-blue-500'
-                        } w-full block py-2 pl-3 pr-4 text-base font-medium text-gray-500 dark:text-gray-400`}
-                      onClick={() => router.push(item.link.url || '')}
-                    >
-                      {item.link.label}
-                    </Disclosure.Button>
-                  ))}
-                </div>
-              </Disclosure.Panel>
+              <div className="h-full w-full">
+                {data.navItems?.map((item, index) => (
+                  <Disclosure.Button
+                    key={index}
+                    className={"w-full block p-4 pl-8 text-base font-bold text-primary text-left"}
+                    onClick={() => router.push(item.link.url || '')}
+                  >
+                    {item.link.label}
+                  </Disclosure.Button>
+                ))}
+              </div>
             </div>
           </>
         )}
       </Disclosure>
-    </motion.header>
+    </header>
   )
 }

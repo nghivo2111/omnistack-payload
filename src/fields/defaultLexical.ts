@@ -64,7 +64,7 @@ export const defaultLexical = lexicalEditor({
     FixedToolbarFeature(),
     InlineToolbarFeature(),
     TextColorFeature({
-      colors: ['#141414', '#4b5563', '#ffffff', '#3b82f6'],
+      colors: ['#141414', '#4b5563', '#ffffff', '#f66437'],
     }),
     TextStateFeature({
       state: {

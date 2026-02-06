@@ -7,6 +7,7 @@ import { FormBlock } from '../Form/config'
 import { MapsBlock } from '../MapsBlock/config'
 import { FeatureBlock } from '../FeatureBlock/config'
 import { settingField } from '@/fields/setting'
+import { ListBlock } from '../ListBlock/config'
 
 const columnFields: Field[] = [
   {
@@ -40,7 +41,7 @@ const columnFields: Field[] = [
         return [
           ...rootFeatures,
           BlocksFeature({
-            blocks: [FormBlock, MapsBlock, FeatureBlock],
+            blocks: [FormBlock, MapsBlock, FeatureBlock, ListBlock],
           }),
         ]
       },

@@ -2,7 +2,7 @@ import type { Field, GroupField, RowField } from 'payload'
 
 import deepMerge from '@/utilities/deepMerge'
 
-export type LinkAppearances = 'default' | 'outline'
+export type LinkAppearances = 'default' | 'outline' | 'link' | 'secondary'
 export type Position = 'center' | 'right'
 
 export const appearanceOptions: Record<LinkAppearances, { label: string; value: string }> = {
@@ -13,6 +13,14 @@ export const appearanceOptions: Record<LinkAppearances, { label: string; value: 
   outline: {
     label: 'Outline',
     value: 'outline',
+  },
+  link: {
+    label: 'Link',
+    value: 'link',
+  },
+  secondary: {
+    label: 'Secondary',
+    value: 'secondary',
   },
 }
 
@@ -143,7 +151,7 @@ export const link: LinkType = ({
   }
 
   if (appearances !== false) {
-    let appearanceOptionsToUse = [appearanceOptions.default, appearanceOptions.outline]
+    let appearanceOptionsToUse = Object.values(appearanceOptions)
 
     if (appearances) {
       appearanceOptionsToUse = appearances.map((appearance) => appearanceOptions[appearance])

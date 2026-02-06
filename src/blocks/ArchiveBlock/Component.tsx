@@ -17,6 +17,7 @@ import ReviewsArchive from '@/components/ReviewArchive'
 import { cookies } from 'next/headers'
 import { blockSettingStyle } from '@/utilities/blockSettingStyle'
 import PortfolioArchive from '@/components/PortfoliosArchive'
+import { CMSLink } from '@/components/Link'
 
 const ArchiveBlock: React.FC<
   ArchiveBlockProps & {
@@ -32,6 +33,7 @@ const ArchiveBlock: React.FC<
     selectedDocs,
     relationTo,
     settings,
+    link
   } = props
 
   const cookieStore = await cookies()
@@ -59,12 +61,12 @@ const ArchiveBlock: React.FC<
         limit,
         ...(flattenedCategories && flattenedCategories.length > 0
           ? {
-              where: {
-                categories: {
-                  in: flattenedCategories,
-                },
+            where: {
+              categories: {
+                in: flattenedCategories,
               },
-            }
+            },
+          }
           : {}),
       })
       posts = fetchedPosts.docs
@@ -77,12 +79,12 @@ const ArchiveBlock: React.FC<
         limit,
         ...(flattenedCategories && flattenedCategories.length > 0
           ? {
-              where: {
-                categories: {
-                  in: flattenedCategories,
-                },
+            where: {
+              categories: {
+                in: flattenedCategories,
               },
-            }
+            },
+          }
           : {}),
       })
       services = fetchedServices.docs
@@ -95,12 +97,12 @@ const ArchiveBlock: React.FC<
         limit,
         ...(flattenedCategories && flattenedCategories.length > 0
           ? {
-              where: {
-                categories: {
-                  in: flattenedCategories,
-                },
+            where: {
+              categories: {
+                in: flattenedCategories,
               },
-            }
+            },
+          }
           : {}),
       })
       reviews = fetchedReviews.docs
@@ -114,12 +116,12 @@ const ArchiveBlock: React.FC<
         sort: ['name', '-updatedAt'],
         ...(flattenedCategories && flattenedCategories.length > 0
           ? {
-              where: {
-                categories: {
-                  in: flattenedCategories,
-                },
+            where: {
+              categories: {
+                in: flattenedCategories,
               },
-            }
+            },
+          }
           : {}),
       })
       portfolios = fetchedPortfolio.docs
@@ -141,7 +143,7 @@ const ArchiveBlock: React.FC<
       case 'services':
         return <ServicesArchive services={services} />
       case 'reviews':
-        return <ReviewsArchive reviews={reviews} isBgCustom={settings?.bgType !== 'transparent'}/>
+        return <ReviewsArchive reviews={reviews} />
       case 'portfolios':
         return <PortfolioArchive portfolios={portfolios} />
       default:
@@ -151,11 +153,15 @@ const ArchiveBlock: React.FC<
 
   return (
     <div className="py-8 block-setting" id={`block-${id}`} style={blockSettingStyle(settings)}>
-      {introContent && (
-        <div className="container">
-          <RichText data={introContent} enableGutter={false} />
+      <div className='container flex flex-col md:flex-row gap-6 md:items-end justify-between pb-6'>
+
+        {introContent && <div className="md:w-[70%]"> <RichText data={introContent} enableGutter={false} /></div>}
+
+        <div className=''>
+          {link && <CMSLink {...link} appearance={'link'} />}
         </div>
-      )}
+      </div>
+
       {renderArchive()}
     </div>
   )

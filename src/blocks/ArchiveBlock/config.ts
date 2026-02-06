@@ -1,3 +1,4 @@
+import { link } from '@/fields/link'
 import { settingField } from '@/fields/setting'
 import type { Block } from 'payload'
 
@@ -11,6 +12,15 @@ export const Archive: Block = {
       type: 'richText',
       label: 'Intro Content',
     },
+    link(
+      {
+        position: false,
+        appearances: false,
+        overrides: {
+          required: false
+        }
+      }
+    ),
     {
       name: 'populateBy',
       type: 'select',
