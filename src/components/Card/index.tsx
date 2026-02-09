@@ -2,7 +2,7 @@
 import { cn } from '@/utilities/ui'
 import useClickableCard from '@/utilities/useClickableCard'
 import React, { Fragment } from 'react'
-import type { Post } from '@/payload-types'
+import type { Post, Solution } from '@/payload-types'
 import { Link } from '@/i18n/routing'
 import { formatDateTime } from '@/utilities/formatDateTime'
 import { useTranslations } from 'next-intl'
@@ -14,7 +14,7 @@ export const Card: React.FC<{
   alignItems?: 'center'
   className?: string
   doc?: CardPostData
-  relationTo?: 'blog'
+  relationTo?: 'blog' | 'solution'
   showCategories?: boolean
   title?: string;
 
@@ -30,7 +30,6 @@ export const Card: React.FC<{
   const titleToUse = titleFromProps || title
   const sanitizedDescription = description?.replace(/\s/g, ' ') // replace non-breaking space with white space
   const href = `/${relationTo}/${slug}`
-
   return (
     <article
       className={cn(

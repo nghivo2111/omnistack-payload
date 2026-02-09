@@ -30,7 +30,7 @@ export default async function Page({ params: paramsPromise }: Args) {
   const categories = await queryCategoryByType({ locale, type: 'blog' })
 
   return (
-    <div className="pt-16">
+    <div className="pt-20">
       <PageClient />
       {page?.hero && <RenderHero {...page?.hero} />}
 

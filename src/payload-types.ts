@@ -75,6 +75,7 @@ export interface Config {
     reviews: Review;
     portfolios: Portfolio;
     categories: Category;
+    solutions: Solution;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -95,6 +96,7 @@ export interface Config {
     reviews: ReviewsSelect<false> | ReviewsSelect<true>;
     portfolios: PortfoliosSelect<false> | PortfoliosSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
+    solutions: SolutionsSelect<false> | SolutionsSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -196,7 +198,7 @@ export interface Page {
        */
       bgAttachment?: ('scroll' | 'fixed') | null;
       /**
-       * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px". Leave blank to use the default.
+       * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px 32px". Leave blank to use the default.
        */
       padding?: string | null;
       /**
@@ -431,6 +433,7 @@ export interface Category {
   id: number;
   title: string;
   type?: ('blog' | 'service') | null;
+  icon?: (number | null) | Media;
   /**
    * When enabled, the slug will auto-generate from the title field on save and autosave.
    */
@@ -516,7 +519,7 @@ export interface CallToActionBlock {
      */
     bgAttachment?: ('scroll' | 'fixed') | null;
     /**
-     * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px". Leave blank to use the default.
+     * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px 32px". Leave blank to use the default.
      */
     padding?: string | null;
     /**
@@ -618,7 +621,7 @@ export interface ContentBlock {
      */
     bgAttachment?: ('scroll' | 'fixed') | null;
     /**
-     * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px". Leave blank to use the default.
+     * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px 32px". Leave blank to use the default.
      */
     padding?: string | null;
     /**
@@ -722,7 +725,7 @@ export interface MediaBlock {
      */
     bgAttachment?: ('scroll' | 'fixed') | null;
     /**
-     * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px". Leave blank to use the default.
+     * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px 32px". Leave blank to use the default.
      */
     padding?: string | null;
     /**
@@ -782,7 +785,7 @@ export interface ArchiveBlock {
      */
     bgAttachment?: ('scroll' | 'fixed') | null;
     /**
-     * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px". Leave blank to use the default.
+     * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px 32px". Leave blank to use the default.
      */
     padding?: string | null;
     /**
@@ -881,7 +884,7 @@ export interface FormBlock {
      */
     bgAttachment?: ('scroll' | 'fixed') | null;
     /**
-     * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px". Leave blank to use the default.
+     * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px 32px". Leave blank to use the default.
      */
     padding?: string | null;
     /**
@@ -1136,7 +1139,7 @@ export interface FeatureBlock {
      */
     bgAttachment?: ('scroll' | 'fixed') | null;
     /**
-     * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px". Leave blank to use the default.
+     * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px 32px". Leave blank to use the default.
      */
     padding?: string | null;
     /**
@@ -1217,7 +1220,7 @@ export interface MediaContentBlock {
      */
     bgAttachment?: ('scroll' | 'fixed') | null;
     /**
-     * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px". Leave blank to use the default.
+     * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px 32px". Leave blank to use the default.
      */
     padding?: string | null;
     /**
@@ -1336,7 +1339,7 @@ export interface MapsBlock {
      */
     bgAttachment?: ('scroll' | 'fixed') | null;
     /**
-     * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px". Leave blank to use the default.
+     * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px 32px". Leave blank to use the default.
      */
     padding?: string | null;
     /**
@@ -1413,7 +1416,7 @@ export interface CarouselBlock {
      */
     bgAttachment?: ('scroll' | 'fixed') | null;
     /**
-     * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px". Leave blank to use the default.
+     * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px 32px". Leave blank to use the default.
      */
     padding?: string | null;
     /**
@@ -1546,7 +1549,7 @@ export interface IListBlock {
      */
     bgAttachment?: ('scroll' | 'fixed') | null;
     /**
-     * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px". Leave blank to use the default.
+     * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px 32px". Leave blank to use the default.
      */
     padding?: string | null;
     /**
@@ -1680,6 +1683,37 @@ export interface Portfolio {
   } | null;
   image?: (number | null) | Media;
   categories?: (number | null) | Category;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "solutions".
+ */
+export interface Solution {
+  id: number;
+  title?: string | null;
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  category?: (number | null) | Category;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -1904,6 +1938,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'categories';
         value: number | Category;
+      } | null)
+    | ({
+        relationTo: 'solutions';
+        value: number | Solution;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -2601,6 +2639,7 @@ export interface PortfoliosSelect<T extends boolean = true> {
 export interface CategoriesSelect<T extends boolean = true> {
   title?: T;
   type?: T;
+  icon?: T;
   generateSlug?: T;
   slug?: T;
   parent?: T;
@@ -2612,6 +2651,19 @@ export interface CategoriesSelect<T extends boolean = true> {
         label?: T;
         id?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "solutions_select".
+ */
+export interface SolutionsSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  category?: T;
+  generateSlug?: T;
+  slug?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -3159,7 +3211,7 @@ export interface BannerBlock {
      */
     bgAttachment?: ('scroll' | 'fixed') | null;
     /**
-     * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px". Leave blank to use the default.
+     * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px 32px". Leave blank to use the default.
      */
     padding?: string | null;
     /**
@@ -3234,7 +3286,7 @@ export interface CodeBlock {
      */
     bgAttachment?: ('scroll' | 'fixed') | null;
     /**
-     * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px". Leave blank to use the default.
+     * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px 32px". Leave blank to use the default.
      */
     padding?: string | null;
     /**
