@@ -20,6 +20,7 @@ import { Reviews } from './collections/Reviews'
 import { Portfolios } from './collections/Portfolios'
 import { Categories } from './collections/Categories'
 import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
+import { Solutions } from './collections/Solutions'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -99,7 +100,7 @@ export default buildConfig({
     },
     push: false,
   }),
-  collections: [Pages, Posts, Media, Users, Services, Reviews, Portfolios, Categories],
+  collections: [Pages, Posts, Media, Users, Services, Reviews, Portfolios, Categories, Solutions],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer],
   plugins,

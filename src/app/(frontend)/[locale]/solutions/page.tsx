@@ -4,9 +4,10 @@ import React from 'react'
 import { RenderHero } from '@/heros/RenderHero'
 import { RenderBlocks } from '@/blocks/RenderBlocks'
 import { generateMeta } from '@/utilities/generateMeta'
-import { queryCategoryByType, queryPageBySlug } from '@/_data'
+import { queryAllSolutions, queryCategoryByType, queryPageBySlug } from '@/_data'
 import PageClient from './page.client'
-import DisplayingPortfolios from '@/components/DisplayingPortfolios'
+import { SolutionsArchive } from '@/components/SolutionsArchive'
+import { cn } from '@/utilities/ui'
 
 export const revalidate = 600
 
@@ -19,8 +20,10 @@ type Args = {
 export default async function Page({ params: paramsPromise }: Args) {
   const { locale = 'en' } = await paramsPromise;
 
+  const solutions = await queryAllSolutions({ locale })
+
   const page = await queryPageBySlug({
-    slug: 'portfolio',
+    slug: 'solutions',
     locale: locale,
   })
 
@@ -30,12 +33,12 @@ export default async function Page({ params: paramsPromise }: Args) {
     <div className="pt-20">
       <PageClient />
       {page?.hero && <RenderHero {...page?.hero} />}
+      <div className={cn('py-12 bg-[#f6f7f8]', { 'pt-12 mg:pt-20 lg:pt-24': page.hero && page.hero.settings.type === 'mediumImpact' })}>
+        <SolutionsArchive solutions={solutions.docs} categories={categories.docs} />
+      </div>
 
       {page?.layout && <RenderBlocks blocks={page?.layout} />}
 
-      <div className='my-12'>
-        <DisplayingPortfolios categories={categories.docs} locale={locale} />
-      </div>
     </div>
   )
 }

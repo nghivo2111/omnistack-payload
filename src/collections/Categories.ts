@@ -22,13 +22,19 @@ export const Categories: CollectionConfig = {
       localized: true,
     },
     {
-      name:'type',
+      name: 'type',
       type: 'select',
       defaultValue: 'service',
       options: [
-        {label: 'Blog', value: 'blog'},
-        {label: 'Service', value: 'service'}
+        { label: 'Blog', value: 'blog' },
+        { label: 'Service', value: 'service' }
       ]
+    },
+    {
+      name: 'icon',
+      type: 'upload',
+      relationTo: 'media',
+      localized: true,
     },
     slugField({
       position: undefined,
