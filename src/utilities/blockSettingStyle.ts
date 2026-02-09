@@ -21,7 +21,7 @@ export const blockSettingStyle = (settings?: Setting) => {
 
   if (!settings) return style
 
-  if (settings.padding) style.padding = `${settings.padding} 0 ${settings.padding}`
+  if (settings.padding) style.paddingBlock = `${settings.padding}`
 
   if (settings.maxWidth) {
     style.maxWidth = `${settings.maxWidth}`
