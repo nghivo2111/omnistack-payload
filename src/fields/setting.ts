@@ -196,7 +196,7 @@ export const settingField = ({ overrides }: { overrides?: Field[] }): Field => {
                 admin: {
                   width: '50%',
                   description:
-                    'Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px". Leave blank to use the default.',
+                    'Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px 32px". Leave blank to use the default.',
                 },
               },
               {

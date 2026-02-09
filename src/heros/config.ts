@@ -62,7 +62,7 @@ export const hero: Field = {
       name: 'media',
       type: 'upload',
       admin: {
-        condition: (_, siblingData) => ['highImpact'].includes(siblingData.settings.type),
+        condition: (_, siblingData) => ['highImpact', 'mediumImpact'].includes(siblingData.settings.type),
       },
       relationTo: 'media',
       required: true,
