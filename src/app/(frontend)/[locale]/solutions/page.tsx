@@ -46,7 +46,7 @@ export default async function Page({ params: paramsPromise }: Args) {
 export async function generateMetadata({ params: paramsPromise }: Args): Promise<Metadata> {
   const { locale = 'en' } = await paramsPromise
   const page = await queryPageBySlug({
-    slug: 'portfolio',
+    slug: 'solutions',
     locale: locale,
   })
 
