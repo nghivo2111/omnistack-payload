@@ -29,7 +29,7 @@ export const SolutionsArchive: React.FC<Props> = (props) => {
                 {solutionsFiltered.map((result, index) => {
                   if (typeof result === 'object' && result !== null) {
                     return (
-                      <div className="col-span-4 border rounded-xl p-6" key={index}>
+                      <div className="col-span-4 border rounded-xl p-6 bg-white" key={index}>
                         <Card className="h-full" doc={result} />
                       </div>
                     )
