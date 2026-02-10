@@ -164,6 +164,7 @@ export const queryAllSolutions = async ({ locale }: { locale: TypedLocale }) => 
   const posts = await payload.find({
     collection: 'solutions',
     depth: 1,
+    limit: 100,
     locale,
     overrideAccess: false,
     sort: '-createdAt'
