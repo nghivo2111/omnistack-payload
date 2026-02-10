@@ -21,6 +21,7 @@ import { Portfolios } from './collections/Portfolios'
 import { Categories } from './collections/Categories'
 import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 import { Solutions } from './collections/Solutions'
+import { Technologies } from './collections/Technologies'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -100,7 +101,7 @@ export default buildConfig({
     },
     push: false,
   }),
-  collections: [Pages, Posts, Media, Users, Services, Reviews, Portfolios, Categories, Solutions],
+  collections: [Pages, Posts, Media, Users, Services, Reviews, Portfolios, Categories, Solutions, Technologies],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer],
   plugins,

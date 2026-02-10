@@ -1,0 +1,29 @@
+import { cn } from '@/utilities/ui';
+import { useTranslations } from 'next-intl'
+import React from 'react'
+
+const Filter = ({ data, setFilter, filter }: {
+   data: {
+      value: string;
+      label: string;
+   }[],
+   setFilter: (value: string) => void
+   filter: string;
+}) => {
+   const t = useTranslations();
+   return (
+      <div className="flex gap-4 justify-center bg-[#f6f7f8] py-4">
+         <p className='font-medium'>{t('filter_by')}: </p>
+         <div className='flex gap-2'>
+            <div className={cn('py-0.5 px-2 bg-[#d9dcdf] rounded-[8px] font-medium hover:bg-secondary/30 cursor-pointer', { 'bg-secondary/30': filter === 'all' })}
+               onClick={() => setFilter('all')}>{t('all')}</div>
+            {data && data.map((d) => (
+               <div key={d.value + d.label}
+                  className={cn('py-0.5 px-2 bg-[#d9dcdf] rounded-[8px] font-medium hover:bg-secondary/30 cursor-pointer', { 'bg-secondary/30': filter === d.value })} onClick={() => setFilter(d.value)}>{d.label}</div>
+            ))}
+         </div>
+      </div>
+   )
+}
+
+export default Filter

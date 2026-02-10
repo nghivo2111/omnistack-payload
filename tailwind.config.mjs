@@ -53,6 +53,7 @@ const config = {
         'slide-to-left': 'slide-to-left 40s linear infinite',
         'slide-to-right': 'slide-to-right 40s linear infinite',
         'spin-slow': 'spin 18s linear infinite',
+        'came-here': 'came-here 0.5s linear',
       },
       borderRadius: {
         lg: 'var(--radius)',
@@ -122,6 +123,10 @@ const config = {
           '0%': { transform: 'translateX(-50%)' },
           '100%': { transform: 'translateX(0%)' },
         },
+        'came-here': {
+          '0%': { transform: 'translateX(200%)' },
+          '100%': { transform: 'translateX(0%)' },
+        }
       },
       typography: () => ({
         DEFAULT: {

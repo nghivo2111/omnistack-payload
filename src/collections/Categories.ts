@@ -27,7 +27,8 @@ export const Categories: CollectionConfig = {
       defaultValue: 'service',
       options: [
         { label: 'Blog', value: 'blog' },
-        { label: 'Service', value: 'service' }
+        { label: 'Service', value: 'service' },
+        { label: 'Technology', value: 'technology' },
       ]
     },
     {
