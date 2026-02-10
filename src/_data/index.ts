@@ -171,3 +171,16 @@ export const queryAllSolutions = async ({ locale }: { locale: TypedLocale }) => 
   })
   return posts
 }
+
+export const queryAllTechnologies = async ({ locale }: { locale: TypedLocale }) => {
+  const payload = await getPayload({ config: configPromise })
+  const posts = await payload.find({
+    collection: 'technologies',
+    depth: 1,
+    limit: 100,
+    locale,
+    overrideAccess: false,
+    sort: '-createdAt'
+  })
+  return posts
+}

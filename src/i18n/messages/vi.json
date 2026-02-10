@@ -27,5 +27,10 @@
     "email": {
       "title": "📩 Tin mới từ"
     }
+  },
+  "filter_by": "Lọc với",
+  "all": "Tất cả",
+  "technology": {
+    "search": "Tìm kiếm bằng tên"
   }
 }

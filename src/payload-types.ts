@@ -76,6 +76,7 @@ export interface Config {
     portfolios: Portfolio;
     categories: Category;
     solutions: Solution;
+    technologies: Technology;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -97,6 +98,7 @@ export interface Config {
     portfolios: PortfoliosSelect<false> | PortfoliosSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     solutions: SolutionsSelect<false> | SolutionsSelect<true>;
+    technologies: TechnologiesSelect<false> | TechnologiesSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -432,7 +434,7 @@ export interface Post {
 export interface Category {
   id: number;
   title: string;
-  type?: ('blog' | 'service') | null;
+  type?: ('blog' | 'service' | 'technology') | null;
   icon?: (number | null) | Media;
   /**
    * When enabled, the slug will auto-generate from the title field on save and autosave.
@@ -1719,6 +1721,23 @@ export interface Solution {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "technologies".
+ */
+export interface Technology {
+  id: number;
+  title?: string | null;
+  image?: (number | null) | Media;
+  category?: (number | null) | Category;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1942,6 +1961,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'solutions';
         value: number | Solution;
+      } | null)
+    | ({
+        relationTo: 'technologies';
+        value: number | Technology;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -2661,6 +2684,19 @@ export interface CategoriesSelect<T extends boolean = true> {
 export interface SolutionsSelect<T extends boolean = true> {
   title?: T;
   description?: T;
+  category?: T;
+  generateSlug?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "technologies_select".
+ */
+export interface TechnologiesSelect<T extends boolean = true> {
+  title?: T;
+  image?: T;
   category?: T;
   generateSlug?: T;
   slug?: T;

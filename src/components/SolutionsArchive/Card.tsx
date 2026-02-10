@@ -1,12 +1,8 @@
 'use client'
 import { cn } from '@/utilities/ui'
-import useClickableCard from '@/utilities/useClickableCard'
-import React, { Fragment } from 'react'
-import type { Post, Solution } from '@/payload-types'
-import { Link } from '@/i18n/routing'
-import { formatDateTime } from '@/utilities/formatDateTime'
+import React from 'react'
+import type { Solution } from '@/payload-types'
 import { useTranslations } from 'next-intl'
-import Image from 'next/image'
 import RichText from '../RichText'
 import { DefaultTypedEditorState } from '@payloadcms/richtext-lexical'
 
@@ -20,7 +16,6 @@ export const Card: React.FC<{
 
 }> = (props) => {
   const t = useTranslations()
-  const { card } = useClickableCard({})
   const { className, doc, title: titleFromProps } = props
 
   const { slug, title, description } = doc || {}
@@ -32,7 +27,6 @@ export const Card: React.FC<{
       className={cn(
         className,
       )}
-      ref={card.ref}
     >
       {titleToUse && (
         <div className='font-semibold md:font-bold text-lg md:text-3xl'>
