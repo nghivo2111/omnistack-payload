@@ -77,6 +77,7 @@ export interface Config {
     categories: Category;
     solutions: Solution;
     technologies: Technology;
+    industries: Industry;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -99,6 +100,7 @@ export interface Config {
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     solutions: SolutionsSelect<false> | SolutionsSelect<true>;
     technologies: TechnologiesSelect<false> | TechnologiesSelect<true>;
+    industries: IndustriesSelect<false> | IndustriesSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -1738,6 +1740,36 @@ export interface Technology {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "industries".
+ */
+export interface Industry {
+  id: number;
+  title?: string | null;
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1965,6 +1997,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'technologies';
         value: number | Technology;
+      } | null)
+    | ({
+        relationTo: 'industries';
+        value: number | Industry;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -2698,6 +2734,18 @@ export interface TechnologiesSelect<T extends boolean = true> {
   title?: T;
   image?: T;
   category?: T;
+  generateSlug?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "industries_select".
+ */
+export interface IndustriesSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
   generateSlug?: T;
   slug?: T;
   updatedAt?: T;
