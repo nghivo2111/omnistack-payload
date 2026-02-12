@@ -6,8 +6,8 @@ import { RenderBlocks } from '@/blocks/RenderBlocks'
 import { generateMeta } from '@/utilities/generateMeta'
 import { queryAllIndustries, queryPageBySlug } from '@/_data'
 import PageClient from './page.client'
-import { SolutionsArchive } from '@/components/SolutionsArchive'
 import { cn } from '@/utilities/ui'
+import { IndustryArchive } from '@/components/Industry'
 
 export const revalidate = 600
 
@@ -32,7 +32,7 @@ export default async function Page({ params: paramsPromise }: Args) {
       <PageClient />
       {page?.hero && <RenderHero {...page?.hero} />}
       <div className={cn('py-12 bg-[#f6f7f8]', { 'pt-12 mg:pt-20 lg:pt-24': page?.hero && page?.hero?.settings?.type === 'mediumImpact' })}>
-        <SolutionsArchive solutions={industries.docs} />
+        <IndustryArchive industries={industries.docs} />
       </div>
 
       {page?.layout && <RenderBlocks blocks={page?.layout} />}
