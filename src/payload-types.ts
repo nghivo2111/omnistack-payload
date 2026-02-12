@@ -214,6 +214,22 @@ export interface Page {
        */
       borderRadius?: string | null;
       type: 'none' | 'highImpact' | 'mediumImpact' | 'lowImpact';
+      /**
+       * Margin format: "top right bottom left" (e.g., "16px 24px 16px 24px"). Applies to media. Each value sets margin for one side, in order: top, right, bottom, left.
+       */
+      margin?: string | null;
+      /**
+       * Width of the media (e.g., "100%", "400px", "40vw"). Accepts any valid CSS width value.
+       */
+      width?: string | null;
+      /**
+       * Show the media on mobile devices.
+       */
+      showMobile?: boolean | null;
+      /**
+       * Border radius of the media (e.g., "16px", "2rem", "50%"). Rounds the corners of the media.
+       */
+      mediaBorderRadius?: string | null;
     };
     richText?: {
       root: {
@@ -2085,6 +2101,10 @@ export interface PagesSelect<T extends boolean = true> {
               maxWidth?: T;
               borderRadius?: T;
               type?: T;
+              margin?: T;
+              width?: T;
+              showMobile?: T;
+              mediaBorderRadius?: T;
             };
         richText?: T;
         link?:

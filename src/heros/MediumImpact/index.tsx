@@ -6,17 +6,26 @@ import { CMSLink } from '@/components/Link'
 import { Media } from '@/components/Media'
 import RichText from '@/components/RichText'
 import { blockSettingStyle } from '@/utilities/blockSettingStyle'
+import { cn } from '@/utilities/ui'
 
 export const MediumImpactHero: React.FC<Page['hero']> = ({ link, media, richText, settings }) => {
   return (
     <div className="py-12 block-setting" style={blockSettingStyle(settings)}>
-      <div className="container flex relative">
+      <div className="container lg:flex relative z-10">
         <div className='max-w-full w-full lg:max-w-[60%]'>
           {richText && <RichText className="mb-6" data={richText} enableGutter={false} />}
           <CMSLink {...link} />
         </div>
-        <div className='absolute -bottom-16 2xl:-bottom-32 right-0 z-10 max-w-0 xl:max-w-[40%]'>
-          <Media resource={media} />
+        <div
+          className={cn('overflow-hidden h-fit', settings.showMobile ? 'w-full lg:w-1/2 block' : 'hidden lg:block w-1/2')}
+          style={{
+            borderRadius: settings.mediaBorderRadius ?? undefined,
+            width: settings.width ?? undefined,
+            margin: settings.margin ?? undefined,
+          }}
+        >
+          <Media resource={media}
+            className="object-contain" />
         </div>
       </div>
     </div>
