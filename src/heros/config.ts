@@ -36,6 +36,50 @@ export const hero: Field = {
           ],
           required: true,
         },
+        {
+          type: 'row',
+          fields: [
+            {
+              label: 'Media Setting',
+              type: 'collapsible',
+              fields: [
+                {
+                  name: 'margin',
+                  type: 'text',
+                  admin: {
+                    description: 'Margin format: "top right bottom left" (e.g., "16px 24px 16px 24px"). Applies to media. Each value sets margin for one side, in order: top, right, bottom, left.'
+                  }
+                },
+                {
+                  name: 'width',
+                  type: 'text',
+                  admin: {
+                    description: 'Width of the media (e.g., "100%", "400px", "40vw"). Accepts any valid CSS width value.',
+                  }
+                },
+                {
+                  name: 'showMobile',
+                  type: 'checkbox',
+                  defaultValue: true,
+                  admin: {
+                    description: 'Show the media on mobile devices.',
+                  },
+                },
+                {
+                  name: 'mediaBorderRadius',
+                  label: 'Border Radius',
+                  type: 'text',
+                  admin: {
+                    description: 'Border radius of the media (e.g., "16px", "2rem", "50%"). Rounds the corners of the media.',
+                  }
+                }
+              ]
+            },
+          ],
+          admin: {
+            condition: (_, siblingData) => { return siblingData?.type === 'mediumImpact' },
+          }
+        }
       ]
     }),
     {
