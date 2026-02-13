@@ -12,7 +12,7 @@ const Filter = ({ data, setFilter, filter }: {
 }) => {
    const t = useTranslations();
    return (
-      <div className="flex gap-4 justify-center bg-[#f6f7f8] py-4">
+      <div className="flex gap-4 justify-center bg-[#f6f7f8] py-4 max-w-[100vw] overflow-x-auto px-4">
          <p className='font-medium'>{t('filter_by')}: </p>
          <div className='flex gap-2'>
             <div className={cn('py-0.5 px-2 bg-[#d9dcdf] rounded-[8px] font-medium hover:bg-secondary/30 cursor-pointer', { 'bg-secondary/30': filter === 'all' })}
