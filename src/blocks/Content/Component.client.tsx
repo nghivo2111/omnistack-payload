@@ -19,7 +19,7 @@ export const ContentClient = ({ props }: { props: ContentBlockProps }) => {
     }
 
     const { style, className: bgClassName } = blockSettingStyle(settings)
-    
+
     return (
         <div className={cn("py-8 block-setting", bgClassName)} style={style}>
             <div className="grid grid-cols-4 lg:grid-cols-12 gap-y-8 gap-x-16 container ">
