@@ -32,7 +32,7 @@ export default async function RootLayout({ children, params }: Args) {
         <InitTheme />
         <link href="/icons/logo_only.webp" rel="icon" type="image/svg+xml" />
       </head>
-      <body>
+      <body className='overscroll-none'>
         <Providers>
           <NextIntlClientProvider messages={messages}>
             <Header locale={locale} />
