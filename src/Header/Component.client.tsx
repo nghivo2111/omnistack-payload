@@ -106,11 +106,15 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
                       </p>
                     )}
                   </div>
-                  <div className="hidden w-full lg:flex justify-end ml-auto">
+                  <div className="w-full flex justify-end ml-auto">
                     <div className="flex">
-                      <HeaderNav data={data} />
-                      <LocaleSwitcher />
-                      <div className="md:flex hidden gap-6 items-center pl-6">
+                      <div className="md:block hidden">
+                        <HeaderNav data={data} />
+                      </div>
+                      <div>
+                        <LocaleSwitcher />
+                      </div>
+                      <div className="flex gap-6 items-center pl-6">
                         <CMSLink {...data.link} />
                         {/* <ThemeSwitcher /> */}
                       </div>
