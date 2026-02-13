@@ -94,8 +94,10 @@ const MediaContentClient = ({ props }: { props: MediaContentProps }) => {
       </>
     )
   }
+  const { style, className: bgClassName } = blockSettingStyle(settings)
+  
   return (
-    <div className={cn(className, 'py-8 block-setting')} style={blockSettingStyle(settings)}>
+    <div className={cn(className, 'py-8 block-setting', bgClassName)} style={style}>
       <div className={cn('flex flex-col md:flex-row w-full gap-6 justify-between', { container: enableGutter })} style={{ gap: `${settings?.gap}` }}>
         {renderLayout()}
       </div>

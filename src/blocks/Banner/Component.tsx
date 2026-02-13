@@ -10,8 +10,10 @@ type Props = {
 } & BannerBlockProps
 
 export const BannerBlock: React.FC<Props> = ({ className, content, settings }) => {
+  const { style, className: bgClassName } = blockSettingStyle(settings)
+  
   return (
-    <div className={cn('py-8 block-setting', className)} style={blockSettingStyle(settings)}>
+    <div className={cn('py-8 block-setting', className, bgClassName)} style={style}>
       <div
         className={cn('border px-6 flex items-center container', {
           'border-border bg-card': settings.style === 'info',

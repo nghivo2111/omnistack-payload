@@ -10,8 +10,10 @@ type Props = MapsBlockType & {
 const MapsBlock = (props: Props): React.JSX.Element => {
   const setting = props.settings
 
+  const { style, className: bgClassName } = blockSettingStyle(setting)
+  
   return (
-    <div className={cn('py-8 block-setting', props.className)} style={blockSettingStyle(setting)}>
+    <div className={cn('py-8 block-setting', props.className, bgClassName)} style={style}>
       <div className="container mx-auto px-6">
         {props?.title && <p className="text-4xl font-bold dark:text-white pb-4">{props?.title}</p>}
 

@@ -14,12 +14,19 @@ type Setting = {
   bgGradient?: string | null,
   maxWidth?: string | null,
   borderRadius?: string | null,
+  showOnMobile?: boolean | null,
 }
 
-export const blockSettingStyle = (settings?: Setting) => {
-  const style: CSSProperties = {}
+type BlockSettingStyleResult = {
+  style: CSSProperties
+  className?: string
+}
 
-  if (!settings) return style
+export const blockSettingStyle = (settings?: Setting): BlockSettingStyleResult => {
+  const style: CSSProperties = {}
+  let className: string | undefined
+
+  if (!settings) return { style }
 
   if (settings.padding) style.paddingBlock = `${settings.padding}`
 
@@ -34,34 +41,43 @@ export const blockSettingStyle = (settings?: Setting) => {
 
   if (settings.bgType === 'transparent') {
     style.background = `transparent`
-    return style
+    return { style }
   }
 
   if (settings.bgType === 'color') {
     style.backgroundColor = `${settings.bgColor}`
-
-    return style
+    return { style }
   }
 
   if (settings.bgType === 'gradient') {
     style.background = `${settings.bgGradient}`
+    return { style }
   }
 
-  style.backgroundRepeat = `${settings.bgRepeat ? 'repeat' : 'no-repeat'}`
-
-  if (settings.bgImage && typeof settings.bgImage === 'object')
-    style.backgroundImage = `url(${settings.bgImage.url})`
-
-  if (settings.bgPosition) style.backgroundPosition = `${settings.bgPosition.join(' ')}`
-
-  if (settings.bgSize) {
-    if (settings.bgSize !== 'custom') {
-      style.backgroundSize = `${settings.bgSize}`
-    } else {
-      style.backgroundSize = `${settings.bgSizeCustom}`
+  // Handle showOnMobile only for background images
+  if (settings.bgType === 'image') {
+    // If showOnMobile is false, hide background image on mobile
+    if (settings.showOnMobile === false) {
+      className = 'hide-bg-on-mobile'
     }
+
+    style.backgroundRepeat = `${settings.bgRepeat ? 'repeat' : 'no-repeat'}`
+
+    if (settings.bgImage && typeof settings.bgImage === 'object')
+      style.backgroundImage = `url(${settings.bgImage.url})`
+
+    if (settings.bgPosition) style.backgroundPosition = `${settings.bgPosition.join(' ')}`
+
+    if (settings.bgSize) {
+      if (settings.bgSize !== 'custom') {
+        style.backgroundSize = `${settings.bgSize}`
+      } else {
+        style.backgroundSize = `${settings.bgSizeCustom}`
+      }
+    }
+
+    if (settings.bgAttachment) style.backgroundAttachment = `${settings.bgAttachment}`
   }
 
-  if (settings.bgAttachment) style.backgroundAttachment = `${settings.bgAttachment}`
-  return style
+  return { style, className }
 }

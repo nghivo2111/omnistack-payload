@@ -207,6 +207,13 @@ a {
   }
 }
 
+/* Hide background image on mobile when showOnMobile is false */
+@media screen and (max-width: 768px) {
+  .hide-bg-on-mobile {
+    background-image: none !important;
+  }
+}
+
 .prose  :where(img, h3, h4, h5, h6){
   margin: 0 !important;
 }

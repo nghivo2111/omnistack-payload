@@ -183,6 +183,16 @@ export const settingField = ({ overrides }: { overrides?: Field[] }): Field => {
                         'Specifies how the background image scrolls with the page. "Scroll" moves with the content (default), "Fixed" remains stationary.',
                     },
                   },
+                  {
+                    name: 'showOnMobile',
+                    label: 'Show Background Image on Mobile',
+                    defaultValue: true,
+                    type: 'checkbox',
+                    admin: {
+                      condition: (_, siblingData) => siblingData.bgType === 'image',
+                      description: 'Show the background image on mobile devices. When unchecked, the background image will be hidden on mobile. Default is true.',
+                    }
+                  }
                 ],
               },
             ],

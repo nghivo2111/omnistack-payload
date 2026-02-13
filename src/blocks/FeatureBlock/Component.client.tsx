@@ -6,8 +6,10 @@ import { FeatureProps } from './Component'
 
 const FeatureClient = ({ props }: { props: FeatureProps }) => {
   const { items, className, settings } = props
+  const { style, className: bgClassName } = blockSettingStyle(settings)
+  
   return (
-    <div className={cn(className, 'py-8 block-setting')} style={blockSettingStyle(settings)}>
+    <div className={cn(className, 'py-8 block-setting', bgClassName)} style={style}>
       <div
         className={cn(
           ' container grid grid-cols-2 gap-x-8 gap-y-12',

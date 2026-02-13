@@ -75,8 +75,10 @@ const renderStatsHighlight = (item: NonNullable<IListBlock['items']>[number]['st
 
 const ListBlock = (props: ListBlockProp) => {
 	const { className, settings, items, title, subtitle } = props
+	const { style, className: bgClassName } = blockSettingStyle(settings)
+	
 	return (
-		<div className={cn('py-8 block-setting overflow-hidden', className)} style={blockSettingStyle(settings)}>
+		<div className={cn('py-8 block-setting overflow-hidden', className, bgClassName)} style={style}>
 			<div className='container'>
 				{(title || subtitle && subtitle.root.children.length > 0) && (
 					<div className=' prose md:prose-md w-full max-w-full mb-16'>
