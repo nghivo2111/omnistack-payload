@@ -92,7 +92,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
   return (
     <header
       className={cn(
-        "fixed w-full z-[9999] transition-opacity duration-300 shadow-none opacity-0",
+        "fixed top-0 w-full z-[9999] transition-opacity duration-300 shadow-none opacity-0",
         { "opacity-100": show },
         { "shadow-lg": lastScrollY >= 50 && show }
       )}
