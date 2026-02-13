@@ -18,6 +18,7 @@ import { cookies } from 'next/headers'
 import { blockSettingStyle } from '@/utilities/blockSettingStyle'
 import PortfolioArchive from '@/components/PortfoliosArchive'
 import { CMSLink } from '@/components/Link'
+import { cn } from '@/utilities/ui'
 
 const ArchiveBlock: React.FC<
   ArchiveBlockProps & {
@@ -151,8 +152,10 @@ const ArchiveBlock: React.FC<
     }
   }
 
+  const { style, className: bgClassName } = blockSettingStyle(settings)
+  
   return (
-    <div className="py-8 block-setting" id={`block-${id}`} style={blockSettingStyle(settings)}>
+    <div className={cn("py-8 block-setting", bgClassName)} id={`block-${id}`} style={style}>
       <div className='container flex flex-col md:flex-row gap-6 md:items-end justify-between pb-6'>
 
         {introContent && <div className="md:w-[70%]"> <RichText data={introContent} enableGutter={false} /></div>}

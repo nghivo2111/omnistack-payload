@@ -202,6 +202,10 @@ export interface Page {
        */
       bgAttachment?: ('scroll' | 'fixed') | null;
       /**
+       * Show the block on mobile devices. Default is true.
+       */
+      showOnMobile?: boolean | null;
+      /**
        * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px 32px". Leave blank to use the default.
        */
       padding?: string | null;
@@ -539,6 +543,10 @@ export interface CallToActionBlock {
      */
     bgAttachment?: ('scroll' | 'fixed') | null;
     /**
+     * Show the block on mobile devices. Default is true.
+     */
+    showOnMobile?: boolean | null;
+    /**
      * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px 32px". Leave blank to use the default.
      */
     padding?: string | null;
@@ -640,6 +648,10 @@ export interface ContentBlock {
      * Specifies how the background image scrolls with the page. "Scroll" moves with the content (default), "Fixed" remains stationary.
      */
     bgAttachment?: ('scroll' | 'fixed') | null;
+    /**
+     * Show the block on mobile devices. Default is true.
+     */
+    showOnMobile?: boolean | null;
     /**
      * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px 32px". Leave blank to use the default.
      */
@@ -745,6 +757,10 @@ export interface MediaBlock {
      */
     bgAttachment?: ('scroll' | 'fixed') | null;
     /**
+     * Show the block on mobile devices. Default is true.
+     */
+    showOnMobile?: boolean | null;
+    /**
      * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px 32px". Leave blank to use the default.
      */
     padding?: string | null;
@@ -804,6 +820,10 @@ export interface ArchiveBlock {
      * Specifies how the background image scrolls with the page. "Scroll" moves with the content (default), "Fixed" remains stationary.
      */
     bgAttachment?: ('scroll' | 'fixed') | null;
+    /**
+     * Show the block on mobile devices. Default is true.
+     */
+    showOnMobile?: boolean | null;
     /**
      * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px 32px". Leave blank to use the default.
      */
@@ -903,6 +923,10 @@ export interface FormBlock {
      * Specifies how the background image scrolls with the page. "Scroll" moves with the content (default), "Fixed" remains stationary.
      */
     bgAttachment?: ('scroll' | 'fixed') | null;
+    /**
+     * Show the block on mobile devices. Default is true.
+     */
+    showOnMobile?: boolean | null;
     /**
      * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px 32px". Leave blank to use the default.
      */
@@ -1159,6 +1183,10 @@ export interface FeatureBlock {
      */
     bgAttachment?: ('scroll' | 'fixed') | null;
     /**
+     * Show the block on mobile devices. Default is true.
+     */
+    showOnMobile?: boolean | null;
+    /**
      * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px 32px". Leave blank to use the default.
      */
     padding?: string | null;
@@ -1239,6 +1267,10 @@ export interface MediaContentBlock {
      * Specifies how the background image scrolls with the page. "Scroll" moves with the content (default), "Fixed" remains stationary.
      */
     bgAttachment?: ('scroll' | 'fixed') | null;
+    /**
+     * Show the block on mobile devices. Default is true.
+     */
+    showOnMobile?: boolean | null;
     /**
      * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px 32px". Leave blank to use the default.
      */
@@ -1359,6 +1391,10 @@ export interface MapsBlock {
      */
     bgAttachment?: ('scroll' | 'fixed') | null;
     /**
+     * Show the block on mobile devices. Default is true.
+     */
+    showOnMobile?: boolean | null;
+    /**
      * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px 32px". Leave blank to use the default.
      */
     padding?: string | null;
@@ -1435,6 +1471,10 @@ export interface CarouselBlock {
      * Specifies how the background image scrolls with the page. "Scroll" moves with the content (default), "Fixed" remains stationary.
      */
     bgAttachment?: ('scroll' | 'fixed') | null;
+    /**
+     * Show the block on mobile devices. Default is true.
+     */
+    showOnMobile?: boolean | null;
     /**
      * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px 32px". Leave blank to use the default.
      */
@@ -1568,6 +1608,10 @@ export interface IListBlock {
      * Specifies how the background image scrolls with the page. "Scroll" moves with the content (default), "Fixed" remains stationary.
      */
     bgAttachment?: ('scroll' | 'fixed') | null;
+    /**
+     * Show the block on mobile devices. Default is true.
+     */
+    showOnMobile?: boolean | null;
     /**
      * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px 32px". Leave blank to use the default.
      */
@@ -2097,6 +2141,7 @@ export interface PagesSelect<T extends boolean = true> {
               bgSizeCustom?: T;
               bgPosition?: T;
               bgAttachment?: T;
+              showOnMobile?: T;
               padding?: T;
               maxWidth?: T;
               borderRadius?: T;
@@ -2165,6 +2210,7 @@ export interface CallToActionBlockSelect<T extends boolean = true> {
         bgSizeCustom?: T;
         bgPosition?: T;
         bgAttachment?: T;
+        showOnMobile?: T;
         padding?: T;
         maxWidth?: T;
         borderRadius?: T;
@@ -2206,6 +2252,7 @@ export interface ContentBlockSelect<T extends boolean = true> {
         bgSizeCustom?: T;
         bgPosition?: T;
         bgAttachment?: T;
+        showOnMobile?: T;
         padding?: T;
         maxWidth?: T;
         borderRadius?: T;
@@ -2249,6 +2296,7 @@ export interface MediaBlockSelect<T extends boolean = true> {
         bgSizeCustom?: T;
         bgPosition?: T;
         bgAttachment?: T;
+        showOnMobile?: T;
         padding?: T;
         maxWidth?: T;
         borderRadius?: T;
@@ -2274,6 +2322,7 @@ export interface ArchiveBlockSelect<T extends boolean = true> {
         bgSizeCustom?: T;
         bgPosition?: T;
         bgAttachment?: T;
+        showOnMobile?: T;
         padding?: T;
         maxWidth?: T;
         borderRadius?: T;
@@ -2313,6 +2362,7 @@ export interface FormBlockSelect<T extends boolean = true> {
         bgSizeCustom?: T;
         bgPosition?: T;
         bgAttachment?: T;
+        showOnMobile?: T;
         padding?: T;
         maxWidth?: T;
         borderRadius?: T;
@@ -2340,6 +2390,7 @@ export interface FeatureBlockSelect<T extends boolean = true> {
         bgSizeCustom?: T;
         bgPosition?: T;
         bgAttachment?: T;
+        showOnMobile?: T;
         padding?: T;
         maxWidth?: T;
         borderRadius?: T;
@@ -2372,6 +2423,7 @@ export interface MediaContentBlockSelect<T extends boolean = true> {
         bgSizeCustom?: T;
         bgPosition?: T;
         bgAttachment?: T;
+        showOnMobile?: T;
         padding?: T;
         maxWidth?: T;
         borderRadius?: T;
@@ -2415,6 +2467,7 @@ export interface MapsBlockSelect<T extends boolean = true> {
         bgSizeCustom?: T;
         bgPosition?: T;
         bgAttachment?: T;
+        showOnMobile?: T;
         padding?: T;
         maxWidth?: T;
         borderRadius?: T;
@@ -2445,6 +2498,7 @@ export interface CarouselBlockSelect<T extends boolean = true> {
         bgSizeCustom?: T;
         bgPosition?: T;
         bgAttachment?: T;
+        showOnMobile?: T;
         padding?: T;
         maxWidth?: T;
         borderRadius?: T;
@@ -2500,6 +2554,7 @@ export interface IListBlockSelect<T extends boolean = true> {
         bgSizeCustom?: T;
         bgPosition?: T;
         bgAttachment?: T;
+        showOnMobile?: T;
         padding?: T;
         maxWidth?: T;
         borderRadius?: T;
@@ -3315,6 +3370,10 @@ export interface BannerBlock {
      */
     bgAttachment?: ('scroll' | 'fixed') | null;
     /**
+     * Show the block on mobile devices. Default is true.
+     */
+    showOnMobile?: boolean | null;
+    /**
      * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px 32px". Leave blank to use the default.
      */
     padding?: string | null;
@@ -3389,6 +3448,10 @@ export interface CodeBlock {
      * Specifies how the background image scrolls with the page. "Scroll" moves with the content (default), "Fixed" remains stationary.
      */
     bgAttachment?: ('scroll' | 'fixed') | null;
+    /**
+     * Show the block on mobile devices. Default is true.
+     */
+    showOnMobile?: boolean | null;
     /**
      * Sets the vertical padding (top and bottom) for the block. Enter values like "40px", "2rem", or "10%". Default is "32px 32px". Leave blank to use the default.
      */

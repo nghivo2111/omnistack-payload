@@ -131,8 +131,10 @@ const FormBlock: React.FC<
     [router, formID, redirect, confirmationType],
   )
 
+  const { style, className: bgClassName } = blockSettingStyle(settings)
+  
   return (
-    <div className={cn(className, 'py-8 block-setting')} style={blockSettingStyle(settings)}>
+    <div className={cn(className, 'py-8 block-setting', bgClassName)} style={style}>
       <div className={cn('container lg:max-w-[48rem]')}>
         {enableIntro && introContent && !hasSubmitted && (
           <RichText className="mb-8 lg:mb-12" data={introContent} enableGutter={false} />

@@ -13,8 +13,10 @@ export type CarouselProps = CarouselBlockType & {
 export default function Carousel(props: CarouselProps) {
 	const { slides, settings, link, subtitle, title } = props;
 	if (!slides?.length) return null;
+	const { style, className: bgClassName } = blockSettingStyle(settings)
+	
 	return (
-		<div className='py-8 w-full' style={blockSettingStyle(settings)}>
+		<div className={cn('py-8 w-full', bgClassName)} style={style}>
 			<div className={cn('space-y-6 prose md:prose-md w-full max-w-full', { "!container": !settings?.fullWidth })}>
 				<div className={cn({ "container": settings?.fullWidth })}>
 					{title && <h1 className='text-center'>
