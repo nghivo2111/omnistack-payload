@@ -140,6 +140,9 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
                     {item.link.label}
                   </Disclosure.Button>
                 ))}
+                <div className="flex gap-6 items-center pl-6 my-4">
+                  <CMSLink {...data.link} />
+                </div>
               </div>
             </div>
           </>
