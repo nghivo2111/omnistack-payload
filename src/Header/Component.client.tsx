@@ -111,10 +111,10 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
                       <div className="md:block hidden">
                         <HeaderNav data={data} />
                       </div>
-                      <div>
+                      <div className='h-full mr-10 md:mr-0'>
                         <LocaleSwitcher />
                       </div>
-                      <div className="flex gap-6 items-center pl-6">
+                      <div className="hidden md:flex gap-6 items-center pl-6">
                         <CMSLink {...data.link} />
                         {/* <ThemeSwitcher /> */}
                       </div>
@@ -125,7 +125,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
             </div>
             <div
               className={cn(
-                'ease-out duration-300 overflow-hidden shadow-lg dark:shadow-[inset_0px_-1px_1px_#132f4c] fixed h-[100vh] top-20 w-full bg-white block overscroll-contain',
+                'ease-out duration-300 overflow-hidden shadow-lg dark:shadow-[inset_0px_-1px_1px_#132f4c] fixed h-[100vh] top-20 w-full bg-white block overscroll-none',
                 { 'left-0': open },
                 { 'left-[100%]': !open },
               )}

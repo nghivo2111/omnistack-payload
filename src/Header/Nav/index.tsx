@@ -11,7 +11,7 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({
   const navItems = data?.navItems || []
 
   return (
-    <nav className="md:flex gap-3 items-center">
+    <nav className="md:flex gap-3 items-center h-full">
       {navItems.map(({ link }, i) => {
         return (
           <div key={i} className=' h-full'>

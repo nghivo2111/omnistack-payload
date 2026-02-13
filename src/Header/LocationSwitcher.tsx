@@ -20,7 +20,7 @@ export const LocaleSwitcher = () => {
   }
 
   return (
-    <div className="my-auto">
+    <div className="h-full flex items-center">
       {localization.locales
         .sort((a, b) => a.code.localeCompare(b.code))
         .map((i) => (
