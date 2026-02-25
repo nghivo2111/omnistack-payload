@@ -14,6 +14,9 @@ export async function GET() {
   Sitemap: ${url}/sitemap.xml
   Sitemap: ${url}/pages-sitemap.xml
   Sitemap: ${url}/blog-sitemap.xml
+  Sitemap: ${url}/industries-sitemap.xml
+  Sitemap: ${url}/solutions-sitemap.xml
+  Sitemap: ${url}/technologies-sitemap.xml
   `
 
   return new NextResponse(defaultRobotContent, {

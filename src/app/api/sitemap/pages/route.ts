@@ -1,4 +1,4 @@
-import {ISitemapField, getServerSideSitemap} from 'next-sitemap'
+import { ISitemapField, getServerSideSitemap } from 'next-sitemap'
 import { getPayload } from 'payload'
 import configPromise from '@payload-config'
 import { NextRequest } from 'next/server'
@@ -10,50 +10,50 @@ export const revalidate = 86400 // 24 hours
 const allLocale = ['en', 'vi'] as const
 
 const getPagesSitemap = unstable_cache(
-  async(originalUrl: string) => {
+  async (originalUrl: string) => {
     const payload = await getPayload({ config: configPromise })
-    const allPages : Array<{updatedAt: string, slug: string}> = []
-      let page = 1
-      let hasMore = true
+    const allPages: Array<{ updatedAt: string, slug: string }> = []
+    let page = 1
+    let hasMore = true
 
-      while (hasMore) {
-        const result = await payload.find({
-          collection: 'pages',
-          where: { _status: { equals: 'published' } },
-          limit: 500,
-          page,
-          depth: 0,
-          select: {
-            slug: true,
-            updatedAt: true,
-          },
-        })
+    while (hasMore) {
+      const result = await payload.find({
+        collection: 'pages',
+        where: { _status: { equals: 'published' } },
+        limit: 500,
+        page,
+        depth: 0,
+        select: {
+          slug: true,
+          updatedAt: true,
+        },
+      })
 
-        result.docs.forEach((doc) => {
-          if (doc.slug) {
-            allPages.push({slug: doc.slug, updatedAt: doc.updatedAt})
-          }
-        })
-
-        hasMore = result.hasNextPage
-        page++
-
-        if (page > 10) {
-          console.warn(`[sitemap/pages] Reached safety limit of 10 pages (5000 pages)`)
-          break
+      result.docs.forEach((doc) => {
+        if (doc.slug) {
+          allPages.push({ slug: doc.slug, updatedAt: doc.updatedAt })
         }
+      })
+
+      hasMore = result.hasNextPage
+      page++
+
+      if (page > 10) {
+        console.warn(`[sitemap/pages] Reached safety limit of 10 pages (5000 pages)`)
+        break
+      }
     }
 
     const dateFallback = new Date().toISOString();
 
-    const sitemap: ISitemapField[] = allPages.flatMap(({updatedAt, slug}) => {
+    const sitemap: ISitemapField[] = allPages.flatMap(({ updatedAt, slug }) => {
       const slugPath = slug === 'home' ? '' : '/' + slug
 
-      return allLocale.map((locale)=>({
+      return allLocale.map((locale) => ({
         loc: `${originalUrl}/${locale}${slugPath}`,
         lastmod: updatedAt || dateFallback,
         changefreq: 'weekly' as const,
-        priority:  0.8
+        priority: 0.8
       }))
     })
     return sitemap
@@ -66,14 +66,13 @@ export async function GET(request: NextRequest) {
     const protocol = hostname.includes('localhost') ? 'http' : 'https'
     const originalUrl = `${protocol}://${hostname}`
 
-    if(!hostname) {
+    if (!hostname) {
       return new Response('Host not found', { status: 400 })
     }
 
     const sitemapXml = await getPagesSitemap(originalUrl)
 
-    if(sitemapXml.length ===0)
-    {
+    if (sitemapXml.length === 0) {
       return getServerSideSitemap([])
     }
 
