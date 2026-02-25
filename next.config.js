@@ -51,6 +51,18 @@ const nextConfig = {
         source: '/blog-sitemap.xml',
         destination: '/api/sitemap/blog',
       },
+      {
+        source: '/industries-sitemap.xml',
+        destination: '/api/sitemap/industries',
+      },
+      {
+        source: '/solutions-sitemap.xml',
+        destination: '/api/sitemap/solutions',
+      },
+      {
+        source: '/technologies-sitemap.xml',
+        destination: '/api/sitemap/technologies',
+      },
     ]
   },
 }

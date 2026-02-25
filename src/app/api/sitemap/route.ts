@@ -9,7 +9,10 @@ const getPagesSitemap = unstable_cache(
   async (originalUrl: string) => {
     const sitemap = [
       `${originalUrl}/pages-sitemap.xml`,
-       `${originalUrl}/blog-sitemap.xml`,
+      `${originalUrl}/blog-sitemap.xml`,
+      `${originalUrl}/industries-sitemap.xml`,
+      `${originalUrl}/solutions-sitemap.xml`,
+      `${originalUrl}/technologies-sitemap.xml`,
     ]
 
     return [...sitemap]
