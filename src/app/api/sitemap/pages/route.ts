@@ -57,6 +57,11 @@ const getPagesSitemap = unstable_cache(
       }))
     })
     return sitemap
+  },
+  ['pages-sitemap'],
+  {
+    tags: ['pages-sitemap'],
+    revalidate: 86400,
   }
 )
 
