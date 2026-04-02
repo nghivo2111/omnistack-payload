@@ -1,36 +1,36 @@
 {
-  "viewDetail": "Xem chi tiết",
-  "portfolio": {
-    "filter": "Lọc"
-  },
-  "hide": "Ẩn",
-  "loadMore": "Xem thêm",
-  "posts": {
-    "author": "Tác Giả",
-    "publishedAt": "Ngày đăng",
-    "slogan": "Chia sẻ những câu chuyện phía sau công nghệ.",
-    "latest": "Mới nhất",
-    "updatedAt": "Ngày sửa"
-  },
-  "post": {
-    "datePublished": "Ngày Đăng"
-  },
-  "previous": "Trước",
-  "more_pages": "Thêm trang",
-  "next": "Kế tiếp",
-  "page-not-found": "Không tìm thấy trang này.",
-  "go_home": "Về trang chủ",
-  "no_data": "Tìm kiếm không có kết quả",
-  "form": {
-    "footer": "Gửi từ hệ thống Omnistack",
-    "sending": "Đang gửi, vui lòng chờ!",
-    "email": {
-      "title": "📩 Tin mới từ"
-    }
-  },
-  "filter_by": "Lọc với",
-  "all": "Tất cả",
-  "technology": {
-    "search": "Tìm kiếm bằng tên"
-  }
+	"viewDetail": "Xem chi tiết",
+	"portfolio": {
+		"filter": "Lọc"
+	},
+	"hide": "Ẩn",
+	"loadMore": "Xem thêm",
+	"posts": {
+		"author": "Tác Giả",
+		"publishedAt": "Ngày đăng",
+		"slogan": "Chia sẻ những câu chuyện phía sau công nghệ.",
+		"latest": "Mới nhất",
+		"updatedAt": "Ngày sửa"
+	},
+	"post": {
+		"datePublished": "Ngày Đăng"
+	},
+	"previous": "Trước",
+	"more_pages": "Thêm trang",
+	"next": "Kế tiếp",
+	"page-not-found": "Không tìm thấy trang này.",
+	"go_home": "Về trang chủ",
+	"no_data": "Tìm kiếm không có kết quả",
+	"form": {
+		"footer": "Gửi từ hệ thống Omnistack",
+		"sending": "Đang gửi, vui lòng chờ!",
+		"email": {
+			"title": "📩 Tin mới từ"
+		}
+	},
+	"filter_by": "Lọc",
+	"all": "Tất cả",
+	"technology": {
+		"search": "Tìm kiếm bằng tên"
+	}
 }
